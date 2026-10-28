@@ -1,0 +1,43 @@
+name: Stats and token care
+
+on:
+  schedule:
+    - cron: "23 6 * * *"   # daily stats, 06:23 UTC
+    - cron: "41 5 * * 1"   # weekly token refresh, Monday 05:41 UTC
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "check, stats or refresh"
+        default: "check"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run
+        env:
+          IG_TOKEN_MIND: ${{ secrets.IG_TOKEN_MIND }}
+          IG_TOKEN_QML: ${{ secrets.IG_TOKEN_QML }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          EVENT: ${{ github.event_name }}
+          SCHED: ${{ github.event.schedule }}
+          TASK: ${{ github.event.inputs.task }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ]; then T="$TASK";
+          elif [ "$SCHED" = "41 5 * * 1" ]; then T=refresh;
+          else T=stats; fi
+          python3 scripts/ig.py "$T"
+      - name: Save stats
+        run: |
+          if [ -n "$(git status --porcelain stats)" ]; then
+            git config user.name "ig-media bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add stats
+            git commit -m "Update stats"
+            git pull --rebase -q || true
+            git push
+          fi
