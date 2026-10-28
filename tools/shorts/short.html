@@ -1,0 +1,128 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1920px; overflow:hidden; }
+  body {
+    background:#e8e4dc;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,.55), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(0,0,0,.06), transparent 50%);
+    font-family:'Inter Display','Inter',sans-serif; color:#151515; position:relative;
+  }
+  #grain { position:absolute; inset:0; opacity:.18; mix-blend-mode:multiply; }
+  .abs { position:absolute; left:96px; right:150px; will-change:transform,opacity; }
+  #handle { top:150px; font:600 34px 'Inter'; letter-spacing:.5px; color:#555; }
+  #bars { top:212px; display:flex; gap:12px; }
+  #bars div { flex:1; height:10px; border-radius:5px; background:rgba(0,0,0,.12); overflow:hidden; }
+  #bars i { display:block; height:100%; width:0; background:#151515; }
+  .hl { background:linear-gradient(transparent 12%, #ffd51e 12%, #ffd51e 88%, transparent 88%);
+        background-repeat:no-repeat; background-size:var(--w,0%) 100%; padding:0 10px; margin:0 -10px; }
+  /* hook */
+  #hook { top:520px; }
+  #hook .l1 { font-weight:900; font-size:124px; line-height:.95; letter-spacing:-4px; }
+  #hook .l2 { font-weight:900; font-size:118px; line-height:1.02; letter-spacing:-3px; margin-top:26px; }
+  #hook .l3 { font-weight:800; font-size:92px; margin-top:34px; letter-spacing:-2px; }
+  /* fact */
+  .fact { top:470px; }
+  .num { font-weight:900; font-size:260px; line-height:.8; letter-spacing:-10px; color:transparent;
+         -webkit-text-stroke:5px #151515; }
+  .title { font-weight:900; font-size:84px; line-height:1.0; letter-spacing:-2px; margin-top:48px; }
+    .body { font:500 60px/1.3 'Inter'; margin-top:44px; color:#222; }
+  .body span { display:inline-block; }
+  .src { margin-top:56px; font:600 30px/1.4 'Inter'; color:#666; border-left:6px solid #ffd51e; padding-left:22px; }
+  /* outro */
+  #outro { top:640px; }
+  #outro .q { font-weight:900; font-size:112px; line-height:1.0; letter-spacing:-3px; }
+  #outro .f { font:600 52px/1.3 'Inter'; margin-top:70px; color:#333; }
+  #outro .h { font-weight:900; font-size:64px; margin-top:20px; }
+</style></head>
+<body>
+<canvas id="grain" width="540" height="960"></canvas>
+<div id="handle" class="abs">@mind.psychollogy</div>
+<div id="bars" class="abs"><div><i></i></div><div><i></i></div><div><i></i></div></div>
+<div id="hook" class="abs">
+  <div class="l1">3 psychology<br>facts</div>
+  <div class="l2">that sound <span class="hl" id="hookhl">fake</span></div>
+  <div class="l3">but are 100% real.</div>
+</div>
+<div id="facts"></div>
+<div id="outro" class="abs">
+  <div class="q">Which one <span class="hl" id="outhl">surprised</span> you most?</div>
+  <div class="f">Follow for a new psychology fact every day</div>
+  <div class="h">@mind.psychollogy</div>
+</div>
+<script>
+const FACTS = [
+ { t:"The Ben Franklin effect", b:"Asking someone for a small favor can make them like you [more], not less.", s:"Jecker & Landy (1969), Human Relations" },
+ { t:"The spotlight effect", b:"People notice your embarrassing moment about [half as much] as you think they do.", s:"Gilovich, Medvec & Savitsky (2000), Journal of Personality and Social Psychology" },
+ { t:"The pratfall effect", b:"A highly competent person becomes [more likable] after a small, harmless mistake.", s:"Aronson, Willerman & Floyd (1966), Psychonomic Science" },
+];
+const HOOK = 2.0, FD = 3.9, OUT = 1.9;
+window.TOTAL = HOOK + FACTS.length*FD + OUT;
+
+const wrap = document.getElementById('facts');
+FACTS.forEach((f,i)=>{
+  const d = document.createElement('div'); d.className='abs fact'; d.id='f'+i;
+  const toks = [];
+  f.b.split(/(\[[^\]]+\])/).forEach(part=>{
+    if (part.startsWith('[')) { toks.push(`<span class="hl">${part.slice(1,-1)}</span>`); return; }
+    part.split(' ').filter(Boolean).forEach(w=>{ if (/^[,.;:!?]/.test(w) && toks.length) toks[toks.length-1]+=w; else toks.push(w); });
+  });
+  const words = toks.map(w=>`<span class="w">${w}</span>`).join(' ');
+  d.innerHTML = `<div class="num">0${i+1}</div><div class="title">${f.t}</div><div class="body">${words}</div><div class="src">Source: ${f.s}</div>`;
+  wrap.appendChild(d);
+});
+
+// static grain
+const g = document.getElementById('grain'), gc = g.getContext('2d'), id = gc.createImageData(540,960);
+let seed = 7; const rnd=()=>{ seed=(seed*16807)%2147483647; return seed/2147483647; };
+for (let p=0;p<id.data.length;p+=4){ const v=150+rnd()*105|0; id.data[p]=id.data[p+1]=id.data[p+2]=v; id.data[p+3]=255; }
+gc.putImageData(id,0,0); g.style.width='1080px'; g.style.height='1920px';
+
+const clamp=(x)=>Math.max(0,Math.min(1,x));
+const ease=(x)=>{ x=clamp(x); return 1-Math.pow(1-x,3); };
+const back=(x)=>{ x=clamp(x); const c1=1.70158,c3=c1+1; return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2); };
+function show(el, t, inAt, outAt, dy=60){
+  const a = ease((t-inAt)/0.45), b = ease((t-outAt)/0.3);
+  el.style.opacity = a*(1-b);
+  el.style.transform = `translateY(${(1-a)*dy - b*40}px)`;
+}
+
+window.setT = function(t){
+  // hook
+  const hook = document.getElementById('hook');
+  hook.style.opacity = t < HOOK ? 1 : 0;
+  const ls = hook.children;
+  [0.0,0.3,0.7].forEach((at,k)=>{ const a=back((t-at)/0.5); ls[k].style.opacity=clamp((t-at)/0.25)*(1-ease((t-(HOOK-0.25))/0.25)); ls[k].style.transform=`scale(${0.85+0.15*a}) translateY(${(1-a)*40}px)`; ls[k].style.transformOrigin='left center'; });
+  document.getElementById('hookhl').style.setProperty('--w', (ease((t-0.5)/0.3)*100)+'%');
+
+  // bars + facts
+  const bars = document.querySelectorAll('#bars i');
+  FACTS.forEach((f,i)=>{
+    const s = HOOK + i*FD, e = s + FD;
+    bars[i].style.width = (clamp((t-s)/FD)*100)+'%';
+    const el = document.getElementById('f'+i);
+    if (t < s-0.1 || t > e+0.1) { el.style.opacity=0; return; }
+    el.style.opacity=1; el.style.transform='none';
+    const [num,title,body,src] = el.children;
+    const lt = t - s, out = ease((lt-(FD-0.3))/0.3);
+    const na = back(lt/0.5);
+    num.style.opacity = clamp(lt/0.2)*(1-out); num.style.transform=`translateX(${(1-na)*-80}px) scale(${0.9+0.1*na})`; num.style.transformOrigin='left top';
+    show(title, lt, 0.1, FD-0.3);
+    const ws = body.querySelectorAll('.w');
+    ws.forEach((w,k)=>{ const at=0.35+k*0.035; const a=ease((lt-at)/0.3); w.style.opacity=a*(1-out); w.style.transform=`translateY(${(1-a)*24}px)`; });
+    const hl = body.querySelector('.hl'); if (hl) hl.style.setProperty('--w', (ease((lt-(0.4+ws.length*0.035))/0.3)*100)+'%');
+    show(src, lt, 0.55+ws.length*0.035, FD-0.3, 30);
+  });
+
+  // outro
+  const os = HOOK + FACTS.length*FD, o = document.getElementById('outro');
+  o.style.opacity = t >= os-0.05 ? 1 : 0;
+  const oc = o.children;
+  [0,0.35,0.55].forEach((at,k)=>show(oc[k], t-os, at, 99));
+  document.getElementById('outhl').style.setProperty('--w', (ease((t-os-0.25)/0.3)*100)+'%');
+  document.getElementById('handle').style.opacity = 1;
+};
+setT(0);
+</script></body></html>
