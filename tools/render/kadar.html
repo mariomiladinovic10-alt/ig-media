@@ -1,0 +1,1145 @@
+<title>Kadar Reels Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;800&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,600;1,600&family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Lora:wght@500;700&family=Manrope:wght@500;800&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { ink: 'var(--bg)', panel: 'var(--panel)', raise: 'var(--raise)', line: 'var(--line)', fg: 'var(--fg)', mute: 'var(--mute)', brass: 'var(--accent)' },
+  fontFamily: { ui: ['"Instrument Sans"', 'system-ui', 'sans-serif'], disp: ['"Instrument Serif"', 'Georgia', 'serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] }
+} } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.js"></script>
+<style>
+/* Layout: darkroom workbench. Fixed left rail of tools, wide working surface, 9:16 proofs as the hero object. */
+:root {
+  --bg: #121110;        /* graphite, warm bias */
+  --panel: #191816;
+  --raise: #22201d;
+  --line: #2e2b27;
+  --fg: #ece8e1;
+  --mute: #8f897e;
+  --accent: #d6bf94;    /* brass, used sparingly */
+  --accent-ink: #1a1610;
+  --ok: #8fb59a;
+  --warn: #d9a25f;
+  --bad: #d77a6b;
+  --f-ui: "Instrument Sans", system-ui, sans-serif;
+  --f-disp: "Instrument Serif", Georgia, serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 14px; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+h1, h2, h3 { text-wrap: balance; }
+.disp { font-family: var(--f-disp); font-weight: 400; letter-spacing: -0.01em; }
+.mono { font-family: var(--f-mono); }
+.eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.tnum { font-variant-numeric: tabular-nums; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--raise); color: var(--fg); font-weight: 500; font-size: 13px; transition: background .15s, border-color .15s, opacity .15s; cursor: pointer; white-space: nowrap; }
+.btn:hover { border-color: #4a4640; background: #2a2723; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.btn-primary:hover { background: #e3cfa8; border-color: #e3cfa8; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--mute); }
+.btn-ghost:hover { color: var(--fg); background: var(--raise); border-color: var(--line); }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 12px; }
+.btn-danger { color: var(--bad); }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--mute); font-size: 12.5px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.chip:hover { color: var(--fg); border-color: #4a4640; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.field { width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; color: var(--fg); padding: 9px 11px; font-size: 13.5px; line-height: 1.5; }
+.field:focus { outline: none; border-color: var(--accent); }
+select.field { height: 38px; padding-top: 0; padding-bottom: 0; }
+label.lbl { display: block; font-size: 12px; color: var(--mute); margin-bottom: 6px; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.badge { font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--mute); background: rgba(0,0,0,.55); }
+.badge-ai { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.badge-pub { color: var(--ok); border-color: #3e5546; }
+.badge-sch { color: var(--warn); border-color: #5a4630; }
+.proof { border-radius: 10px; box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 18px 50px rgba(0,0,0,.45); background: #000; display: block; width: 100%; height: auto; }
+.navbtn { display: flex; align-items: center; gap: 10px; width: 100%; height: 38px; padding: 0 12px; border-radius: 8px; color: var(--mute); font-size: 13.5px; transition: all .15s; white-space: nowrap; }
+.navbtn:hover { color: var(--fg); background: var(--raise); }
+.navbtn[aria-current="page"] { color: var(--fg); background: var(--raise); box-shadow: inset 0 0 0 1px var(--line); }
+.navbtn .num { font-family: var(--f-mono); font-size: 10px; color: #5f5a52; width: 18px; }
+.navbtn[aria-current="page"] .num { color: var(--accent); }
+.scroll-x { overflow-x: auto; scrollbar-width: none; }
+.scroll-x::-webkit-scrollbar { display: none; }
+.toast { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 50; background: var(--fg); color: var(--bg); padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,.5); max-width: min(420px, calc(100vw - 32px)); }
+.bar { height: 6px; border-radius: 3px; background: var(--raise); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); border-radius: 3px; transition: width .2s; }
+.fade-in { animation: fi .25s ease-out; }
+@keyframes fi { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .fade-in { animation: none; } * { transition: none !important; } }
+.min0 { min-width: 0; }
+textarea.field { resize: vertical; }
+.swatch { aspect-ratio: 9/16; border-radius: 6px; border: 2px solid transparent; overflow: hidden; cursor: pointer; background: #000; max-width: 100%; }
+.swatch[aria-pressed="true"] { border-color: var(--accent); }
+.swatch canvas { width: 100%; height: 100%; display: block; }
+</style>
+
+<div id="root"></div>
+
+<script>
+(() => {
+const { useState, useEffect, useRef, useMemo, useCallback, createContext, useContext } = React;
+const html = htm.bind(React.createElement);
+
+/* ───────────────────────── Data ───────────────────────── */
+const CATS = [
+  { k: 'odnosi', n: 'Men & women', d: 'relationship dynamics, respect, communication between partners' },
+  { k: 'zene', n: "Women's psychology", d: 'how many women experience attention, security and communication, without generalizing' },
+  { k: 'muskarci', n: "Men's psychology", d: 'the inner world of men, silence, vulnerability, accountability' },
+  { k: 'ljubav', n: 'Love & emotions', d: 'closeness, emotional maturity, what love is and is not' },
+  { k: 'raskidi', n: 'Breakups & exes', d: 'grief after a breakup, letting go, going back to exes, healing' },
+  { k: 'samopostovanje', n: 'Self-respect', d: 'personal standards, boundaries, how you treat yourself' },
+  { k: 'granice', n: 'Manipulation & boundaries', d: 'recognizing control and guilt tripping, setting and holding boundaries' },
+  { k: 'disciplina', n: 'Discipline & masculinity', d: 'habits, keeping your word, ownership, self improvement' },
+  { k: 'istine', n: 'Brutal truths', d: 'uncomfortable but useful truths about life, time and people' },
+  { k: 'dejting', n: 'Attraction & dating', d: 'meeting people, first dates, confidence, rejection' },
+];
+const CAT = Object.fromEntries(CATS.map(c => [c.k, c]));
+const CAT_TAGS = {
+  odnosi: ['#relationships', '#relationshipadvice', '#communication', '#respect', '#psychology'],
+  zene: ['#womenpsychology', '#relationships', '#communication', '#psychologyfacts', '#understandingwomen'],
+  muskarci: ['#menspsychology', '#menshealth', '#mentalhealthmatters', '#emotions', '#masculinity'],
+  ljubav: ['#love', '#emotions', '#lovequotes', '#emotionalintelligence', '#intimacy'],
+  raskidi: ['#breakup', '#movingon', '#heartbreak', '#healing', '#letgo'],
+  samopostovanje: ['#selfrespect', '#selfworth', '#confidence', '#boundaries', '#personalgrowth'],
+  granice: ['#boundaries', '#manipulation', '#toxicrelationships', '#emotionalmaturity', '#redflags'],
+  disciplina: ['#discipline', '#masculinity', '#selfimprovement', '#habits', '#mindset'],
+  istine: ['#hardtruths', '#lifelessons', '#reality', '#wisdom', '#mindset'],
+  dejting: ['#dating', '#datingadvice', '#attraction', '#confidence', '#firstdate'],
+};
+const COMMON_TAGS = ['#mensmindset', '#selfgrowth', '#reels'];
+
+// [category, background, angle, text, caption, question]
+const DEMO = [
+['odnosi','silueta','Integrity',"Respect isn't requested. It *shows* in how you act when no one is watching.","Respect in a relationship isn't built with grand gestures. It's built in the small, consistent things you do when you think they don't count.",'What is the clearest sign of respect in a relationship for you?'],
+['odnosi','prozor','Communication',"Most fights don't start because of what was said. They start because of the *tone* it was said in.",'The same sentence can calm an argument or set it on fire. Before you reply, ask how you sound, not just what you say.','What is harder to take: the criticism or the tone it comes in?'],
+['odnosi','kisa','Clarity','If you always have to guess where you stand with someone, that is your *answer*.',"Mixed signals aren't a mystery to solve. People who want you in their life don't leave you guessing.",'Have you ever waited too long for a clear answer?'],
+['odnosi','hodnik','Consistency',"Big words don't keep a relationship alive. *Boring consistency* does.",'Romance is nice, but trust grows when you show up the way you said you would, day after day. No audience, no applause.','What means more to you: a big gesture or small daily attention?'],
+['odnosi','beton','Maturity',"Two people don't have to think the same. They have to know how to *disagree* without humiliating each other.","Disagreement doesn't mean the relationship is broken. The problem starts when one of you has to feel small for the argument to end.",'How do you handle disagreements in a relationship?'],
+['odnosi','more','Honesty',"Your partner isn't your therapist. But they also shouldn't be someone you have to *pretend* around.","A healthy relationship has room for your bad days. Not so someone carries them for you, but so you don't have to hide them.","Is it easy for you to show when you're not okay?"],
+['zene','kisa','Silence','When a woman stops explaining what hurts, it rarely means it stopped hurting. Often it means she *gave up*.',"Silence after long conversations isn't always peace. Sometimes it's exhaustion from saying the same thing and never being heard.",'Have you ever realized too late what a silence meant?'],
+['zene','prozor','Security',"Security isn't only about money. It's the feeling of *not having to* constantly check.","When words and actions match, there's no room for doubt. That's a kind of security no gift can replace.",'What does security in a relationship mean to you?'],
+['zene','silueta','Consistency',"Many women aren't looking for a perfect man. They want someone whose words and actions *say the same thing*.",'Perfection is impossible and boring. What people value is being able to trust what they hear.','What matters more: what someone says or what they do?'],
+['zene','hodnik','Attention','When she says “it’s fine” and her tone says otherwise, ask again. *Calmly*. Without getting defensive.','Sometimes “it’s fine” means check if you care. One calm question can prevent a big fight.','Is it hard for you to ask again when something feels off?'],
+['zene','grad','Sincerity',"Attention that only shows up when you want something isn't attention. It's a *transaction*.","People quickly feel the difference between interest and calculation. Real attention doesn't ask for anything back.",'How do you recognize genuine attention?'],
+['zene','more','Presence','No one remembers who talked the best. They remember who was there *when it was hard*.','Nice words are forgotten by next week. Being there in a hard moment is remembered for years.','Who was there for you when it was hardest?'],
+['muskarci','silueta','Vulnerability',"Many men aren't silent because they have nothing to say. They're silent because no one ever taught them *how*.","Talking about emotions is a skill, not a talent you're born with. If you didn't learn it as a boy, you can still learn it now.",'Were you taught to talk about your feelings growing up?'],
+['muskarci','beton','Accountability',"A man who can't say “I was wrong” isn't strong. He's just *rigid*.",'Strength is admitting a mistake and fixing it. Rigidity protects the ego while relationships crack.','When did you last say “I was wrong”?'],
+['muskarci','prozor','Actions and words',"Many men show care through actions. But that's no excuse for the words to *never come*.",'Fixing the car and paying the bills is care. Sometimes it also needs to be said out loud.',"What's easier for you: showing it or saying it?"],
+['muskarci','hodnik','Inner battle',"The hardest fight for many men isn't with other people. It's with the voice that says they're *not enough*.","That voice sounds convincing because you've listened to it for years. That doesn't make it true.",'What would you tell your younger self about that voice?'],
+['muskarci','dim','Strength',"A man isn't measured by how much he endures. He's measured by what he *builds* afterward.",'Getting through something hard is only half the story. The other half is what you do with it.','What have you built from something that broke you?'],
+['muskarci','kisa','Silence',"Silence isn't always strength. Sometimes it's just pain with *nowhere to go*.","If silence is the only way you carry a hard season, find one person you can talk to. That isn't weakness.","Who can you talk to when you're not okay?"],
+['ljubav','more','Wholeness',"Love isn't someone filling your emptiness. It's two whole people *choosing* each other.","When you ask someone to fix you, you hand them a weight that isn't theirs. The healthiest relationships happen between people who are already at peace with themselves.",'Do you believe you have to be okay alone first?'],
+['ljubav','silueta','Feeling',"We don't just fall for people. We fall for *how we feel* around them.","That's why we sometimes miss people who weren't good for us. We miss the feeling, not them.",'How do you feel around the people you love?'],
+['ljubav','prozor','Closeness',"Real closeness is when you can sit in silence with someone and it *doesn't feel awkward*.",'Not every moment needs words. A quiet moment with the right person says more than long conversations.','Who are you comfortable being quiet with?'],
+['ljubav','hodnik','Self worth',"Love that asks you to shrink to fit inside it *isn't your size*.","If someone only loves you when you're quieter and smaller, they don't love you. They love the version that suits them.",'Have you ever changed just to be accepted?'],
+['ljubav','dim','Control',"Emotions aren't weakness. Weakness is letting them *decide for you*.",'Feeling anger, sadness or jealousy is human. The only question is who makes the decision: you or the moment.','Which emotion takes control of you most often?'],
+['ljubav','kisa','Truth','Sometimes the greatest act of love is telling a truth *no one wants to hear*.',"It's easy to be nice. It's harder to be honest when it costs something. But the people we love deserve the truth.",'Would you rather hear a hard truth or a kind lie?'],
+['raskidi','kisa','Nostalgia',"Maybe you don't miss her. You miss the version of you *that still had hope*.",'After a breakup we don\'t only grieve the person. We grieve the plans, the feeling and who we were back then.','What did you actually miss most after a breakup?'],
+['raskidi','more','Closure',"You don't get closure from the other person. You *give it to yourself*.",'Waiting for an explanation can take years. Sometimes the only ending is the one you decide to write.','Did you get closure, or did you create it?'],
+['raskidi','hodnik','Habit',"If you keep going back to the same person for the same reasons, you're not going back to love. You're going back to *habit*.","Familiar isn't the same as good. Sometimes we return only because the pain we know feels easier than the unknown.",'Have you ever gone back to someone out of habit?'],
+['raskidi','grad','Future',"A breakup doesn't only hurt because of the person. It hurts because of the *future* you already pictured.","You lose plans, places and days that never happened. It's okay to grieve what never even existed.",'What was hardest to let go of after a breakup?'],
+['raskidi','beton','Healing','Stop checking her profile. Every time you look, you *reopen* the wound.','Every look is a small step backward. Give yourself the distance you need for the wound to close.','Have you ever unfollowed someone just so you could move on?'],
+['raskidi','dim','Lesson','Some people are a lesson, not a destination. *Thank them* and move on.',"A relationship isn't a failure just because it ended. Some exist to teach you what you won't accept next time.",'What lesson did your last relationship teach you?'],
+['samopostovanje','beton','Standards',"Every time you stay where you're not respected, you teach yourself it's *normal*.","What we tolerate becomes our standard. That's why leaving is sometimes the most important lesson you give yourself.",'Where did you stay too long?'],
+['samopostovanje','prozor','Firmness',"Self respect is when your “no” doesn't need a *long explanation*.","You don't owe everyone a justification for your boundaries. A short, calm no is a complete sentence.",'Is it hard for you to say no without apologizing?'],
+['samopostovanje','silueta','Consistency',"You can't ask others for the respect you don't *give yourself*.",'People notice how you treat yourself. Your standards are the first signal you send to others.','How do you show respect for yourself?'],
+['samopostovanje','grad','Space',"Stop apologizing for taking up space. *It's yours.*",'Your opinion, your time and your seat at the table are not favors someone is doing you.',"What do you apologize for when you don't need to?"],
+['samopostovanje','hodnik','Peace',"When you stop chasing approval, you'll see who was *really* there.",'The people who stay when you stop proving yourself are the ones worth keeping.','Who stayed when you stopped trying to hold on?'],
+['samopostovanje','dim','Boundaries','People treat you the way you *allow* them to.','The first time is their choice. Every time after that is also your decision to accept it.','What do you no longer allow anyone to do?'],
+['granice','kisa','Guilt',"If you feel guilty after every conversation and don't know why, that's not a coincidence. It's a *pattern*.","Healthy communication doesn't leave you confused and guilty every time. When it keeps happening, look closely at what's really going on.",'Have you ever felt guilty without a clear reason?'],
+['granice','beton','Firmness',"A boundary you don't defend isn't a boundary. It's a *suggestion*.",'Stating a boundary is the first step. Holding it when someone tests it is what makes it real.','Which boundary is hardest for you to defend?'],
+['granice','prozor','Recognition','Control rarely sounds like a threat. Usually it sounds like *“I just worry about you.”*',"Care respects your choice. Control hides behind care. The difference is whether you're allowed to say no.",'How do you tell care from control?'],
+['granice','hodnik','Clarity','When someone gets angry at your boundary, they just showed you *why you need it*.',"People who respect you may disagree, but they'll accept it. Anger at your no says more about them than about you.",'How do people around you react when you set a boundary?'],
+['granice','dim','Accountability',"“You're too sensitive” is the shortest way to avoid responsibility for what someone *said*.","Your reaction can be discussed. That doesn't erase what was said before it.",'Has someone dismissed your feelings instead of apologizing?'],
+['granice','more','Peace',"You don't have to win an argument with someone who refuses to understand you. You can *walk away*.",'Not every argument is an invitation to fight. Some are just a way to drain your energy.','When did you last choose peace over winning?'],
+['disciplina','hodnik','Persistence','Motivation gets you started. *Discipline* gets you to the finish.',"Motivation depends on your mood. Discipline works on the days you don't feel like doing anything.","What do you do even when you don't feel like it?"],
+['disciplina','beton','Ownership',"No one is coming to save you. And that's actually *good news*.","If no one is coming, the wheel is in your hands. That's a weight, but it's also freedom.",'What would you change if you knew no one would do it for you?'],
+['disciplina','silueta','Your word',"Masculinity isn't in your voice, your muscles or your wallet. It's in *keeping your word*.",'Promising is easy. Delivering when it gets uncomfortable is where character shows.','What is a true sign of masculinity to you?'],
+['disciplina','prozor','Small steps',"You don't need a fresh start. You need the *next small step*, today.",'Waiting for the perfect Monday is just another way to procrastinate. A small step today beats a big plan for tomorrow.',"What's your next small step?"],
+['disciplina','grad','Habits',"The people you admire didn't have more time. They had *fewer excuses*.",'We all get the same day. The difference is what we choose to do with it.','Which excuse steals the most of your time?'],
+['disciplina','dim','Control',"If you don't run your morning, your morning *runs you*.",'The first hour often sets the tone for the rest of the day. Your phone can wait.','What do you do in the first hour after waking up?'],
+['istine','grad','Freedom',"No one thinks about you as much as you're *afraid* they do.","Most people are busy with their own worries. That isn't insulting, it's freeing.","What would you do if you didn't care what people think?"],
+['istine','beton','Change',"People don't change when you tell them to. They change when they *decide to*.","You can explain, plead and wait. But change that isn't their decision doesn't last.",'Have you ever waited for someone to change?'],
+['istine','more','Time',"Time doesn't heal anything on its own. What heals is what you *do* with that time.",'Years can pass and the wound can stay the same. Healing comes from what you do, not from the calendar.','What actually helped you get over something?'],
+['istine','kisa','Acceptance',"There will be people you'll never be enough for. *That's not your job.*",'You can try until you\'re exhausted and still not get recognition. Some standards were never meant for you.','Who did you try to prove yourself to for too long?'],
+['istine','hodnik','Fear',"Often it isn't fear of failure that stops you. It's fear of what *others will say*.","Failure can be fixed. A life spent waiting for approval can't.",'What would you try if no one was watching?'],
+['istine','dim','Habits','Your habits today are your life in *five years*.','Big changes rarely happen all at once. They come from small things you repeat every day.','Which habit do you want to have five years from now?'],
+['dejting','grad','Attraction',"Attraction can't be faked. It shows when you're *genuinely busy* with your own life.","When you have goals, friends and interests, you don't have to pretend to be interesting. You just are.",'What makes you feel most like yourself?'],
+['dejting','prozor','Presence',"On a first date you don't have to impress. You have to be *present*.","Phone in your pocket, attention on the person across from you. That's remembered longer than any story.",'What matters most to you on a first date?'],
+['dejting','silueta','Effort',"If you're wondering whether someone likes you, watch the effort, not the words. *Effort doesn't lie.*",'Sweet texts are easy. Time, attention and showing up when you said you would are what tell the truth.','Do words or effort tell you more?'],
+['dejting','hodnik','Confidence',"Confidence isn't being sure they'll say yes. It's being *okay* with no.","Rejection isn't a verdict on your worth. It's just information that it wasn't the right match.",'How do you handle rejection?'],
+['dejting','beton','Listening','The most attractive trait nobody talks about: *listening* without waiting for your turn to speak.','Most people listen only to reply. When you really listen, the other person feels it right away.','Is it easier for you to talk or to listen?'],
+['dejting','kisa','Dignity',"No reply is also a reply. Don't ask for it a *second time*.","You don't need to text a third time to get clarity. Sometimes silence is all the clarity you need.",'How long do you wait for a reply before letting go?'],
+];
+
+const FONTS = {
+  archivo:   { n: 'Archivo', fam: 'Archivo', w: 800, lh: 1.1 },
+  anton:     { n: 'Anton', fam: 'Anton', w: 400, up: true, lh: 1.04 },
+  bebas:     { n: 'Bebas Neue', fam: 'Bebas Neue', w: 400, up: true, lh: 0.98 },
+  oswald:    { n: 'Oswald', fam: 'Oswald', w: 500, up: true, lh: 1.12 },
+  manrope:   { n: 'Manrope', fam: 'Manrope', w: 800, lh: 1.14 },
+  playfair:  { n: 'Playfair Display', fam: 'Playfair Display', w: 600, lh: 1.16 },
+  playfairI: { n: 'Playfair Italic', fam: 'Playfair Display', w: 600, st: 'italic', lh: 1.16 },
+  dmserif:   { n: 'DM Serif Display', fam: 'DM Serif Display', w: 400, lh: 1.06 },
+  cormorant: { n: 'Cormorant Garamond', fam: 'Cormorant Garamond', w: 600, lh: 1.08 },
+  lora:      { n: 'Lora', fam: 'Lora', w: 500, lh: 1.26 },
+};
+
+const TPL = {
+  t1: { no: '01', n: 'Black Canvas', desc: 'Pure black background, large white text, left aligned.', max: 104, d: { font: 'archivo', size: 0, align: 'left', posY: 0.5, bright: 0.6, overlay: 0, grain: 0.22, mono: true } },
+  t2: { no: '02', n: 'Cinematic', desc: 'Dark cinematic photography with centered text.', max: 86, d: { font: 'playfair', size: 0, align: 'center', posY: 0.52, bright: 0.55, overlay: 0.55, grain: 0.3, mono: true } },
+  t3: { no: '03', n: 'Haze', desc: 'Blurred black and white photography with heavy type.', max: 132, d: { font: 'anton', size: 0, align: 'center', posY: 0.5, bright: 0.5, overlay: 0.35, grain: 0.35, mono: true } },
+  t4: { no: '04', n: 'Editorial', desc: 'Minimal editorial layout with oversized text.', max: 124, d: { font: 'dmserif', size: 0, align: 'left', posY: 0.56, bright: 0.28, overlay: 0, grain: 0.2, mono: true } },
+  t5: { no: '05', n: 'Atmosphere', desc: 'Dark atmosphere, soft gradients and film grain.', max: 100, d: { font: 'cormorant', size: 0, align: 'center', posY: 0.5, bright: 0.45, overlay: 0.2, grain: 0.45, mono: true } },
+};
+const TPL_ROT = ['t2', 't3', 't4', 't5', 't1'];
+
+const BGS = [
+  { id: 'silueta', n: 'Silhouette' }, { id: 'kisa', n: 'Rain on glass' }, { id: 'prozor', n: 'Light through blinds' },
+  { id: 'grad', n: 'City at night' }, { id: 'hodnik', n: 'Corridor' }, { id: 'dim', n: 'Smoke' }, { id: 'more', n: 'Horizon' }, { id: 'beton', n: 'Concrete' },
+];
+const BG_IDS = BGS.map(b => b.id);
+
+const DEFAULT_SETTINGS = { handle: '@yourhandle', showHandle: true, accent: '#d6bf94', defaultTpl: 'auto', duration: 8, cta: 'Follow us for more', emojis: '🖤🧠', noHyphens: true };
+const K = { posts: 'kadar.en.posts', settings: 'kadar.en.settings' };
+
+/* ───────────────────────── Utils ───────────────────────── */
+const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+const ymd = d => { const x = new Date(d); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+const parseYmd = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const startOfWeek = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); const k = (x.getDay() + 6) % 7; x.setDate(x.getDate() - k); return x; };
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const plain = t => (t || '').replace(/\*/g, '');
+const norm = t => plain(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/['’]/g, '').replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length > 2);
+function similarity(a, b) { const A = new Set(norm(a)), B = new Set(norm(b)); if (!A.size || !B.size) return 0; let i = 0; A.forEach(w => B.has(w) && i++); return i / (A.size + B.size - i); }
+function isDuplicate(text, list) { return list.some(t => similarity(text, t) >= 0.6); }
+const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const lsGet = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } };
+function dehyphen(s) { return s.replace(/(\S)-(\S)/g, '$1 $2').replace(/\s[-–—]\s/g, ', '); }
+const fmtDay = d => `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+
+function tplFor(settings, i) { return settings.defaultTpl && settings.defaultTpl !== 'auto' ? settings.defaultTpl : TPL_ROT[i % TPL_ROT.length]; }
+function makeDesign(tpl, bg) { return { tpl, ...TPL[tpl].d, bg: BG_IDS.includes(bg) ? bg : 'beton' }; }
+function makePost({ cat, text, caption, tags, bg, angle, q, source }, tpl) {
+  return { id: uid(), cat, text, caption, tags: tags && tags.length ? tags : [...CAT_TAGS[cat], ...COMMON_TAGS], bg, angle, q, source, fav: false, status: 'draft', date: null, time: null, createdAt: Date.now(), design: makeDesign(tpl, bg) };
+}
+function demoToPost(row, tpl) { const [cat, bg, angle, text, caption, q] = row; return makePost({ cat, bg, angle, text, caption, q, source: 'demo' }, tpl); }
+const CAT_EMOJI = { odnosi: '🤝', zene: '💭', muskarci: '🧠', ljubav: '❤️', raskidi: '💔', samopostovanje: '👑', granice: '🚫', disciplina: '💪', istine: '⚡', dejting: '🔥' };
+const HAS_EMOJI = /\p{Extended_Pictographic}/u;
+function migrateSettings(s) { if (!s.cta || s.cta === 'Follow for more thoughts like this') s.cta = 'Follow us for more'; return s; }
+function normalizePost(raw, docId, i) {
+  const cat = CAT[raw.cat] ? raw.cat : (CAT[raw.category] ? raw.category : 'odnosi');
+  const bg = BG_IDS.includes(raw.bg) ? raw.bg : (BG_IDS.includes(raw.background) ? raw.background : 'beton');
+  const tpl = TPL[raw.tpl] ? raw.tpl : TPL_ROT[i % TPL_ROT.length];
+  const tags = (Array.isArray(raw.tags) ? raw.tags : Array.isArray(raw.hashtags) ? raw.hashtags : []).map(t => String(t).trim()).filter(Boolean).map(t => t.startsWith('#') ? t : '#' + t);
+  return { id: docId, cat, text: String(raw.text), caption: String(raw.caption || ''), tags: tags.length ? tags : [...CAT_TAGS[cat], ...COMMON_TAGS], bg, angle: String(raw.angle || ''), q: String(raw.q || raw.question || ''), source: raw.source || 'ai', fav: !!raw.fav, status: raw.status || 'draft', date: raw.date || null, time: raw.time || null, createdAt: Number(raw.createdAt) || Date.now(), design: makeDesign(tpl, bg) };
+}
+function fullCaption(p, s) {
+  const tags = (p.tags || []).join(' ');
+  let cap = (p.caption || '').trim(); if (cap && !HAS_EMOJI.test(cap)) cap += ' ' + (CAT_EMOJI[p.cat] || '🖤');
+  let body = [cap, p.q].filter(Boolean).join('\n\n');
+  if (s.noHyphens) body = dehyphen(body);
+  const cta = [s.cta, s.handle].filter(Boolean).join(' ');
+  return [body, [cta, s.emojis].filter(Boolean).join(' '), tags].filter(Boolean).join('\n\n');
+}
+
+/* ───────────────────────── Backgrounds ───────────────────────── */
+const W0 = 1080, H0 = 1920;
+function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function mk(w = W0, h = H0) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function softBlur(src, f) {
+  const sw = Math.max(2, Math.round(src.width / f)), sh = Math.max(2, Math.round(src.height / f));
+  const a = mk(sw, sh), ac = a.getContext('2d'); ac.imageSmoothingQuality = 'high'; ac.drawImage(src, 0, 0, sw, sh);
+  const b = mk(sw * 2, sh * 2), bc = b.getContext('2d'); bc.imageSmoothingQuality = 'high'; bc.drawImage(a, 0, 0, sw * 2, sh * 2);
+  const o = mk(src.width, src.height), oc = o.getContext('2d'); oc.imageSmoothingQuality = 'high'; oc.drawImage(b, 0, 0, src.width, src.height); return o;
+}
+function glow(ctx, x, y, r, a, v = 255) { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(${v},${v},${v},${a})`); g.addColorStop(1, `rgba(${v},${v},${v},0)`); ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); }
+const GEN = {
+  silueta(ctx, R) {
+    const g = ctx.createLinearGradient(0, 0, 0, H0); g.addColorStop(0, '#0a0a0a'); g.addColorStop(1, '#030303'); ctx.fillStyle = g; ctx.fillRect(0, 0, W0, H0);
+    glow(ctx, 540, 820, 900, .55, 190); glow(ctx, 540, 760, 380, .5, 235);
+    for (let i = 0; i < 40; i++) glow(ctx, R() * W0, 500 + R() * 900, 120 + R() * 260, .025);
+    ctx.fillStyle = '#040404';
+    ctx.beginPath(); ctx.ellipse(540, 1080, 92, 118, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(470, 1170); ctx.lineTo(610, 1170); ctx.lineTo(630, 1270);
+    ctx.bezierCurveTo(820, 1300, 930, 1360, 960, 1520); ctx.lineTo(1010, 1920); ctx.lineTo(70, 1920); ctx.lineTo(120, 1520);
+    ctx.bezierCurveTo(150, 1360, 260, 1300, 450, 1270); ctx.closePath(); ctx.fill();
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = 6; ctx.shadowColor = 'rgba(255,255,255,.4)'; ctx.shadowBlur = 30;
+    ctx.beginPath(); ctx.ellipse(540, 1080, 92, 118, 0, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke(); ctx.restore();
+    const f = ctx.createLinearGradient(0, 1500, 0, H0); f.addColorStop(0, 'rgba(0,0,0,0)'); f.addColorStop(1, 'rgba(0,0,0,.8)'); ctx.fillStyle = f; ctx.fillRect(0, 1500, W0, 420);
+  },
+  kisa(ctx, R) {
+    ctx.fillStyle = '#0b0b0b'; ctx.fillRect(0, 0, W0, H0);
+    for (let i = 0; i < 70; i++) glow(ctx, R() * W0, R() * H0 * .8, 30 + R() * 140, .06 + R() * .2, 150 + R() * 100 | 0);
+    ctx.lineCap = 'round';
+    for (let i = 0; i < 260; i++) { const x = R() * W0, y = R() * H0, l = 30 + R() * 160; ctx.strokeStyle = `rgba(255,255,255,${.03 + R() * .08})`; ctx.lineWidth = 1 + R() * 2.5; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + l * .08, y + l); ctx.stroke(); }
+    for (let i = 0; i < 420; i++) { const x = R() * W0, y = R() * H0, r = 2 + R() * 9; ctx.fillStyle = `rgba(0,0,0,${.3 + R() * .3})`; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.fillStyle = `rgba(255,255,255,${.12 + R() * .25})`; ctx.beginPath(); ctx.arc(x - r * .3, y - r * .3, r * .35, 0, 7); ctx.fill(); }
+  },
+  prozor(ctx, R) {
+    const g = ctx.createLinearGradient(0, 0, W0, H0); g.addColorStop(0, '#1a1a1a'); g.addColorStop(1, '#060606'); ctx.fillStyle = g; ctx.fillRect(0, 0, W0, H0);
+    ctx.save(); ctx.translate(540, 900); ctx.rotate(-0.36); ctx.shadowColor = 'rgba(255,255,255,.7)'; ctx.shadowBlur = 24;
+    for (let i = -7; i < 8; i++) { const a = .22 * (1 - Math.abs(i) / 9); ctx.fillStyle = `rgba(235,235,235,${a})`; ctx.fillRect(-520, i * 92, 1040, 46); }
+    ctx.restore(); glow(ctx, 380, 760, 700, .12);
+    const v = ctx.createRadialGradient(540, 900, 300, 540, 900, 1300); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.85)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W0, H0);
+  },
+  grad(ctx, R) {
+    const g = ctx.createLinearGradient(0, 0, 0, H0); g.addColorStop(0, '#050505'); g.addColorStop(.62, '#1d1d1d'); g.addColorStop(1, '#0a0a0a'); ctx.fillStyle = g; ctx.fillRect(0, 0, W0, H0);
+    let x = -20; ctx.fillStyle = '#070707';
+    while (x < W0) { const w = 60 + R() * 140, h = 180 + R() * 520; ctx.fillRect(x, 1260 - h, w, h + 700); for (let k = 0; k < 18; k++) if (R() < .35) { ctx.fillStyle = `rgba(230,230,230,${.15 + R() * .5})`; ctx.fillRect(x + 8 + R() * (w - 18), 1260 - h + 14 + R() * (h - 20), 5, 7); ctx.fillStyle = '#070707'; } x += w + 4; }
+    for (let i = 0; i < 90; i++) glow(ctx, R() * W0, 1380 + R() * 520, 14 + R() * 70, .12 + R() * .35, 180 + R() * 75 | 0);
+    glow(ctx, 540, 1250, 800, .08);
+  },
+  hodnik(ctx, R) {
+    ctx.fillStyle = '#080808'; ctx.fillRect(0, 0, W0, H0);
+    const vx = 540, vy = 860, ex = 120, ey = 200;
+    const poly = (pts, fill) => { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); };
+    let g = ctx.createLinearGradient(0, 0, vx, 0); g.addColorStop(0, '#0d0d0d'); g.addColorStop(1, '#3a3a3a'); poly([0, 0, vx - ex, vy - ey, vx - ex, vy + ey, 0, H0], g);
+    g = ctx.createLinearGradient(W0, 0, vx, 0); g.addColorStop(0, '#0a0a0a'); g.addColorStop(1, '#333'); poly([W0, 0, vx + ex, vy - ey, vx + ex, vy + ey, W0, H0], g);
+    g = ctx.createLinearGradient(0, 0, 0, vy); g.addColorStop(0, '#050505'); g.addColorStop(1, '#262626'); poly([0, 0, W0, 0, vx + ex, vy - ey, vx - ex, vy - ey], g);
+    g = ctx.createLinearGradient(0, H0, 0, vy); g.addColorStop(0, '#0a0a0a'); g.addColorStop(1, '#4a4a4a'); poly([0, H0, W0, H0, vx + ex, vy + ey, vx - ex, vy + ey], g);
+    ctx.fillStyle = '#e6e6e6'; ctx.fillRect(vx - ex, vy - ey, ex * 2, ey * 2); glow(ctx, vx, vy, 520, .5); glow(ctx, vx, vy + 500, 260, .12);
+    ctx.fillStyle = '#050505'; ctx.fillRect(vx - 14, vy + 40, 28, 160); ctx.beginPath(); ctx.arc(vx, vy + 26, 17, 0, 7); ctx.fill();
+  },
+  dim(ctx, R) {
+    ctx.fillStyle = '#060606'; ctx.fillRect(0, 0, W0, H0);
+    let x = 540, y = 1700;
+    for (let i = 0; i < 260; i++) { x += (R() - .5) * 90; y -= 6 + R() * 6; x = Math.max(100, Math.min(980, x)); glow(ctx, x + Math.sin(i / 9) * 160, y, 60 + R() * 260, .025 + R() * .03); }
+    glow(ctx, 540, 900, 700, .06);
+  },
+  more(ctx, R) {
+    const hz = 1120;
+    let g = ctx.createLinearGradient(0, 0, 0, hz); g.addColorStop(0, '#050505'); g.addColorStop(.75, '#2a2a2a'); g.addColorStop(1, '#4d4d4d'); ctx.fillStyle = g; ctx.fillRect(0, 0, W0, hz);
+    g = ctx.createLinearGradient(0, hz, 0, H0); g.addColorStop(0, '#1d1d1d'); g.addColorStop(1, '#030303'); ctx.fillStyle = g; ctx.fillRect(0, hz, W0, H0 - hz);
+    glow(ctx, 540, hz - 140, 320, .45, 230); glow(ctx, 540, hz - 140, 90, .7, 250);
+    for (let i = 0; i < 160; i++) { const yy = hz + 6 + Math.pow(R(), 1.6) * 700, w = 20 + R() * 220 * (1 - (yy - hz) / 900); ctx.fillStyle = `rgba(230,230,230,${.05 + R() * .18})`; ctx.fillRect(540 - w / 2 + (R() - .5) * 140, yy, w, 2 + R() * 3); }
+    for (let i = 0; i < 30; i++) glow(ctx, R() * W0, 200 + R() * 700, 200 + R() * 300, .02);
+  },
+  beton(ctx, R) {
+    ctx.fillStyle = '#1e1e1e'; ctx.fillRect(0, 0, W0, H0);
+    const s = mk(135, 240), sc = s.getContext('2d'), id = sc.createImageData(135, 240);
+    for (let i = 0; i < id.data.length; i += 4) { const v = 22 + R() * 30; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+    sc.putImageData(id, 0, 0); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(softBlur(s, 2), 0, 0, W0, H0);
+    for (let i = 0; i < 9000; i++) { ctx.fillStyle = R() < .5 ? `rgba(0,0,0,${R() * .5})` : `rgba(255,255,255,${R() * .08})`; ctx.fillRect(R() * W0, R() * H0, 1 + R() * 3, 1 + R() * 3); }
+    glow(ctx, 300, 500, 900, .06);
+    const v = ctx.createRadialGradient(540, 960, 400, 540, 960, 1300); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.7)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W0, H0);
+  },
+};
+const BGCACHE = new Map();
+const UPLOADS = new Map(); // id -> canvas
+function baseBg(id) {
+  if (id && id.startsWith('up:')) { const c = UPLOADS.get(id.slice(3)); if (c) return c; id = 'beton'; }
+  if (!GEN[id]) id = 'beton';
+  if (!BGCACHE.has(id)) { const c = mk(), ctx = c.getContext('2d'); GEN[id](ctx, rng(id.split('').reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7))); BGCACHE.set(id, c); }
+  return BGCACHE.get(id);
+}
+function toMono(src) { const c = mk(src.width, src.height), x = c.getContext('2d'); x.drawImage(src, 0, 0); const d = x.getImageData(0, 0, c.width, c.height), p = d.data; for (let i = 0; i < p.length; i += 4) { const v = p[i] * .299 + p[i + 1] * .587 + p[i + 2] * .114; p[i] = p[i + 1] = p[i + 2] = v; } x.putImageData(d, 0, 0); return c; }
+function getBg(id, blur, mono) {
+  const up = id && id.startsWith('up:');
+  const key = id + (blur ? ':b' : '') + (up && mono ? ':m' : '');
+  if (BGCACHE.has(key)) return BGCACHE.get(key);
+  let c = baseBg(id); if (c === BGCACHE.get('beton') && up) return c;
+  if (up && mono) c = toMono(c);
+  if (blur) c = softBlur(softBlur(c, 10), 3);
+  BGCACHE.set(key, c); return c;
+}
+let NOISE = null;
+function noise() { if (NOISE) return NOISE; const c = mk(256, 256), x = c.getContext('2d'), d = x.createImageData(256, 256); for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 34; } x.putImageData(d, 0, 0); NOISE = c; return c; }
+
+/* ───────────────────────── Renderer ───────────────────────── */
+function tokenize(text, up) {
+  const out = []; let hl = false;
+  (text || '').replace(/\r/g, '').split('\n').forEach((line, li) => {
+    if (li > 0) out.push({ br: true });
+    line.split(/\s+/).filter(Boolean).forEach(raw => {
+      const segs = []; let cur = '';
+      for (const ch of raw) { if (ch === '*') { if (cur) segs.push({ t: cur, hl }); cur = ''; hl = !hl; } else cur += ch; }
+      if (cur) segs.push({ t: cur, hl });
+      if (segs.length) out.push({ segs: segs.map(s => ({ ...s, t: up ? s.t.toLocaleUpperCase('en-US') : s.t })) });
+    });
+  });
+  return out;
+}
+function fontStr(F, size) { return `${F.st || 'normal'} ${F.w} ${size}px "${F.fam}", Georgia, sans-serif`; }
+function layout(ctx, toks, F, size, maxW) {
+  ctx.font = fontStr(F, size); const sp = ctx.measureText(' ').width;
+  const lines = []; let cur = { items: [], w: 0 }; let widest = 0;
+  for (const t of toks) {
+    if (t.br) { lines.push(cur); cur = { items: [], w: 0 }; continue; }
+    const ww = t.segs.reduce((a, s) => a + ctx.measureText(s.t).width, 0); widest = Math.max(widest, ww);
+    if (cur.items.length && cur.w + sp + ww > maxW) { lines.push(cur); cur = { items: [], w: 0 }; }
+    cur.w += (cur.items.length ? sp : 0) + ww; cur.items.push({ segs: t.segs, w: ww });
+  }
+  if (cur.items.length) lines.push(cur);
+  return { lines, sp, widest };
+}
+function hexA(hex, a) { const h = hex.replace('#', ''); const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; }
+function setLS(ctx, v) { if ('letterSpacing' in ctx) ctx.letterSpacing = v; }
+
+function renderPost(ctx, post, S, W, opt = {}) {
+  const s = W / W0, H = Math.round(W * H0 / W0);
+  const tk = (post.design && TPL[post.design.tpl]) ? post.design.tpl : 't1'; const T = TPL[tk];
+  const d = { ...T.d, ...(post.design || {}) }; const F = FONTS[d.font] || FONTS.archivo; const accent = S.accent || '#d6bf94';
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.shadowBlur = 0; setLS(ctx, '0px');
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+  const zoom = opt.zoom || 1;
+  if (tk !== 't1') {
+    const src = getBg(d.bg, tk === 't3', d.mono !== false);
+    const sc = Math.max(W / src.width, H / src.height) * zoom, dw = src.width * sc, dh = src.height * sc;
+    ctx.imageSmoothingQuality = 'high'; ctx.drawImage(src, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    const b = d.bright ?? 0.5;
+    if (b < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - b})`; ctx.fillRect(0, 0, W, H); }
+    else if (b > 1) { ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = `rgba(255,255,255,${(b - 1) * .6})`; ctx.fillRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over'; }
+  }
+  if (tk === 't4') { ctx.fillStyle = 'rgba(14,13,12,.55)'; ctx.fillRect(0, 0, W, H); }
+  if (tk === 't5') {
+    let g = ctx.createRadialGradient(W * .2, H * .15, 0, W * .2, H * .15, H * .7); g.addColorStop(0, hexA(accent, .22)); g.addColorStop(1, hexA(accent, 0)); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    g = ctx.createRadialGradient(W * .85, H * .9, 0, W * .85, H * .9, H * .6); g.addColorStop(0, 'rgba(90,110,125,.22)'); g.addColorStop(1, 'rgba(90,110,125,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+  if (tk === 't2' || tk === 't3' || tk === 't5') { const v = ctx.createRadialGradient(W / 2, H / 2, H * .22, W / 2, H / 2, H * .78); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.72)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H); }
+
+  const padX = (tk === 't4' ? 88 : 96) * s, maxW = W - padX * 2, maxH = (tk === 't4' ? 1180 : 1120) * s;
+  const toks = tokenize(post.text, !!F.up);
+  let size = Math.round((d.size || T.max) * s); const minSize = 26 * s; let L;
+  while (true) { L = layout(ctx, toks, F, size, maxW); const h = L.lines.length * size * F.lh; if ((h <= maxH && L.widest <= maxW) || size <= minSize) break; size -= Math.max(1, 2 * s); }
+  const lineH = size * F.lh, totalH = L.lines.length * lineH;
+  let top = (d.posY ?? .5) * H - totalH / 2; top = Math.max(200 * s, Math.min(H - 220 * s - totalH, top));
+
+  if ((d.overlay || 0) > 0 && tk !== 't1') {
+    const a = d.overlay, y0 = top - 260 * s, y1 = top + totalH + 260 * s; const g = ctx.createLinearGradient(0, y0, 0, y1);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.3, `rgba(0,0,0,${a})`); g.addColorStop(.7, `rgba(0,0,0,${a})`); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(0, y0, W, y1 - y0);
+  }
+  if ((d.grain || 0) > 0) { ctx.save(); ctx.globalAlpha = Math.min(1, d.grain * 1.4); const p = ctx.createPattern(noise(), 'repeat'); if (p.setTransform && s < 1) p.setTransform(new DOMMatrix().scale(Math.max(.35, s))); ctx.fillStyle = p; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+
+  const mute = 'rgba(236,232,225,.55)';
+  const catName = (CAT[post.cat] || { n: '' }).n.toUpperCase();
+  ctx.textBaseline = 'alphabetic';
+  if (tk === 't1') { ctx.font = `500 ${22 * s}px "JetBrains Mono", monospace`; setLS(ctx, `${3 * s}px`); ctx.fillStyle = mute; ctx.textAlign = 'left'; ctx.fillText(catName, padX, 190 * s); setLS(ctx, '0px'); ctx.fillStyle = accent; ctx.fillRect(padX, top - 70 * s, 64 * s, 4 * s); }
+  if (tk === 't3') { ctx.fillStyle = accent; ctx.fillRect(W / 2 - 40 * s, top - 64 * s, 80 * s, 5 * s); }
+  if (tk === 't4') {
+    ctx.font = `500 ${22 * s}px "JetBrains Mono", monospace`; setLS(ctx, `${3 * s}px`); ctx.fillStyle = mute; ctx.textAlign = 'left'; ctx.fillText(catName, padX, 170 * s);
+    ctx.textAlign = 'right'; ctx.fillText('SAVE THIS', W - padX, 170 * s); setLS(ctx, '0px');
+    ctx.fillStyle = 'rgba(236,232,225,.25)'; ctx.fillRect(padX, 196 * s, W - padX * 2, Math.max(1, 2 * s));
+    ctx.font = `400 ${260 * s}px "DM Serif Display", Georgia, serif`; ctx.fillStyle = accent; ctx.textAlign = 'left'; ctx.fillText('“', padX - 10 * s, top + 70 * s);
+  }
+  if (tk === 't5') { ctx.fillStyle = hexA(accent, .8); ctx.beginPath(); ctx.arc(W / 2, top - 70 * s, 5 * s, 0, 7); ctx.fill(); }
+
+  if (tk !== 't1' && tk !== 't4') { ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 24 * s; }
+  const align = d.align || 'left';
+  L.lines.forEach((ln, i) => {
+    const y = top + i * lineH + size * .82 + (tk === 't4' ? 110 * s : 0);
+    let x = align === 'center' ? (W - ln.w) / 2 : align === 'right' ? W - padX - ln.w : padX;
+    ctx.font = fontStr(F, size); ctx.textAlign = 'left';
+    ln.items.forEach((it, j) => {
+      if (j) x += L.sp;
+      it.segs.forEach(sg => { ctx.fillStyle = sg.hl ? accent : '#f4f1ec'; ctx.fillText(sg.t, x, y); x += ctx.measureText(sg.t).width; });
+    });
+  });
+  ctx.shadowBlur = 0;
+
+  if (S.showHandle && S.handle) {
+    ctx.font = `500 ${24 * s}px "JetBrains Mono", monospace`; ctx.fillStyle = mute; setLS(ctx, `${1 * s}px`);
+    if (tk === 't1' || tk === 't4') { ctx.textAlign = 'left'; ctx.fillText(S.handle, padX, H - 150 * s); }
+    else { ctx.textAlign = 'center'; ctx.fillText(S.handle, W / 2, H - 150 * s); }
+    setLS(ctx, '0px');
+  }
+  if (opt.fade != null && opt.fade < 1) { ctx.fillStyle = `rgba(0,0,0,${1 - opt.fade})`; ctx.fillRect(0, 0, W, H); }
+  ctx.restore();
+}
+
+/* ───────────────────────── Fonts ───────────────────────── */
+async function loadFonts() {
+  if (!document.fonts) return;
+  const sample = 'AaBbQq’“”';
+  const reqs = Object.values(FONTS).map(F => document.fonts.load(fontStr(F, 40), sample));
+  reqs.push(document.fonts.load('500 24px "JetBrains Mono"', sample));
+  try { await Promise.race([Promise.all(reqs), new Promise(r => setTimeout(r, 6000))]); } catch {}
+}
+
+/* ───────────────────────── Platform ───────────────────────── */
+const CAPS = { dl: null, sample: null };
+async function useCap(name) { try { return window.claude && window.claude.use ? await window.claude.use(name) : null; } catch { return null; } }
+async function saveFile(filename, data) {
+  if (CAPS.dl) {
+    try { await CAPS.dl.save({ filename, data }); return 'saved'; }
+    catch (e) { if (e && e.code === 'declined') return 'declined'; throw new Error(e && e.message ? e.message : 'Download failed.'); }
+  }
+  if (!window.claude) { const blob = data instanceof Blob ? data : new Blob([data]); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); return 'saved'; }
+  throw new Error('Downloads are not available in this view. Open the page on claude.ai.');
+}
+
+/* ───────────────────────── Export ───────────────────────── */
+function renderFull(post, S) { const c = mk(); renderPost(c.getContext('2d'), post, S, W0); return c; }
+const toBlob = (c, type, q) => new Promise(r => c.toBlob(r, type, q));
+async function imageBlob(post, S, kind) { const c = renderFull(post, S); return kind === 'jpg' ? toBlob(c, 'image/jpeg', 0.92) : toBlob(c, 'image/png'); }
+async function pickAvc() {
+  if (!('VideoEncoder' in window) || !window.Mp4Muxer) return null;
+  for (const codec of ['avc1.640028', 'avc1.4d0028', 'avc1.42002a']) {
+    try { const r = await VideoEncoder.isConfigSupported({ codec, width: W0, height: H0, bitrate: 6e6, framerate: 30 }); if (r.supported) return codec; } catch {}
+  }
+  return null;
+}
+async function videoBlob(post, S, seconds, onProg) {
+  const fps = 30, n = Math.round(seconds * fps), c = mk(), ctx = c.getContext('2d');
+  const frame = i => { const p = i / Math.max(1, n - 1); renderPost(ctx, post, S, W0, { zoom: 1 + 0.045 * p, fade: Math.min(1, i / 12) }); };
+  const codec = await pickAvc();
+  if (codec) {
+    const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: 'avc', width: W0, height: H0, frameRate: fps }, fastStart: 'in-memory' });
+    let err = null;
+    const enc = new VideoEncoder({ output: (chunk, meta) => muxer.addVideoChunk(chunk, meta), error: e => { err = e; } });
+    enc.configure({ codec, width: W0, height: H0, bitrate: 6e6, framerate: fps, avc: { format: 'avc' } });
+    for (let i = 0; i < n; i++) {
+      if (err) throw err;
+      frame(i);
+      const vf = new VideoFrame(c, { timestamp: Math.round(i * 1e6 / fps), duration: Math.round(1e6 / fps) });
+      enc.encode(vf, { keyFrame: i % 60 === 0 }); vf.close();
+      if (enc.encodeQueueSize > 8) await new Promise(r => setTimeout(r, 5));
+      if (i % 10 === 0) { onProg && onProg(i / n); await new Promise(r => setTimeout(r, 0)); }
+    }
+    await enc.flush(); enc.close(); muxer.finalize(); onProg && onProg(1);
+    return { blob: new Blob([muxer.target.buffer], { type: 'video/mp4' }), ext: 'mp4' };
+  }
+  if (!c.captureStream || !window.MediaRecorder) throw new Error('This browser cannot create video. Try Chrome or Edge.');
+  const mime = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m));
+  const stream = c.captureStream(fps), rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6e6 }), parts = [];
+  rec.ondataavailable = e => e.data.size && parts.push(e.data);
+  const done = new Promise(r => rec.onstop = r);
+  frame(0); rec.start(250); const t0 = performance.now();
+  await new Promise(res => { const tick = () => { const el = (performance.now() - t0) / 1000; const i = Math.min(n - 1, Math.round(el * fps)); frame(i); onProg && onProg(el / seconds); if (el >= seconds) { rec.stop(); res(); } else requestAnimationFrame(tick); }; requestAnimationFrame(tick); });
+  await done; const ext = mime.includes('mp4') ? 'mp4' : 'webm';
+  return { blob: new Blob(parts, { type: mime.split(';')[0] }), ext };
+}
+const slug = (p, i) => String(i + 1).padStart(2, '0') + '-' + norm(p.text).slice(0, 5).join('-');
+
+/* ───────────────────────── Store ───────────────────────── */
+const Store = {
+  db: null, base: null, timers: {}, lt: null,
+  saveLocal(posts) { clearTimeout(this.lt); this.lt = setTimeout(() => lsSet(K.posts, posts), 250); },
+  put(post) { if (!this.db) return; const id = post.id; clearTimeout(this.timers[id]); this.timers[id] = setTimeout(() => { delete this.timers[id]; this.db.doc(this.base + '/reels/posts_en/' + id).set(JSON.parse(JSON.stringify(post))).catch(e => console.warn('db', e)); }, 600); },
+  del(id) { clearTimeout(this.timers[id]); delete this.timers[id]; if (this.db) this.db.doc(this.base + '/reels/posts_en/' + id).delete().catch(() => {}); },
+  putSettings(s) { lsSet(K.settings, s); if (this.db) { clearTimeout(this.st); this.st = setTimeout(() => this.db.doc(this.base + '/settings_en').set(s).catch(() => {}), 600); } },
+  pending(id) { return !!this.timers[id]; },
+};
+function seedPosts() {
+  const pick = [0, 13, 24, 31, 37, 43, 49, 55];
+  return pick.map((ix, i) => { const p = demoToPost(DEMO[ix], TPL_ROT[i % 5]); p.createdAt = Date.now() - (pick.length - i) * 60000; return p; });
+}
+
+/* ───────────────────────── UI pieces ───────────────────────── */
+const Ctx = createContext(null);
+function PostCanvas({ post, w = 360, className = 'proof', zoom }) {
+  const ref = useRef(null); const { settings, ver } = useContext(Ctx);
+  useEffect(() => { const c = ref.current; if (c) renderPost(c.getContext('2d'), post, settings, w, zoom ? { zoom } : {}); }, [post, settings, w, ver, zoom]);
+  return html`<canvas ref=${ref} width=${w} height=${Math.round(w * H0 / W0)} className=${className} aria-label=${plain(post.text)} role="img"></canvas>`;
+}
+function BgSwatch({ id, active, onPick, label }) {
+  const ref = useRef(null); const { ver } = useContext(Ctx);
+  useEffect(() => { const c = ref.current; if (!c) return; const x = c.getContext('2d'); const src = baseBg(id); x.drawImage(src, 0, 0, c.width, c.height); }, [id, ver]);
+  return html`<button type="button" className="swatch" aria-pressed=${active ? 'true' : 'false'} onClick=${() => onPick(id)} title=${label} aria-label=${label}><canvas ref=${ref} width="90" height="160"></canvas></button>`;
+}
+function SourceBadge({ p }) {
+  if (p.source === 'ai') return html`<span className="badge badge-ai">AI</span>`;
+  if (p.source === 'manual') return html`<span className="badge">Manual</span>`;
+  return html`<span className="badge">Demo</span>`;
+}
+function StatusBadge({ p }) {
+  if (p.status === 'published') return html`<span className="badge badge-pub">Published</span>`;
+  if (p.date) return html`<span className="badge badge-sch">${fmtDay(parseYmd(p.date))}</span>`;
+  return null;
+}
+function Icon({ n, s = 16 }) {
+  const P = {
+    grid: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z', spark: 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6',
+    edit: 'M4 20h4L19 9l-4-4L4 16zM14 6l4 4', layers: 'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5', lib: 'M5 4v16M10 4v16M15 5l4 15', cal: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
+    star: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1L3.2 9.5l6.1-.9z', down: 'M12 4v11M7 10l5 5 5-5M5 20h14', check: 'M5 12l5 5 9-10', trash: 'M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13', copy: 'M8 8h11v12H8zM5 16V4h11', plus: 'M12 5v14M5 12h14', up: 'M12 20V9M7 14l5-5 5 5M5 4h14'
+  };
+  return html`<svg width=${s} height=${s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d=${P[n]}></path></svg>`;
+}
+function Seg({ value, options, onChange, label }) {
+  return html`<div role="group" aria-label=${label} className="flex flex-wrap gap-2">${options.map(o => html`<button type="button" key=${o.v} className="chip" aria-pressed=${String(value === o.v)} onClick=${() => onChange(o.v)}>${o.l}</button>`)}</div>`;
+}
+function Slider({ id, label, value, min, max, step, onChange, fmt }) {
+  return html`<div><div className="flex justify-between"><label className="lbl" htmlFor=${id}>${label}</label><span className="mono text-[11px] text-mute tnum">${fmt ? fmt(value) : value}</span></div>
+    <input id=${id} type="range" min=${min} max=${max} step=${step} value=${value} onInput=${e => onChange(Number(e.target.value))} onChange=${e => onChange(Number(e.target.value))} /></div>`;
+}
+function PageHead({ eyebrow, title, children }) {
+  return html`<div className="flex flex-wrap items-end justify-between gap-4 mb-6"><div className="min0"><div className="eyebrow mb-2">${eyebrow}</div><h1 className="disp text-[40px] leading-[1.05] sm:text-[48px]">${title}</h1></div><div className="flex flex-wrap gap-2">${children}</div></div>`;
+}
+
+/* ───────────────────────── Pages ───────────────────────── */
+const NAV = [
+  { k: 'overview', n: 'Overview' }, { k: 'generator', n: 'AI Generator' }, { k: 'editor', n: 'Reels Editor' },
+  { k: 'templates', n: 'Templates' }, { k: 'library', n: 'Content Library' }, { k: 'calendar', n: 'Content Calendar' }, { k: 'settings', n: 'Settings' },
+];
+
+function Overview({ posts, go, openEditor }) {
+  const wk = startOfWeek(new Date()); const wkEnd = addDays(wk, 7);
+  const thisWeek = posts.filter(p => p.date && parseYmd(p.date) >= wk && parseYmd(p.date) < wkEnd);
+  const stats = [
+    { l: 'Total posts', v: posts.length }, { l: 'Drafts', v: posts.filter(p => p.status !== 'published' && !p.date).length },
+    { l: 'Scheduled this week', v: thisWeek.filter(p => p.status !== 'published').length }, { l: 'Published', v: posts.filter(p => p.status === 'published').length },
+  ];
+  const byCat = CATS.map(c => ({ ...c, v: posts.filter(p => p.cat === c.k).length })); const maxC = Math.max(1, ...byCat.map(c => c.v));
+  const recent = posts.slice().sort((a, b) => b.createdAt - a.createdAt).slice(0, 4);
+  const hasDemo = posts.some(p => p.source === 'demo');
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="Overview" title="Your Reels studio">
+      <button className="btn" onClick=${() => go('calendar')}><${Icon} n="cal" /> Plan the week</button>
+      <button className="btn btn-primary" onClick=${() => go('generator')}><${Icon} n="spark" /> Generate posts</button>
+    <//>
+    ${hasDemo && html`<p className="text-mute text-[13px] mb-5 max-w-[70ch]">Posts marked <span className="badge">Demo</span> are examples from the built in library. AI posts are marked <span className="badge badge-ai">AI</span>.</p>`}
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+      ${stats.map(s => html`<div key=${s.l} className="card p-4"><div className="text-mute text-[12px] mb-2">${s.l}</div><div className="disp text-[40px] leading-none tnum">${s.v}</div></div>`)}
+    </div>
+    <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-6">
+      <section className="card p-5 min0">
+        <div className="flex items-baseline justify-between mb-4"><h2 className="text-[15px] font-semibold">By category</h2><span className="eyebrow">posts</span></div>
+        <div className="flex flex-col gap-3">
+          ${byCat.map(c => html`<div key=${c.k} className="grid grid-cols-[minmax(0,1fr)_28px] items-center gap-3">
+            <div className="min0"><div className="text-[12.5px] mb-1 truncate">${c.n}</div><div className="bar"><i style=${{ width: (c.v / maxC * 100) + '%', opacity: c.v ? 1 : 0 }}></i></div></div>
+            <span className="mono text-[12px] text-mute text-right tnum">${c.v}</span></div>`)}
+        </div>
+      </section>
+      <section className="min0">
+        <div className="flex items-baseline justify-between mb-3"><h2 className="text-[15px] font-semibold">Recently created</h2><button className="btn btn-ghost btn-sm" onClick=${() => go('library')}>Open library</button></div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          ${recent.map(p => html`<button key=${p.id} className="text-left group" onClick=${() => openEditor(p.id)} aria-label=${'Edit: ' + plain(p.text)}>
+            <div className="relative"><${PostCanvas} post=${p} w=${300} /><div className="absolute top-2 left-2 flex gap-1"><${SourceBadge} p=${p} /></div></div>
+            <div className="text-[12px] text-mute mt-2 truncate">${(CAT[p.cat] || {}).n}</div></button>`)}
+        </div>
+        ${!recent.length && html`<div className="card p-6 text-mute">No posts yet. Open the AI Generator to create your first batch.</div>`}
+        <div className="card p-4 mt-6">
+          <div className="flex items-baseline justify-between mb-3"><h2 className="text-[15px] font-semibold">This week</h2><span className="eyebrow">${fmtDay(wk)} – ${fmtDay(addDays(wk, 6))}</span></div>
+          <div className="grid grid-cols-7 gap-2">
+            ${DAYS.map((dn, i) => { const day = ymd(addDays(wk, i)); const items = posts.filter(p => p.date === day); const isToday = day === ymd(new Date());
+              return html`<div key=${dn} className="text-center"><div className=${'mono text-[10px] mb-1 ' + (isToday ? 'text-brass' : 'text-mute')}>${dn}</div>
+                <div className="h-10 rounded-md flex items-center justify-center gap-1" style=${{ background: 'var(--bg)', border: '1px solid var(--line)' }}>
+                  ${items.slice(0, 3).map(p => html`<i key=${p.id} className="block w-1.5 h-1.5 rounded-full" style=${{ background: p.status === 'published' ? 'var(--ok)' : 'var(--accent)' }}></i>`)}
+                </div></div>`; })}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>`;
+}
+
+function Generator({ posts, addPosts, openEditor, notify }) {
+  const { settings, caps } = useContext(Ctx);
+  const [cat, setCat] = useState('odnosi'); const [count, setCount] = useState(5);
+  const [mode, setMode] = useState(caps.sample ? 'ai' : 'demo'); const [tpl, setTpl] = useState(settings.defaultTpl || 'auto');
+  const [busy, setBusy] = useState(false); const [stream, setStream] = useState(''); const [result, setResult] = useState(null); const [err, setErr] = useState('');
+  useEffect(() => { if (caps.sample && mode === 'demo' && !result) setMode('ai'); }, [caps.sample]);
+  const existing = posts.map(p => p.text);
+  const tplSet = { ...settings, defaultTpl: tpl };
+
+  async function run() {
+    setErr(''); setBusy(true); setResult(null); setStream('');
+    try {
+      let made = [], skipped = 0, note = '';
+      if (mode === 'demo') {
+        const pool = shuffle(DEMO.filter(r => (cat === 'mix' || r[0] === cat) && !isDuplicate(r[3], existing)));
+        made = pool.slice(0, count).map((r, i) => demoToPost(r, tplFor(tplSet, i)));
+        if (made.length < count) note = made.length ? `The demo library only has ${made.length} unused posts left for this category.` : 'Every demo post for this category is already in your library. Switch to AI for new ideas.';
+      } else {
+        const sample = caps.sample; if (!sample) throw new Error('AI is not available in this view.');
+        const catLine = cat === 'mix' ? 'Mixed: spread the posts evenly across the categories listed below and include a "category" key for each.' : `Category: ${CAT[cat].n} (${CAT[cat].d}).`;
+        const avoid = existing.slice(-60).map(t => '- ' + plain(t)).join('\n') || '- (none)';
+        const prompt = `You are the content editor for an English language Instagram Reels account about men's psychology, relationships between men and women, dating, emotions, self respect and discipline. The audience is mostly English speaking men aged 20 to 40 in the US, UK, Canada and Australia.
+
+Write ${count} new, original posts.
+${catLine}
+
+Rules:
+- Natural, concise American English. Plain words, short sentences, no corporate tone.
+- "text" is the text on the image: 8 to 24 words, a strong first sentence, no hashtags. Mark one to three key words with asterisks, for example *boundary*.
+- No invented statistics, no "studies show", no fake psychology facts. Write observations and lived experience, not scientific claims.
+- No exaggeration or generalizations about all men or all women. Use "many", "often", "sometimes" where it fits.
+- No generic motivational quotes or clichés. Each post makes one clear, specific point.
+- Do not repeat ideas from the existing posts listed below, or from each other.
+- "caption": 2 to 3 sentences in English that deepen the idea, with 1 or 2 fitting emojis placed naturally, no hashtags, no hyphens or dashes. Do not add a follow line; the app adds it.
+- "hashtags": 6 to 10 English hashtags, lowercase, each starting with #.
+- "background": one of: ${BG_IDS.join(', ')}.
+- "angle": the emotional angle in 1 to 3 words.
+- "question": one question that invites comments.${cat === 'mix' ? `\n- "category": one of: ${CATS.map(c => c.k).join(', ')}.` : ''}
+
+Existing posts (do not repeat):
+${avoid}
+
+Return only a JSON array of objects with the keys: text, caption, hashtags, background, angle, question${cat === 'mix' ? ', category' : ''}.`;
+        const out = await sample.json(prompt, { modelTier: 'default', cache: false, onText: u => setStream(u.text) });
+        const arr = Array.isArray(out) ? out : (out && Array.isArray(out.posts) ? out.posts : []);
+        const seen = existing.slice();
+        arr.forEach((o, i) => {
+          if (!o || typeof o.text !== 'string' || !o.text.trim()) return;
+          if (isDuplicate(o.text, seen)) { skipped++; return; }
+          seen.push(o.text);
+          const c = cat === 'mix' ? (CAT[o.category] ? o.category : CATS[i % CATS.length].k) : cat;
+          const tags = (Array.isArray(o.hashtags) ? o.hashtags : String(o.hashtags || '').split(/\s+/)).map(t => String(t).trim()).filter(Boolean).map(t => t.startsWith('#') ? t : '#' + t);
+          made.push(makePost({ cat: c, text: o.text.trim(), caption: String(o.caption || '').trim(), tags, bg: BG_IDS.includes(o.background) ? o.background : 'beton', angle: String(o.angle || '').trim(), q: String(o.question || '').trim(), source: 'ai' }, tplFor(tplSet, made.length)));
+        });
+        if (!made.length) throw new Error('Claude did not return usable posts. Try again.');
+      }
+      if (made.length) addPosts(made);
+      setResult({ made, skipped, note });
+      if (made.length) notify(`Added to library: ${made.length}`);
+    } catch (e) {
+      const code = e && e.code;
+      setErr(code === 'not_granted' ? 'This page was not allowed to use Claude. Use the demo library or allow access.' : code === 'rate_limited' ? 'Too many requests in a short time. Wait a minute and try again.' : (e && e.message) || 'Generation failed.');
+    } finally { setBusy(false); }
+  }
+
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="AI Generator" title="New batch of posts" />
+    <div className="grid xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] gap-6">
+      <section className="card p-5 flex flex-col gap-5 self-start">
+        <div><div className="lbl">Category</div>
+          <div className="flex flex-wrap gap-2">
+            ${[...CATS, { k: 'mix', n: 'Mixed' }].map(c => html`<button key=${c.k} className="chip" aria-pressed=${String(cat === c.k)} onClick=${() => setCat(c.k)}>${c.n}</button>`)}
+          </div>
+        </div>
+        <div><div className="lbl">Number of posts</div><${Seg} label="Number of posts" value=${count} onChange=${setCount} options=${[1, 5, 10, 20].map(v => ({ v, l: String(v) }))} /></div>
+        <div><div className="lbl">Text source</div>
+          <${Seg} label="Text source" value=${mode} onChange=${setMode} options=${[{ v: 'ai', l: 'Claude AI' }, { v: 'demo', l: 'Demo library' }]} />
+          <p className="text-[12px] text-mute mt-2 leading-relaxed">${mode === 'ai'
+            ? (caps.sample ? 'Claude writes new posts right from this page. It asks for permission the first time. No API key needed.' : 'Claude is not available in this view. Open the page on claude.ai, or use the demo library.')
+            : `A built in library of ${DEMO.length} original posts. These are marked Demo.`}</p>
+        </div>
+        <div><label className="lbl" htmlFor="gen-tpl">Template</label>
+          <select id="gen-tpl" className="field" value=${tpl} onChange=${e => setTpl(e.target.value)}>
+            <option value="auto">Rotate all five templates</option>
+            ${Object.entries(TPL).map(([k, t]) => html`<option key=${k} value=${k}>${t.no} ${t.n}</option>`)}
+          </select></div>
+        <button className="btn btn-primary h-11" disabled=${busy || (mode === 'ai' && !caps.sample)} onClick=${run}><${Icon} n="spark" /> ${busy ? 'Writing…' : `Generate ${count}`}</button>
+        ${err && html`<p className="text-[13px]" style=${{ color: 'var(--bad)' }}>${err}</p>`}
+      </section>
+      <section className="min0">
+        ${busy && html`<div className="card p-5"><div className="eyebrow mb-3">Claude is writing</div><pre className="mono text-[11.5px] text-mute whitespace-pre-wrap max-h-[420px] overflow-auto">${stream ? stream.slice(-1800) : (mode === 'ai' ? 'Waiting for a response…' : 'Picking posts…')}</pre></div>`}
+        ${!busy && !result && html`<div className="card p-6"><h2 className="disp text-[28px] mb-2">What every post includes</h2>
+          <ul className="text-mute text-[13.5px] leading-7 list-disc pl-5"><li>image text with highlighted key words</li><li>an Instagram caption and a question for comments</li><li>hashtags matched to the topic</li><li>a suggested background and emotional angle</li><li>a finished design in the chosen template, ready to export</li></ul>
+          <p className="text-mute text-[12.5px] mt-4">Posts that are too similar to existing ones are skipped automatically.</p></div>`}
+        ${result && html`<div>
+          <div className="flex flex-wrap items-baseline gap-3 mb-4"><h2 className="text-[15px] font-semibold">Created: ${result.made.length}</h2>
+            ${result.skipped > 0 && html`<span className="text-mute text-[12.5px]">Skipped as duplicates: ${result.skipped}</span>`}
+            ${result.note && html`<span className="text-[12.5px]" style=${{ color: 'var(--warn)' }}>${result.note}</span>`}</div>
+          <div className="flex flex-col gap-4">
+            ${result.made.map(p => html`<article key=${p.id} className="card p-4 grid grid-cols-[110px_minmax(0,1fr)] sm:grid-cols-[150px_minmax(0,1fr)] gap-4">
+              <button onClick=${() => openEditor(p.id)} aria-label="Open in editor"><${PostCanvas} post=${p} w=${300} /></button>
+              <div className="min0 flex flex-col gap-2">
+                <div className="flex flex-wrap gap-2 items-center"><${SourceBadge} p=${p} /><span className="eyebrow">${CAT[p.cat].n}</span>${p.angle && html`<span className="text-[12px] text-mute">· ${p.angle}</span>`}</div>
+                <p className="text-[15px] leading-snug">${plain(p.text)}</p>
+                <p className="text-[13px] text-mute leading-relaxed">${p.caption}</p>
+                <p className="text-[13px]"><span className="text-mute">Question: </span>${p.q}</p>
+                <p className="mono text-[11px] text-mute break-words">${p.tags.join(' ')}</p>
+                <div className="flex gap-2 mt-1"><button className="btn btn-sm" onClick=${() => openEditor(p.id)}><${Icon} n="edit" s=${14} /> Edit</button></div>
+              </div></article>`)}
+          </div></div>`}
+      </section>
+    </div>
+  </div>`;
+}
+
+function CopyBtn({ text, notify, label = 'Copy caption' }) {
+  const ref = useRef(null);
+  return html`<span className="inline-flex items-center gap-2"><textarea ref=${ref} readOnly value=${text} aria-hidden="true" tabIndex="-1" style=${{ position: 'absolute', left: '-9999px', width: '1px', height: '1px' }}></textarea><button className="btn btn-sm" onClick=${async () => { try { await navigator.clipboard.writeText(text); notify('Copied'); } catch { const t = ref.current; if (t) { t.select(); try { document.execCommand('copy'); notify('Copied'); } catch { notify('Copy failed. Select the text below.'); } } } }}><${Icon} n="copy" s=${14} /> ${label}</button></span>`;
+}
+
+function Editor({ post, posts, update, openEditor, addPosts, notify, go }) {
+  const { settings, caps, bump } = useContext(Ctx);
+  const [busy, setBusy] = useState(''); const [prog, setProg] = useState(0); const [dur, setDur] = useState(settings.duration || 8);
+  const [uploads, setUploads] = useState(() => [...UPLOADS.keys()]);
+  const fileRef = useRef(null);
+  if (!post) {
+    return html`<div className="fade-in"><${PageHead} eyebrow="Reels Editor" title="Pick a post" />
+      <div className="flex flex-wrap gap-2 mb-5"><button className="btn btn-primary" onClick=${() => { const p = makePost({ cat: 'odnosi', text: 'Write your thought here. *Highlight* the key word.', caption: '', tags: [], bg: 'silueta', angle: '', q: '', source: 'manual' }, tplFor(settings, 0)); addPosts([p]); openEditor(p.id); }}><${Icon} n="plus" /> New blank post</button></div>
+      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-7 gap-3">${posts.slice().sort((a, b) => b.createdAt - a.createdAt).map(p => html`<button key=${p.id} onClick=${() => openEditor(p.id)} aria-label=${'Edit: ' + plain(p.text)}><${PostCanvas} post=${p} w=${240} /></button>`)}</div></div>`;
+  }
+  const d = { ...TPL[post.design.tpl].d, ...post.design };
+  const setD = patch => update(post.id, p => ({ ...p, design: { ...p.design, ...patch } }));
+  const set = patch => update(post.id, p => ({ ...p, ...patch }));
+  const applyTpl = t => update(post.id, p => ({ ...p, design: { ...TPL[t].d, tpl: t, bg: p.design.bg } }));
+  const cap = fullCaption(post, settings);
+
+  async function onUpload(e) {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      const url = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+      const img = new Image(); await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = url; });
+      const c = mk(), x = c.getContext('2d'); const sc = Math.max(W0 / img.width, H0 / img.height); x.drawImage(img, (W0 - img.width * sc) / 2, (H0 - img.height * sc) / 2, img.width * sc, img.height * sc);
+      const id = uid(); UPLOADS.set(id, c);
+      const ok = lsSet('kadar.img.' + id, c.toDataURL('image/jpeg', 0.82)); if (ok) lsSet('kadar.imgs', [...UPLOADS.keys()]);
+      setUploads([...UPLOADS.keys()]); bump(); setD({ bg: 'up:' + id });
+      notify(ok ? 'Photo added' : 'Photo added for this session only (browser storage is full)');
+    } catch { notify('That file could not be read as an image.'); }
+  }
+  async function exportImg(kind) {
+    setBusy(kind); try { const b = await imageBlob(post, settings, kind); const r = await saveFile(`reel-${slug(post, 0)}.${kind}`, b); if (r === 'saved') notify(kind.toUpperCase() + ' saved'); } catch (e) { notify(e.message); } finally { setBusy(''); }
+  }
+  async function exportVid() {
+    setBusy('mp4'); setProg(0);
+    try { const { blob, ext } = await videoBlob(post, settings, dur, setProg); const r = await saveFile(`reel-${slug(post, 0)}.${ext}`, blob); if (r === 'saved') notify(ext === 'mp4' ? 'MP4 saved' : 'Saved as WebM (this browser cannot make MP4)'); }
+    catch (e) { notify(e.message || 'The video could not be created.'); } finally { setBusy(''); setProg(0); }
+  }
+  const t1 = post.design.tpl === 't1';
+
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="Reels Editor" title=${(CAT[post.cat] || {}).n || 'Post'}>
+      <button className="btn" aria-pressed=${String(post.fav)} onClick=${() => set({ fav: !post.fav })} style=${post.fav ? { color: 'var(--accent)' } : null}><${Icon} n="star" /> ${post.fav ? 'Favorite' : 'Add to favorites'}</button>
+      <button className="btn" onClick=${() => set({ status: post.status === 'published' ? (post.date ? 'scheduled' : 'draft') : 'published' })}><${Icon} n="check" /> ${post.status === 'published' ? 'Move back to drafts' : 'Mark as published'}</button>
+    <//>
+    <div className="grid lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-6 lg:gap-8">
+      <div className="min0 lg:sticky lg:top-6 self-start">
+        <div className="mx-auto max-w-[380px]"><${PostCanvas} post=${post} w=${720} /></div>
+        <div className="flex items-center justify-between mt-3 max-w-[380px] mx-auto"><div className="flex gap-2"><${SourceBadge} p=${post} /><${StatusBadge} p=${post} /></div><span className="mono text-[11px] text-mute">1080 × 1920</span></div>
+        <div className="card p-4 mt-4 max-w-[380px] mx-auto">
+          <div className="eyebrow mb-3">Export</div>
+          <div className="grid grid-cols-2 gap-2 mb-4">
+            <button className="btn" disabled=${!!busy} onClick=${() => exportImg('png')}><${Icon} n="down" s=${14} /> PNG</button>
+            <button className="btn" disabled=${!!busy} onClick=${() => exportImg('jpg')}><${Icon} n="down" s=${14} /> JPG</button>
+          </div>
+          <${Slider} id="ed-dur" label="Video length" value=${dur} min=${6} max=${10} step=${1} onChange=${setDur} fmt=${v => v + ' s'} />
+          <button className="btn btn-primary w-full mt-3" disabled=${!!busy} onClick=${exportVid}><${Icon} n="down" s=${14} /> ${busy === 'mp4' ? `Rendering video ${Math.round(prog * 100)}%` : 'MP4 video'}</button>
+          ${busy === 'mp4' && html`<div className="bar mt-2"><i style=${{ width: Math.round(prog * 100) + '%' }}></i></div>`}
+          <p className="text-[11.5px] text-mute mt-3 leading-relaxed">The video is silent, with a slow zoom and fade in. Add music in Instagram when you post.</p>
+          ${!caps.dl && window.claude && html`<p className="text-[11.5px] mt-2" style=${{ color: 'var(--warn)' }}>Downloads are not available in this view.</p>`}
+        </div>
+      </div>
+
+      <div className="min0 flex flex-col gap-6">
+        <section className="card p-5 flex flex-col gap-4">
+          <div className="flex items-baseline justify-between"><label className="text-[15px] font-semibold" htmlFor="ed-text">Image text</label><span className="text-[12px] text-mute">*word* = highlight color</span></div>
+          <textarea id="ed-text" className="field text-[15px]" rows="4" value=${post.text} onInput=${e => set({ text: e.target.value })}></textarea>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div><label className="lbl" htmlFor="ed-cat">Category</label><select id="ed-cat" className="field" value=${post.cat} onChange=${e => set({ cat: e.target.value })}>${CATS.map(c => html`<option key=${c.k} value=${c.k}>${c.n}</option>`)}</select></div>
+            <div><label className="lbl" htmlFor="ed-angle">Emotional angle</label><input id="ed-angle" className="field" value=${post.angle || ''} onInput=${e => set({ angle: e.target.value })} /></div>
+          </div>
+        </section>
+
+        <section className="card p-5 flex flex-col gap-5">
+          <h2 className="text-[15px] font-semibold">Design</h2>
+          <div><div className="lbl">Template</div><${Seg} label="Template" value=${post.design.tpl} onChange=${applyTpl} options=${Object.entries(TPL).map(([k, t]) => ({ v: k, l: t.no + ' ' + t.n }))} /></div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div><label className="lbl" htmlFor="ed-font">Font</label><select id="ed-font" className="field" value=${d.font} onChange=${e => setD({ font: e.target.value })}>${Object.entries(FONTS).map(([k, f]) => html`<option key=${k} value=${k}>${f.n}</option>`)}</select></div>
+            <div><div className="lbl">Alignment</div><${Seg} label="Alignment" value=${d.align} onChange=${v => setD({ align: v })} options=${[{ v: 'left', l: 'Left' }, { v: 'center', l: 'Center' }, { v: 'right', l: 'Right' }]} /></div>
+            <${Slider} id="ed-size" label="Font size" value=${d.size || 0} min=${0} max=${160} step=${2} onChange=${v => setD({ size: v < 40 ? 0 : v })} fmt=${v => v < 40 ? 'auto' : v + ' px'} />
+            <${Slider} id="ed-pos" label="Vertical position" value=${d.posY} min=${0.2} max=${0.8} step=${0.01} onChange=${v => setD({ posY: v })} fmt=${v => Math.round(v * 100) + '%'} />
+          </div>
+          <div>
+            <div className="flex items-baseline justify-between mb-2"><div className="lbl mb-0">Background</div>${t1 && html`<span className="text-[12px] text-mute">Template 01 uses a pure black background</span>`}</div>
+            <div className="grid grid-cols-5 sm:grid-cols-9 gap-2">
+              ${BGS.map(b => html`<${BgSwatch} key=${b.id} id=${b.id} label=${b.n} active=${d.bg === b.id} onPick=${id => setD({ bg: id })} />`)}
+              ${uploads.map(u => html`<${BgSwatch} key=${u} id=${'up:' + u} label="Your photo" active=${d.bg === 'up:' + u} onPick=${id => setD({ bg: id })} />`)}
+              <button type="button" className="swatch flex flex-col items-center justify-center gap-1 text-mute text-[10px]" style=${{ border: '1px dashed var(--line)', background: 'var(--bg)' }} onClick=${() => fileRef.current && fileRef.current.click()} aria-label="Add your own photo"><${Icon} n="up" s=${16} /> Add</button>
+            </div>
+            <input ref=${fileRef} type="file" accept="image/*" hidden onChange=${onUpload} />
+            <p className="text-[11.5px] text-mute mt-2">The built in backgrounds are drawn in your browser and free to use. Only upload photos you have the rights to.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <${Slider} id="ed-bright" label="Brightness" value=${d.bright} min=${0.1} max=${1.4} step=${0.01} onChange=${v => setD({ bright: v })} fmt=${v => Math.round(v * 100) + '%'} />
+            <${Slider} id="ed-ov" label="Overlay behind text" value=${d.overlay} min=${0} max=${0.9} step=${0.01} onChange=${v => setD({ overlay: v })} fmt=${v => Math.round(v * 100) + '%'} />
+            <${Slider} id="ed-grain" label="Grain" value=${d.grain} min=${0} max=${0.7} step=${0.01} onChange=${v => setD({ grain: v })} fmt=${v => Math.round(v * 100) + '%'} />
+          </div>
+          ${d.bg && d.bg.startsWith('up:') && html`<label className="flex items-center gap-2 text-[13px]"><input type="checkbox" checked=${d.mono !== false} onChange=${e => setD({ mono: e.target.checked })} /> Black and white photo</label>`}
+        </section>
+
+        <section className="card p-5 flex flex-col gap-4">
+          <h2 className="text-[15px] font-semibold">Instagram caption</h2>
+          <div><label className="lbl" htmlFor="ed-cap">Caption</label><textarea id="ed-cap" className="field" rows="3" value=${post.caption || ''} onInput=${e => set({ caption: e.target.value })}></textarea></div>
+          <div><label className="lbl" htmlFor="ed-q">Engagement question</label><input id="ed-q" className="field" value=${post.q || ''} onInput=${e => set({ q: e.target.value })} /></div>
+          <div><label className="lbl" htmlFor="ed-tags">Hashtags</label><input id="ed-tags" className="field mono text-[12px]" value=${(post.tags || []).join(' ')} onInput=${e => set({ tags: e.target.value.split(/\s+/).filter(Boolean) })} /></div>
+          <div><div className="flex items-baseline justify-between mb-2"><div className="lbl mb-0">Ready to post caption</div><${CopyBtn} text=${cap} notify=${notify} /></div>
+            <pre className="field whitespace-pre-wrap text-[13px] leading-relaxed" style=${{ fontFamily: 'var(--f-ui)' }}>${cap}</pre></div>
+        </section>
+
+        <section className="card p-5 flex flex-wrap items-end gap-4">
+          <div><label className="lbl" htmlFor="ed-date">Post date</label><input id="ed-date" type="date" className="field" value=${post.date || ''} onChange=${e => set({ date: e.target.value || null, status: post.status === 'published' ? 'published' : (e.target.value ? 'scheduled' : 'draft') })} /></div>
+          <div><label className="lbl" htmlFor="ed-time">Time</label><input id="ed-time" type="time" className="field" value=${post.time || ''} onChange=${e => set({ time: e.target.value || null })} /></div>
+          <p className="text-[12px] text-mute flex-1 min-w-[180px]">Every change is saved automatically.</p>
+          <button className="btn" onClick=${() => go('library')}>Back to library</button>
+        </section>
+      </div>
+    </div>
+  </div>`;
+}
+
+function Templates({ posts, setSettings, update, notify }) {
+  const { settings } = useContext(Ctx);
+  const base = posts[0] ? posts[0] : demoToPost(DEMO[3], 't1');
+  const [applyFor, setApplyFor] = useState(null);
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="Templates" title="Five visual templates" />
+    <p className="text-mute text-[13.5px] max-w-[65ch] mb-6">Each template has its own font, layout and background treatment. Text size shrinks automatically for longer lines, so nothing gets cut off. The generator uses your default template.</p>
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
+      ${Object.entries(TPL).map(([k, t]) => { const p = { ...base, design: { ...TPL[k].d, tpl: k, bg: base.design.bg || 'silueta' } }; const isDef = settings.defaultTpl === k;
+        return html`<article key=${k} className="flex flex-col gap-3 min0">
+          <${PostCanvas} post=${p} w=${360} />
+          <div><div className="flex items-baseline gap-2"><span className="mono text-[11px] text-brass">${t.no}</span><h2 className="text-[15px] font-semibold">${t.n}</h2></div>
+          <p className="text-[12.5px] text-mute mt-1 leading-relaxed">${t.desc}</p></div>
+          <div className="flex flex-wrap gap-2 mt-auto">
+            <button className="btn btn-sm" aria-pressed=${String(isDef)} onClick=${() => { setSettings({ ...settings, defaultTpl: isDef ? 'auto' : k }); notify(isDef ? 'The generator now rotates templates' : `Default template: ${t.n}`); }}>${isDef ? 'Default ✓' : 'Set as default'}</button>
+            ${applyFor === k
+              ? html`<button className="btn btn-sm btn-primary" onClick=${() => { const ds = posts.filter(x => x.status !== 'published'); ds.forEach(x => update(x.id, q => ({ ...q, design: { ...TPL[k].d, tpl: k, bg: q.design.bg } }))); setApplyFor(null); notify(`Template applied to ${ds.length} posts`); }}>Confirm</button>`
+              : html`<button className="btn btn-sm btn-ghost" onClick=${() => setApplyFor(k)}>Apply to all unpublished</button>`}
+          </div></article>`; })}
+    </div></div>`;
+}
+
+function Library({ posts, update, remove, openEditor, notify }) {
+  const { settings } = useContext(Ctx);
+  const [cat, setCat] = useState('all'); const [st, setSt] = useState('all'); const [q, setQ] = useState(''); const [sel, setSel] = useState(() => new Set());
+  const [busy, setBusy] = useState(false); const [prog, setProg] = useState(''); const [fmt, setFmt] = useState({ png: true, jpg: false, mp4: false }); const [confirmDel, setConfirmDel] = useState(null);
+  const list = posts.filter(p => (cat === 'all' || p.cat === cat) && (st === 'all' || (st === 'fav' ? p.fav : st === 'published' ? p.status === 'published' : st === 'scheduled' ? (p.date && p.status !== 'published') : st === 'ai' ? p.source === 'ai' : st === 'demo' ? p.source === 'demo' : (!p.date && p.status !== 'published'))) && (!q || plain(p.text).toLowerCase().includes(q.toLowerCase()))).sort((a, b) => b.createdAt - a.createdAt);
+  const toggle = id => setSel(s => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
+  const allSel = list.length && list.every(p => sel.has(p.id));
+  const chosen = posts.filter(p => sel.has(p.id));
+
+  async function exportZip() {
+    if (!chosen.length) return; setBusy(true);
+    try {
+      const zip = new JSZip(); const all = [];
+      for (let i = 0; i < chosen.length; i++) {
+        const p = chosen[i], name = slug(p, i);
+        if (fmt.png) { setProg(`Image ${i + 1}/${chosen.length}`); zip.file(name + '.png', await imageBlob(p, settings, 'png')); }
+        if (fmt.jpg) { setProg(`Image ${i + 1}/${chosen.length}`); zip.file(name + '.jpg', await imageBlob(p, settings, 'jpg')); }
+        if (fmt.mp4) { const r = await videoBlob(p, settings, settings.duration || 8, v => setProg(`Video ${i + 1}/${chosen.length} · ${Math.round(v * 100)}%`)); zip.file(name + '.' + r.ext, r.blob); }
+        const c = fullCaption(p, settings); zip.file(name + '.txt', c); all.push(`${name}\n${plain(p.text)}\n\n${c}`);
+      }
+      zip.file('all-captions.txt', all.join('\n\n────────────\n\n'));
+      setProg('Packing ZIP…'); const blob = await zip.generateAsync({ type: 'blob' });
+      const r = await saveFile(`reels-${ymd(new Date())}.zip`, blob); if (r === 'saved') notify(`ZIP saved (${chosen.length} posts)`);
+    } catch (e) { notify(e.message || 'Export failed.'); } finally { setBusy(false); setProg(''); }
+  }
+
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="Content Library" title=${`${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`} />
+    <div className="flex flex-col gap-3 mb-5">
+      <div className="scroll-x -mx-1 px-1"><div className="flex gap-2">${[{ k: 'all', n: 'All categories' }, ...CATS].map(c => html`<button key=${c.k} className="chip" aria-pressed=${String(cat === c.k)} onClick=${() => setCat(c.k)}>${c.n}</button>`)}</div></div>
+      <div className="flex flex-wrap gap-3 items-center">
+        <select className="field w-auto" id="lib-status" aria-label="Filter" value=${st} onChange=${e => setSt(e.target.value)}>
+          <option value="all">All statuses</option><option value="draft">Drafts</option><option value="scheduled">Scheduled</option><option value="published">Published</option><option value="fav">Favorites</option><option value="ai">AI only</option><option value="demo">Demo only</option>
+        </select>
+        <input className="field w-auto flex-1 min-w-[160px]" id="lib-q" placeholder="Search text" value=${q} onInput=${e => setQ(e.target.value)} />
+        <button className="btn btn-sm" onClick=${() => setSel(allSel ? new Set() : new Set(list.map(p => p.id)))}>${allSel ? 'Clear selection' : 'Select shown'}</button>
+      </div>
+    </div>
+    ${sel.size > 0 && html`<div className="card p-4 mb-5 flex flex-wrap items-center gap-4 fade-in" style=${{ borderColor: '#4a4234' }}>
+      <span className="text-[13px] font-semibold tnum">Selected: ${sel.size}</span>
+      ${['png', 'jpg', 'mp4'].map(f => html`<label key=${f} className="flex items-center gap-2 text-[13px] mono uppercase"><input type="checkbox" checked=${fmt[f]} onChange=${e => setFmt({ ...fmt, [f]: e.target.checked })} /> ${f}</label>`)}
+      <button className="btn btn-primary btn-sm" disabled=${busy || !(fmt.png || fmt.jpg || fmt.mp4)} onClick=${exportZip}><${Icon} n="down" s=${14} /> ${busy ? prog || 'Working…' : 'Download ZIP'}</button>
+      <button className="btn btn-sm" onClick=${() => { chosen.forEach(p => update(p.id, x => ({ ...x, status: 'published' }))); notify('Marked as published'); }}>Mark published</button>
+      ${confirmDel === 'bulk' ? html`<button className="btn btn-sm btn-danger" onClick=${() => { remove([...sel]); setSel(new Set()); setConfirmDel(null); notify('Deleted'); }}>Confirm delete ${sel.size}</button>` : html`<button className="btn btn-sm btn-ghost btn-danger" onClick=${() => setConfirmDel('bulk')}>Delete</button>`}
+      ${fmt.mp4 && html`<span className="text-[12px] text-mute">Each video takes about ${settings.duration || 8} s to render.</span>`}
+    </div>`}
+    ${!list.length && html`<div className="card p-8 text-center text-mute">No posts match this filter.</div>`}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4">
+      ${list.map(p => html`<article key=${p.id} className="min0 flex flex-col gap-2">
+        <div className="relative">
+          <button className="block w-full" onClick=${() => openEditor(p.id)} aria-label=${'Edit: ' + plain(p.text)}><${PostCanvas} post=${p} w=${300} /></button>
+          <div className="absolute top-2 left-2 flex flex-wrap gap-1 pointer-events-none"><${SourceBadge} p=${p} /><${StatusBadge} p=${p} /></div>
+          <label className="absolute top-2 right-2 w-7 h-7 rounded-md flex items-center justify-center" style=${{ background: 'rgba(0,0,0,.6)' }}><input type="checkbox" aria-label="Select" checked=${sel.has(p.id)} onChange=${() => toggle(p.id)} /></label>
+        </div>
+        <div className="text-[12px] text-mute truncate">${(CAT[p.cat] || {}).n}</div>
+        <div className="flex gap-1">
+          <button className="btn btn-sm btn-ghost px-2" title="Favorite" aria-label="Favorite" aria-pressed=${String(p.fav)} style=${p.fav ? { color: 'var(--accent)' } : null} onClick=${() => update(p.id, x => ({ ...x, fav: !x.fav }))}><${Icon} n="star" s=${15} /></button>
+          <button className="btn btn-sm btn-ghost px-2" title=${p.status === 'published' ? 'Move back to drafts' : 'Mark published'} aria-label="Published" style=${p.status === 'published' ? { color: 'var(--ok)' } : null} onClick=${() => update(p.id, x => ({ ...x, status: x.status === 'published' ? (x.date ? 'scheduled' : 'draft') : 'published' }))}><${Icon} n="check" s=${15} /></button>
+          <button className="btn btn-sm btn-ghost px-2" title="Edit" aria-label="Edit" onClick=${() => openEditor(p.id)}><${Icon} n="edit" s=${15} /></button>
+          ${confirmDel === p.id ? html`<button className="btn btn-sm btn-danger ml-auto" onClick=${() => { remove([p.id]); setConfirmDel(null); }}>Delete?</button>` : html`<button className="btn btn-sm btn-ghost px-2 ml-auto" title="Delete" aria-label="Delete" onClick=${() => setConfirmDel(p.id)}><${Icon} n="trash" s=${15} /></button>`}
+        </div>
+      </article>`)}
+    </div></div>`;
+}
+
+function Calendar({ posts, update, openEditor, go, notify }) {
+  const [wk, setWk] = useState(() => startOfWeek(new Date())); const [perDay, setPerDay] = useState(1);
+  const days = [...Array(7)].map((_, i) => ymd(addDays(wk, i)));
+  const TIMES = { 1: ['19:00'], 2: ['12:00', '19:00'], 3: ['08:00', '12:00', '19:00'] };
+  function plan() {
+    const need = []; days.forEach(d => { const have = posts.filter(p => p.date === d).length; for (let k = have; k < perDay; k++) need.push({ d, k }); });
+    const pool = posts.filter(p => !p.date && p.status !== 'published').sort((a, b) => a.createdAt - b.createdAt);
+    const byCat = {}; pool.forEach(p => (byCat[p.cat] = byCat[p.cat] || []).push(p)); const order = []; let added = true;
+    while (added) { added = false; for (const c of Object.keys(byCat)) { const p = byCat[c].shift(); if (p) { order.push(p); added = true; } } }
+    let n = 0; need.forEach((slot, i) => { const p = order[i]; if (!p) return; update(p.id, x => ({ ...x, date: slot.d, time: TIMES[perDay][slot.k] || '19:00', status: 'scheduled' })); n++; });
+    const missing = need.length - n;
+    notify(missing > 0 ? `Scheduled ${n}. You need ${missing} more drafts, generate new posts.` : `Scheduled ${n} posts`);
+  }
+  const label = `${fmtDay(wk)} – ${fmtDay(addDays(wk, 6))}, ${addDays(wk, 6).getFullYear()}`;
+  const drafts = posts.filter(p => !p.date && p.status !== 'published').length;
+  return html`<div className="fade-in">
+    <${PageHead} eyebrow="Content Calendar" title=${label}>
+      <button className="btn" onClick=${() => setWk(addDays(wk, -7))} aria-label="Previous week">←</button>
+      <button className="btn" onClick=${() => setWk(startOfWeek(new Date()))}>This week</button>
+      <button className="btn" onClick=${() => setWk(addDays(wk, 7))} aria-label="Next week">→</button>
+    <//>
+    <div className="card p-4 mb-5 flex flex-wrap items-center gap-4">
+      <div><div className="lbl">Posts per day</div><${Seg} label="Posts per day" value=${perDay} onChange=${setPerDay} options=${[1, 2, 3].map(v => ({ v, l: String(v) }))} /></div>
+      <button className="btn btn-primary" onClick=${plan}><${Icon} n="cal" /> Build weekly plan</button>
+      <p className="text-[12.5px] text-mute flex-1 min-w-[200px]">The plan fills empty days with drafts and mixes categories. Times are in your audience's time zone. Drafts available: <span className="tnum">${drafts}</span>.</p>
+    </div>
+    <div className="scroll-x"><div className="grid grid-cols-7 gap-3 min-w-[840px]">
+      ${days.map((d, i) => { const items = posts.filter(p => p.date === d).sort((a, b) => (a.time || '').localeCompare(b.time || '')); const today = d === ymd(new Date());
+        return html`<div key=${d} className="flex flex-col gap-2 min0">
+          <div className="flex items-baseline justify-between px-1"><span className=${'mono text-[11px] ' + (today ? 'text-brass' : 'text-mute')}>${DAYS[i]}</span><span className="text-[13px] tnum">${parseYmd(d).getDate()}</span></div>
+          <div className="rounded-lg p-2 flex flex-col gap-3 min-h-[200px]" style=${{ background: 'var(--panel)', border: '1px solid ' + (today ? '#4a4234' : 'var(--line)') }}>
+            ${items.map(p => html`<div key=${p.id} className="flex flex-col gap-1">
+              <button onClick=${() => openEditor(p.id)} aria-label=${'Edit: ' + plain(p.text)}><${PostCanvas} post=${p} w=${220} /></button>
+              <div className="flex items-center justify-between"><span className="mono text-[10.5px] text-mute">${p.time || ''}</span>${p.status === 'published' ? html`<span className="badge badge-pub">Published</span>` : html`<button className="btn btn-sm btn-ghost px-1.5 h-6 text-[11px]" onClick=${() => update(p.id, x => ({ ...x, status: 'published' }))}>Mark posted</button>`}</div>
+              <button className="text-[11px] text-mute hover:text-fg text-left" onClick=${() => update(p.id, x => ({ ...x, date: null, time: null, status: x.status === 'published' ? 'published' : 'draft' }))}>Remove from day</button>
+            </div>`)}
+            ${!items.length && html`<span className="text-[11.5px] text-mute m-auto">Empty</span>`}
+          </div></div>`; })}
+    </div></div>
+    ${drafts === 0 && html`<p className="text-mute text-[13px] mt-4">No free drafts left. <button className="underline" onClick=${() => go('generator')}>Generate new posts</button>.</p>`}
+  </div>`;
+}
+
+function Settings({ setSettings, posts, replaceAll, notify, storeMode }) {
+  const { settings, caps } = useContext(Ctx);
+  const [s, setS] = useState(settings); const [confirm, setConfirm] = useState(false); const impRef = useRef(null);
+  useEffect(() => setS(settings), [settings]);
+  const ch = patch => { const n = { ...s, ...patch }; setS(n); setSettings(n); };
+  async function exportJson() { try { const r = await saveFile(`reels-library-${ymd(new Date())}.json`, JSON.stringify({ settings, posts }, null, 2)); if (r === 'saved') notify('Backup saved'); } catch (e) { notify(e.message); } }
+  async function importJson(e) {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { const data = JSON.parse(await f.text()); if (!Array.isArray(data.posts)) throw new Error(); const ids = new Set(posts.map(p => p.id)); const add = data.posts.filter(p => p && p.id && p.text && p.design && !ids.has(p.id)); replaceAll([...posts, ...add]); notify(`Imported ${add.length} posts`); }
+    catch { notify('File not recognized. Import a JSON backup exported from this app.'); }
+  }
+  return html`<div className="fade-in max-w-[860px]">
+    <${PageHead} eyebrow="Settings" title="Profile and export" />
+    <div className="flex flex-col gap-5">
+      <section className="card p-5 grid sm:grid-cols-2 gap-4">
+        <h2 className="sm:col-span-2 text-[15px] font-semibold">Branding on images</h2>
+        <div><label className="lbl" htmlFor="st-handle">Instagram handle</label><input id="st-handle" className="field" value=${s.handle} onInput=${e => ch({ handle: e.target.value })} /></div>
+        <div><label className="lbl" htmlFor="st-accent">Highlight color</label>
+          <div className="flex gap-2 items-center"><input id="st-accent" type="color" value=${s.accent} onInput=${e => ch({ accent: e.target.value })} className="h-[38px] w-[52px] rounded-md bg-transparent border border-line" />
+            ${['#d6bf94', '#e9e4da', '#c4573f', '#8fb0c9', '#b9c48f'].map(c => html`<button key=${c} className="w-7 h-7 rounded-full" style=${{ background: c, outline: s.accent === c ? '2px solid var(--fg)' : 'none', outlineOffset: '2px' }} aria-label=${'Color ' + c} onClick=${() => ch({ accent: c })}></button>`)}</div></div>
+        <label className="flex items-center gap-2 text-[13px]"><input type="checkbox" checked=${s.showHandle} onChange=${e => ch({ showHandle: e.target.checked })} /> Show handle on images</label>
+      </section>
+      <section className="card p-5 grid sm:grid-cols-2 gap-4">
+        <h2 className="sm:col-span-2 text-[15px] font-semibold">Caption</h2>
+        <div><label className="lbl" htmlFor="st-cta">Follow line (your handle is added after it)</label><input id="st-cta" className="field" value=${s.cta} onInput=${e => ch({ cta: e.target.value })} /></div>
+        <div><label className="lbl" htmlFor="st-emo">Closing emojis</label><input id="st-emo" className="field" value=${s.emojis} onInput=${e => ch({ emojis: e.target.value })} /></div>
+        <label className="flex items-center gap-2 text-[13px]"><input type="checkbox" checked=${s.noHyphens} onChange=${e => ch({ noHyphens: e.target.checked })} /> Remove hyphens and dashes from captions</label>
+      </section>
+      <section className="card p-5 grid sm:grid-cols-2 gap-4">
+        <h2 className="sm:col-span-2 text-[15px] font-semibold">Defaults</h2>
+        <div><label className="lbl" htmlFor="st-tpl">Generator template</label><select id="st-tpl" className="field" value=${s.defaultTpl} onChange=${e => ch({ defaultTpl: e.target.value })}><option value="auto">Rotate all five</option>${Object.entries(TPL).map(([k, t]) => html`<option key=${k} value=${k}>${t.no} ${t.n}</option>`)}</select></div>
+        <${Slider} id="st-dur" label="Video length" value=${s.duration} min=${6} max=${10} step=${1} onChange=${v => ch({ duration: v })} fmt=${v => v + ' s'} />
+      </section>
+      <section className="card p-5 flex flex-col gap-3">
+        <h2 className="text-[15px] font-semibold">Status</h2>
+        <dl className="grid grid-cols-[140px_minmax(0,1fr)] gap-y-2 text-[13px]">
+          <dt className="text-mute">AI text</dt><dd>${caps.sample ? 'Claude is available, no API key needed' : 'Not available in this view, demo mode is on'}</dd>
+          <dt className="text-mute">Storage</dt><dd>${storeMode === 'cloud' ? 'Saved privately to your account' : 'Saved in this browser only'}</dd>
+          <dt className="text-mute">Downloads</dt><dd>${caps.dl ? 'Available' : (window.claude ? 'Not available in this view' : 'Direct from the browser')}</dd>
+          <dt className="text-mute">MP4</dt><dd>${'VideoEncoder' in window ? 'Real H.264 MP4 rendered in the browser' : 'Real time recording (MP4 or WebM, depending on the browser)'}</dd>
+        </dl>
+      </section>
+      <section className="card p-5 flex flex-wrap gap-3 items-center">
+        <h2 className="w-full text-[15px] font-semibold">Data</h2>
+        <button className="btn" onClick=${exportJson}><${Icon} n="down" s=${14} /> Export library (JSON)</button>
+        <button className="btn" onClick=${() => impRef.current && impRef.current.click()}><${Icon} n="up" s=${14} /> Import JSON</button>
+        <input ref=${impRef} type="file" accept="application/json,.json" hidden onChange=${importJson} />
+        ${confirm ? html`<button className="btn btn-danger" onClick=${() => { replaceAll([]); setConfirm(false); notify('Library cleared'); }}>Confirm deleting ${posts.length} posts</button>` : html`<button className="btn btn-ghost btn-danger" onClick=${() => setConfirm(true)}><${Icon} n="trash" s=${14} /> Delete all posts</button>`}
+      </section>
+    </div></div>`;
+}
+
+/* ───────────────────────── App ───────────────────────── */
+function App() {
+  const [posts, setPosts] = useState(() => lsGet(K.posts, null) || seedPosts());
+  const [settings, setSettingsState] = useState(() => migrateSettings({ ...DEFAULT_SETTINGS, ...lsGet(K.settings, {}) }));
+  const [page, setPage] = useState(() => { const h = location.hash.slice(1); return NAV.some(n => n.k === h) ? h : 'overview'; });
+  const [editId, setEditId] = useState(null); const [toast, setToast] = useState(''); const [ver, setVer] = useState(0);
+  const [caps, setCaps] = useState({ sample: null, dl: null }); const [storeMode, setStoreMode] = useState('local');
+  const postsRef = useRef(posts); postsRef.current = posts;
+  const bump = useCallback(() => setVer(v => v + 1), []);
+  const notify = useCallback(m => { setToast(m); clearTimeout(notify.t); notify.t = setTimeout(() => setToast(''), 3200); }, []);
+
+  useEffect(() => { Store.saveLocal(posts); }, [posts]);
+  useEffect(() => {
+    loadFonts().then(bump);
+    (lsGet('kadar.imgs', []) || []).forEach(id => { const url = lsGet('kadar.img.' + id, null); if (!url) return; const img = new Image(); img.onload = () => { const c = mk(); c.getContext('2d').drawImage(img, 0, 0, W0, H0); UPLOADS.set(id, c); BGCACHE.forEach((_, k) => k.startsWith('up:' + id) && BGCACHE.delete(k)); bump(); }; img.src = url; });
+    const onHash = () => { const h = location.hash.slice(1); if (NAV.some(n => n.k === h)) setPage(h); };
+    window.addEventListener('hashchange', onHash);
+    (async () => {
+      const [sample, dl, db, user] = await Promise.all([useCap('sample'), useCap('downloads'), useCap('db'), useCap('user')]);
+      CAPS.dl = dl; CAPS.sample = sample; setCaps({ sample, dl });
+      if (db && user) {
+        try {
+          const id = await user.id(); Store.db = db; Store.base = 'data/users/' + id; setStoreMode('cloud');
+          try { const ss = await db.doc(Store.base + '/settings_en').get(); if (ss.exists) { const v = migrateSettings({ ...DEFAULT_SETTINGS, ...ss.data() }); setSettingsState(v); lsSet(K.settings, v); } } catch {}
+          let first = true;
+          db.collection(Store.base + '/reels/posts_en').onSnapshot(snap => {
+            const remote = snap.docs.map((d, i) => { const raw = d.data(); if (!raw || !raw.text) return null; if (raw.design && raw.id) return raw; const n = normalizePost(raw, d.id, i); Store.put(n); return n; }).filter(Boolean);
+            if (first) { first = false; if (!remote.length) { postsRef.current.forEach(p => Store.put(p)); return; } }
+            setPosts(local => { const byId = new Map(remote.map(p => [p.id, p])); local.forEach(p => { if (Store.pending(p.id)) byId.set(p.id, p); }); return [...byId.values()]; });
+          }, () => { Store.db = null; setStoreMode('local'); });
+        } catch { Store.db = null; }
+      }
+    })();
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const go = k => { setPage(k); try { history.replaceState(null, '', '#' + k); } catch { location.hash = k; } window.scrollTo(0, 0); };
+  const openEditor = id => { setEditId(id); go('editor'); };
+  const addPosts = list => { setPosts(p => [...p, ...list]); list.forEach(x => Store.put(x)); };
+  const update = (id, fn) => setPosts(ps => ps.map(p => { if (p.id !== id) return p; const n = typeof fn === 'function' ? fn(p) : { ...p, ...fn }; Store.put(n); return n; }));
+  const remove = ids => { setPosts(ps => ps.filter(p => !ids.includes(p.id))); ids.forEach(id => Store.del(id)); };
+  const replaceAll = list => { const keep = new Set(list.map(p => p.id)); postsRef.current.forEach(p => { if (!keep.has(p.id)) Store.del(p.id); }); list.forEach(p => Store.put(p)); setPosts(list); };
+  const setSettings = s => { setSettingsState(s); Store.putSettings(s); };
+  const editPost = posts.find(p => p.id === editId) || null;
+  const ctx = useMemo(() => ({ settings, ver, caps, bump }), [settings, ver, caps, bump]);
+
+  let body;
+  if (page === 'overview') body = html`<${Overview} posts=${posts} go=${go} openEditor=${openEditor} />`;
+  else if (page === 'generator') body = html`<${Generator} posts=${posts} addPosts=${addPosts} openEditor=${openEditor} notify=${notify} />`;
+  else if (page === 'editor') body = html`<${Editor} key=${editId || 'none'} post=${editPost} posts=${posts} update=${update} openEditor=${openEditor} addPosts=${addPosts} notify=${notify} go=${go} />`;
+  else if (page === 'templates') body = html`<${Templates} posts=${posts} setSettings=${setSettings} update=${update} notify=${notify} />`;
+  else if (page === 'library') body = html`<${Library} posts=${posts} update=${update} remove=${remove} openEditor=${openEditor} notify=${notify} />`;
+  else if (page === 'calendar') body = html`<${Calendar} posts=${posts} update=${update} openEditor=${openEditor} go=${go} notify=${notify} />`;
+  else body = html`<${Settings} setSettings=${setSettings} posts=${posts} replaceAll=${replaceAll} notify=${notify} storeMode=${storeMode} />`;
+
+  return html`<${Ctx.Provider} value=${ctx}>
+    <div className="min-h-full lg:grid lg:grid-cols-[232px_minmax(0,1fr)]">
+      <aside className="lg:sticky lg:top-0 lg:h-screen lg:border-r border-line flex flex-col" style=${{ background: 'var(--bg)' }}>
+        <div className="gutter lg:px-5 pt-5 pb-3 lg:pt-7 flex items-center justify-between lg:block">
+          <div><div className="disp text-[30px] leading-none">Kadar</div><div className="eyebrow mt-1.5">Reels studio</div></div>
+          <span className="lg:hidden mono text-[10px] text-mute">${storeMode === 'cloud' ? 'saved to account' : 'local'}</span>
+        </div>
+        <nav className="scroll-x lg:overflow-visible gutter lg:px-3 pb-3 border-b border-line lg:border-0" aria-label="Main menu">
+          <div className="flex lg:flex-col gap-1">
+            ${NAV.map((n, i) => html`<a key=${n.k} href=${'#' + n.k} className="navbtn" aria-current=${page === n.k ? 'page' : undefined} onClick=${e => { e.preventDefault(); if (n.k === 'editor' && !editPost) setEditId(null); go(n.k); }}>
+              <span className="num hidden lg:inline">${String(i + 1).padStart(2, '0')}</span><span>${n.n}</span></a>`)}
+          </div>
+        </nav>
+        <div className="hidden lg:block mt-auto px-5 pb-6 text-[11.5px] text-mute leading-relaxed">
+          <div className="flex items-center gap-2 mb-1"><i className="block w-1.5 h-1.5 rounded-full" style=${{ background: caps.sample ? 'var(--ok)' : 'var(--mute)' }}></i>${caps.sample ? 'Claude AI connected' : 'Demo mode'}</div>
+          <div>${storeMode === 'cloud' ? 'Saved to your account' : 'Saved in this browser'}</div>
+        </div>
+      </aside>
+      <main className="gutter py-6 lg:py-10 lg:px-10 min0">${body}</main>
+    </div>
+    ${toast && html`<div className="toast fade-in" role="status">${toast}</div>`}
+  <//>`;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(html`<${App} />`);
+})();
+</script>
