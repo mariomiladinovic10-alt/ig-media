@@ -15,3 +15,6 @@ Scheduling uses the page's own API with the X-Mc-Auth token from localStorage `g
 - `GET /api/actions/normalize/image/url?url=<public media url>&blogId=7697579&userId=6011984` -> Metricool media URL (works for mp4 too)
 - `POST /api/v2/scheduler/posts?blogId=7697579&userId=6011984` with the createScheduledPost JSON body.
 Image POST 01:00, REEL 18:00 Europe/Belgrade.
+STORY 19:00 Europe/Belgrade daily: media = that day's REEL mp4 (already normalized Metricool URL), empty text, instagramData {autoPublish: true, type: "STORY"}.
+List: `GET /api/v2/scheduler/posts?blogId=7697579&userId=6011984&start=YYYY-MM-DDT00:00:00&end=...&timezone=Europe/Belgrade&extendedRange=true`
+Monthly run also does a competitor/trend scan (read only) before writing.
