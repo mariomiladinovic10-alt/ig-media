@@ -1,0 +1,13 @@
+{
+  "name": "Quiet Man Laws animated style (LOCKED 2026-10-29)",
+  "image_model": "kling-3-omni text2image 9:16 1k (10 credits)",
+  "video_model": "pixverseV6 image2video 540p 5s (50 credits)",
+  "style_prefix": "Minimalist 2D stick figure animation frame, vertical 9:16. Pure black background, a flat dark charcoal ground plane, lots of empty negative space.",
+  "hero": "the hero: a clean white stick figure with a round head and smooth uniform thick lines, glowing with a soft white neon halo",
+  "others": "dim gray stick figures with no glow",
+  "style_suffix": "A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no color, no faces, no 3D, no photorealism.",
+  "motion_suffix": "Smooth simple 2D stick figure animation, fluid natural body movement, keep the exact same minimalist black and white glowing style, same characters, same background, no new objects, no text, no camera shake.",
+  "overlay": "Inter 800 uppercase white with soft glow, centered in the upper third; key word in warm gold #f2c46d; hook text on screen from frame 0",
+  "music": "original synthesized piano and pad (tools/animate/music.py), no copyrighted audio",
+  "end_card": "Follow @quietmanlaws"
+}
