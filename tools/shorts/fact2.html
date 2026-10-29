@@ -1,0 +1,75 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1920px; overflow:hidden; }
+  body {
+    background:#e8e4dc;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,.55), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(0,0,0,.06), transparent 50%);
+    font-family:'Inter Display','Inter',sans-serif; color:#151515; position:relative;
+  }
+  #grain { position:absolute; inset:0; opacity:.18; mix-blend-mode:multiply; }
+  .abs { position:absolute; left:96px; right:150px; will-change:transform,opacity; }
+  #handle { top:150px; font:600 34px 'Inter'; letter-spacing:.5px; color:#555; }
+  #bars { top:212px; display:flex; gap:12px; }
+  #bars div { flex:1; height:10px; border-radius:5px; background:rgba(0,0,0,.12); overflow:hidden; }
+  #bars i { display:block; height:100%; width:0; background:#151515; }
+  .hl { background:linear-gradient(transparent 12%, #ffd51e 12%, #ffd51e 88%, transparent 88%);
+        background-repeat:no-repeat; background-size:var(--w,0%) 100%; padding:0 10px; margin:0 -10px; }
+  /* hook */
+  #hook { top:520px; }
+  #hook .l1 { font-weight:900; font-size:124px; line-height:.95; letter-spacing:-4px; }
+  #hook .l2 { font-weight:900; font-size:118px; line-height:1.02; letter-spacing:-3px; margin-top:26px; }
+  #hook .l3 { font-weight:800; font-size:92px; margin-top:34px; letter-spacing:-2px; }
+  /* fact */
+  .fact { top:470px; }
+  .num { font-weight:900; font-size:260px; line-height:.8; letter-spacing:-10px; color:transparent;
+         -webkit-text-stroke:5px #151515; }
+  .title { font-weight:900; font-size:84px; line-height:1.0; letter-spacing:-2px; margin-top:48px; }
+    .body { font:500 60px/1.3 'Inter'; margin-top:44px; color:#222; }
+  .body span { display:inline-block; }
+  .src { margin-top:56px; font:600 30px/1.4 'Inter'; color:#666; border-left:6px solid #ffd51e; padding-left:22px; }
+  /* outro */
+  #outro { top:640px; }
+  #outro .q { font-weight:900; font-size:112px; line-height:1.0; letter-spacing:-3px; }
+  #outro .f { font:600 52px/1.3 'Inter'; margin-top:70px; color:#333; }
+  #outro .h { font-weight:900; font-size:64px; margin-top:20px; }
+
+  #hook2 { top:560px; } #hook2 .big { font-weight:900; font-size:132px; line-height:1.0; letter-spacing:-3px; }
+  #hook2 .kick { font:700 40px 'Inter'; color:#666; letter-spacing:3px; margin-bottom:36px; }
+  #fact { top:520px; } #fact .lab { font:800 38px 'Inter'; letter-spacing:4px; color:#151515; }
+  #fact .body { font:500 68px/1.28 'Inter'; margin-top:40px; color:#1b1b1b; } #fact .body span.w { display:inline-block; }
+</style></head>
+<body>
+<canvas id="grain" width="540" height="960"></canvas>
+<div id="handle" class="abs">@mind.psychollogy</div>
+<div id="bars" class="abs"><div><i></i></div></div>
+<div id="hook2" class="abs"><div class="kick">PSYCHOLOGY FACT</div><div class="big" id="hk"></div></div>
+<div id="fact" class="abs"><div class="lab">THE STUDY</div><div class="body" id="fb"></div><div class="src" id="fs"></div></div>
+<div id="outro" class="abs"><div class="q">Save <span class="hl" id="outhl">this.</span></div><div class="f">Follow for a new psychology fact every day</div><div class="h">@mind.psychollogy</div></div>
+<script>
+const HOOK=2.6, FD=6.8, OUT=1.8; window.TOTAL=HOOK+FD+OUT;
+const mk=(txt)=>{ const toks=[]; txt.split(/(\[[^\]]+\])/).forEach(part=>{ if(part.startsWith('[')){toks.push(`<span class="hl">${part.slice(1,-1)}</span>`);return;} part.split(' ').filter(Boolean).forEach(w=>{ if(/^[,.;:!?]/.test(w)&&toks.length) toks[toks.length-1]+=w; else toks.push(w); }); }); return toks.map(w=>`<span class="w">${w}</span>`).join(' '); };
+window.init=function(F){ document.getElementById('hk').innerHTML=mk(F.h); document.getElementById('fb').innerHTML=mk(F.b); document.getElementById('fs').textContent='Source: '+F.s; };
+const g=document.getElementById('grain'),gc=g.getContext('2d'),id=gc.createImageData(540,960); let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+for(let p=0;p<id.data.length;p+=4){const v=150+rnd()*105|0; id.data[p]=id.data[p+1]=id.data[p+2]=v; id.data[p+3]=255;} gc.putImageData(id,0,0); g.style.width='1080px'; g.style.height='1920px';
+const clamp=x=>Math.max(0,Math.min(1,x)), ease=x=>{x=clamp(x);return 1-Math.pow(1-x,3);}, back=x=>{x=clamp(x);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);};
+function show(el,t,inAt,outAt,dy=60){const a=ease((t-inAt)/0.45),b=ease((t-outAt)/0.3); el.style.opacity=a*(1-b); el.style.transform=`translateY(${(1-a)*dy-b*40}px)`;}
+window.setT=function(t){
+  document.querySelector('#bars i').style.width=(clamp(t/window.TOTAL)*100)+'%';
+  const h=document.getElementById('hook2'); h.style.opacity=t<HOOK?1:0; h.children[0].style.opacity=1-ease((t-(HOOK-0.3))/0.3);
+  const hw=h.querySelectorAll('.w'); hw.forEach((w,k)=>{const z=1+0.04*clamp(t/HOOK); w.style.opacity=1-ease((t-(HOOK-0.3))/0.3); w.style.transform=`scale(${z})`; w.style.transformOrigin='left center';});
+  const hh=h.querySelector('.hl'); if(hh) hh.style.setProperty('--w',(ease((t-0.1)/0.35)*100)+'%');
+  const f=document.getElementById('fact'), lt=t-HOOK; f.style.opacity=(lt>-0.05&&lt<FD+0.1)?1:0;
+  show(f.children[0],lt,0,FD-0.3,30);
+  const ws=f.querySelectorAll('.body .w'), out=ease((lt-(FD-0.3))/0.3);
+  ws.forEach((w,k)=>{const at=0.25+k*0.05; const a=ease((lt-at)/0.3); w.style.opacity=a*(1-out); w.style.transform=`translateY(${(1-a)*24}px)`;});
+  const fh=f.querySelector('.body .hl'); if(fh) fh.style.setProperty('--w',(ease((lt-(0.3+ws.length*0.05))/0.35)*100)+'%');
+  show(f.children[2],lt,0.5+ws.length*0.05,FD-0.3,30);
+  const os=HOOK+FD, o=document.getElementById('outro'); o.style.opacity=t>=os-0.05?1:0;
+  [0,0.3,0.45].forEach((at,k)=>show(o.children[k],t-os,at,99));
+  document.getElementById('outhl').style.setProperty('--w',(ease((t-os-0.2)/0.3)*100)+'%');
+};
+</script></body></html>
