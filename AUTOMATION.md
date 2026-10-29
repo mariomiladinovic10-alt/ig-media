@@ -18,3 +18,9 @@ Image POST 01:00, REEL 18:00 Europe/Belgrade.
 STORY 19:00 Europe/Belgrade daily: media = that day's REEL mp4 (already normalized Metricool URL), empty text, instagramData {autoPublish: true, type: "STORY"}.
 List: `GET /api/v2/scheduler/posts?blogId=7697579&userId=6011984&start=YYYY-MM-DDT00:00:00&end=...&timezone=Europe/Belgrade&extendedRange=true`
 Monthly run also does a competitor/trend scan (read only) before writing.
+
+## @mind.psychollogy YouTube hook Shorts (test batch, Oct 30 to Nov 8)
+10 YouTube only Shorts at 21:00 Europe/Belgrade (`media/mind/shorts/hook-XX.mp4`), on top of the existing 01:00 and 17:00/18:00 Shorts.
+Hook is fully visible from the first frame, titles name the finding, topics are relationships and behavior.
+Render: `cd tools/shorts && node render1.js` (reads facts.json, template fact2.html, audio mix1.wav).
+Quiet Man Laws YouTube is unchanged.
