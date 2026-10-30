@@ -18,7 +18,7 @@ def run(cmd):
 def dur(p):
     return float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', p]).strip())
 
-def text_card(text, path, size=78, y=360, sub=None):
+def text_card(text, path, size=78, y=360, sub=None, accent=GOLD):
     """Uppercase glowing text, *word* rendered in gold. Transparent PNG."""
     img = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     f = ImageFont.truetype(FONT, size)
@@ -34,7 +34,7 @@ def text_card(text, path, size=78, y=360, sub=None):
     for i, ln in enumerate(lines):
         full = ' '.join(x for x, _ in ln); x = (W - f.getlength(full)) / 2; yy = y + i * lh
         for wd, gold in ln:
-            d.text((x, yy), wd, font=f, fill=GOLD if gold else WHITE)
+            d.text((x, yy), wd, font=f, fill=accent if gold else WHITE)
             x += f.getlength(wd + ' ')
     if sub:
         f2 = ImageFont.truetype(FONT2, 44)
@@ -61,7 +61,7 @@ def main():
         inputs += ['-i', os.path.join(cdir, s['clip'])]
         # cover-scale to 1080x1920, subtle glow (screen-blended blur), slight contrast
         fc.append(f'[{i}:v]trim=0:{lens[i]},setpts=PTS-STARTPTS,fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},'
-                  f'hue=s=0,eq=contrast=1.08:brightness=-0.01,format=gbrp,split[a{i}][b{i}];[b{i}]gblur=sigma=18[g{i}];'
+                  f'{"" if story.get("color") else "hue=s=0,"}eq=contrast=1.08:brightness=-0.01,format=gbrp,split[a{i}][b{i}];[b{i}]gblur=sigma=18[g{i}];'
                   f'[a{i}][g{i}]blend=all_mode=screen:all_opacity=0.45,format=yuv420p,setsar=1[v{i}]')
     # end card: black with soft vignette light
     inputs += ['-f', 'lavfi', '-i', f'color=c=black:s={W}x{H}:r={FPS}:d={END}']
@@ -74,10 +74,10 @@ def main():
     k = n + 1; prev = 'base'
     cards = []
     for i, s in enumerate(scenes):
-        p = os.path.join(tmp, f't{i}.png'); text_card(s['text'], p, size=84 if i == 0 else 76)
+        p = os.path.join(tmp, f't{i}.png'); text_card(s['text'], p, size=84 if i == 0 else 76, y=story.get('text_y', 360), accent=tuple(story.get('accent', GOLD)))
         t0 = 0 if i == 0 else starts[i] + 0.25; t1 = starts[i] + lens[i] - 0.15
         cards.append((p, t0, t1, i == 0))
-    p = os.path.join(tmp, 'tend.png'); text_card(story['end'], p, size=96, y=820, sub='Follow ' + story.get('handle', '@quietmanlaws'))
+    p = os.path.join(tmp, 'tend.png'); text_card(story['end'], p, size=96, y=820, sub='Follow ' + story.get('handle', '@quietmanlaws'), accent=tuple(story.get('accent', GOLD)))
     cards.append((p, total_scenes - XF + 0.1, total, False))
     for p, t0, t1, hook in cards:
         inputs += ['-loop', '1', '-t', f'{total:.3f}', '-i', p]

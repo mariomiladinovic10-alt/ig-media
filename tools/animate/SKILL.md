@@ -7,7 +7,16 @@ description: Use when Mario types /animate (optionally with a topic or a count):
 
 Talk to Mario in Serbian. Every on screen text, title and caption is in English. Never use dashes in on screen text or captions.
 
-## Locked style (never change without Mario's explicit approval)
+## CURRENT locked style: NEON COUPLE (approved by Mario 2026-10-30, use for all new videos)
+Spec in `tools/animate/style-neon.json` (prompts, reference image, models). In short:
+- Stick figures made of glowing neon tubes, hollow circle heads with nothing inside (never faces). Man = ice blue white neon. Woman = bright pink neon with ponytail and triangle dress. Rivals or crowd = dim flickering gray neon.
+- Background changes with every topic (rainy street, stormy pier, foggy park, alley, misty forest...), but always night, dark, misty, wet reflective ground with the neon reflections.
+- Scenes: grok-imagine-image-2 image2image with the reference image (keeps the characters and removes faces). Clips: pixverseV6 image2video as before.
+- Story json gets "color": true and "accent": [143, 220, 255] (ice blue key words). About 415 credits per video.
+- Theme: men's psychology in relationships, the calm stable man in conflict (his best performing topic).
+
+## Previous style v1 (first 3 videos only): white glowing figures on black
+
 Repo: `mariomiladinovic10-alt/ig-media`, folder `tools/animate/` (style.json, assemble.py, music.py).
 - Minimalist 2D stick figures, pure black background, dark charcoal ground, lots of negative space.
 - Hero: clean white stick figure, round head, thick uniform lines, soft white neon glow. Others: dim gray, no glow.
