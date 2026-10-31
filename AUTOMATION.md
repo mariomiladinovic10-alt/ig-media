@@ -24,3 +24,6 @@ Monthly run also does a competitor/trend scan (read only) before writing.
 Hook is fully visible from the first frame, titles name the finding, topics are relationships and behavior.
 Render: `cd tools/shorts && node render1.js` (reads facts.json, template fact2.html, audio mix1.wav).
 Quiet Man Laws YouTube is unchanged.
+
+## Thumbnails (Mario's standing rule, 31 Oct 2026)
+Every video (Instagram Reel, YouTube Short, TikTok) must have a real thumbnail, never a black frame. Pass `videoThumbnailUrl` (a 1080x1920 JPG with the hook text) when scheduling, or `videoCoverMilliseconds` (e.g. 2000, a frame where the text is fully visible) if the thumbnail is rejected. Frame 0 of every rendered video must already show the text (no fade from black).
