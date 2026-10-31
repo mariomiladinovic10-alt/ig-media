@@ -9,3 +9,4 @@
 | qml-anim-05 | NEON couple: her storm, his calm (stormy pier) | SHE BROUGHT THE STORM. | STAY STEADY. |
 | qml-anim-06 | NEON couple: small things repeated (four seasons) | WHY SHE STAYED FOR YEARS. | SHOW UP. EVERY DAY. |
 | qml-anim-07 | NEON couple: called weak for staying calm (alley) | THEY CALLED HIM WEAK. | STAY CALM. |
+| qml-anim-08 | Quiet Law #1: answer disrespect with a calm question (dinner table, voiceover 49s) | SOMEONE MOCKED YOU IN FRONT OF EVERYONE. | SO NEXT TIME SOMEONE MOCKS YOU... (loop) |
