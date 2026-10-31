@@ -499,7 +499,7 @@ async function pickAvc() {
 }
 async function videoBlob(post, S, seconds, onProg) {
   const fps = 30, n = Math.round(seconds * fps), c = mk(), ctx = c.getContext('2d');
-  const frame = i => { const p = i / Math.max(1, n - 1); renderPost(ctx, post, S, W0, { zoom: 1 + 0.045 * p, fade: Math.min(1, i / 12) }); };
+  const frame = i => { const p = i / Math.max(1, n - 1); renderPost(ctx, post, S, W0, { zoom: 1 + 0.045 * p, fade: 1 }); /* no fade from black: frame 0 must be a usable thumbnail */ };
   const codec = await pickAvc();
   if (codec) {
     const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: 'avc', width: W0, height: H0, frameRate: fps }, fastStart: 'in-memory' });
