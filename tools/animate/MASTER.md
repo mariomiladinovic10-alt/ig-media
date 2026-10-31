@@ -88,5 +88,4 @@ Every finished video ships with all of this, no exceptions:
 
 ## 13. Decisions (1 Nov 2026)
 - Mario: "na osnovu ovog prompta pravis videe i opise ... sve sto smo pricali". This master system is the standard for all Quiet Man Laws Shorts from now on, including the Monday weekly routine.
-- The weekly routine keeps Mario's standing auto publish approval (31 Oct 2026) but its main videos follow this system: original animated stories (formats A to E), no static quote main videos, full packaging (section 12).
-- Following the audit, YouTube no longer gets Shorts versions of the static image posts (Instagram and TikTok image posts continue). Mario can reverse this at any time.
+- PENDING: updating the weekly routine to this system was blocked by a permission check on 1 Nov 2026; Mario needs to approve the routine change. Planned change: keep his standing auto publish approval (31 Oct 2026), make every main video an original animated story with full packaging (section 12), and stop YouTube Shorts versions of the static image posts (Instagram and TikTok image posts continue).
