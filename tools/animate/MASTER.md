@@ -74,5 +74,19 @@ Log per video: id, title, topic, hook, script, duration, format, publish date, a
 ## 11. Research
 Study English Shorts in psychology, relationships, emotional intelligence, animated storytelling: hooks, structure, pacing, visuals, endings, titles. Verifiable sources only; never invent competitor numbers; never copy scripts, characters or animations.
 
-## 12. Open decisions for Mario (1 Nov 2026)
-- The Monday routine "Quiet Man Laws nedeljna serija" still auto publishes 7 static image Shorts and text videos per week on YouTube and does not wait for approval. This conflicts with sections 8 and 10. Waiting for Mario: pause it, or keep Instagram images but stop their YouTube versions and switch main videos to this pipeline with approval.
+## 12. Packaging standard for every video (Mario, 1 Nov 2026: "uvek imamo thumbnail, hashtagove i ostalo sve što ide")
+Every finished video ships with all of this, no exceptions:
+- Final MP4 1080x1920, frame 0 already shows the hook text.
+- Thumbnail JPG 1080x1920 (frame ~2 s with the hook text fully visible), hosted in the repo and passed as videoThumbnailUrl on Instagram REEL, YouTube Short and TikTok (fallback videoCoverMilliseconds 2000).
+- YouTube title: the hook as a curiosity line, up to ~80 characters, ending " #shorts" (e.g. "The More He Chased, the Farther She Went #shorts"), plus 2 alternative titles in the report.
+- Caption / description (same text on Instagram, YouTube, TikTok): line 1 restates the story's insight in one sentence + 1 emoji; blank line; one question that invites viewers to share their own story; blank line; "Follow us for more @quietmanlaws 🖤🧠"; blank line; 6 to 8 hashtags: 3 to 5 topic tags + #stickfigure #animation #quietmanlaws (YouTube copy also #shorts). Never "-" or dashes.
+- YouTube tags: 4 topic tags + "mens psychology", "stick figure animation", "shorts"; category PEOPLE_BLOGS; madeForKids false; type short; public.
+- TikTok title: the hook in sentence case (no hashtags), privacy PUBLIC_TO_EVERYONE.
+- Instagram: type REEL, showReelOnFeed true.
+- Scheduling: one Metricool post (blogId 7710957) with instagram + youtube, and a separate TikTok post at the same time; then check both appear in getScheduledPosts.
+- After scheduling: append to stories.md and experiments.md, commit and push.
+
+## 13. Decisions (1 Nov 2026)
+- Mario: "na osnovu ovog prompta pravis videe i opise ... sve sto smo pricali". This master system is the standard for all Quiet Man Laws Shorts from now on, including the Monday weekly routine.
+- The weekly routine keeps Mario's standing auto publish approval (31 Oct 2026) but its main videos follow this system: original animated stories (formats A to E), no static quote main videos, full packaging (section 12).
+- Following the audit, YouTube no longer gets Shorts versions of the static image posts (Instagram and TikTok image posts continue). Mario can reverse this at any time.
