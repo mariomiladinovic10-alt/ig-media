@@ -1,0 +1,78 @@
+# Quiet Man Laws: master system for YouTube Shorts (adopted 1 Nov 2026)
+
+Mario's instruction (1 Nov 2026): "od sad ovako radimo". This file merges his MASTER PROJECT prompt with the production brief format and the locked animated style. It is the operating manual for every Quiet Man Laws Short. Talk to Mario in Serbian (Latin); every script, title, caption and on screen text is natural English.
+
+## 1. Channel
+- Quiet Man Laws | Silent Power, https://www.youtube.com/@quietmanlaws. Slogan: A Quieter Mind. A Stronger Man.
+- Audience: men 18 to 35 (psychology, relationships, emotional intelligence, confidence, personal development).
+- Pillars: male psychology, relationships and attraction, emotional intelligence, self respect and boundaries, quiet confidence, masculinity and discipline, human behavior, psychological storytelling.
+- Personality: calm, confident, mature, premium, minimalist, emotionally compelling, direct but never aggressive, mysterious but never confusing.
+- Goal: an original storytelling brand, not an AI quote channel. Never promise views, subscribers or earnings.
+
+## 2. Baseline analytics (YouTube Studio, given by Mario 1 Nov 2026)
+| | Video A: They laughed at what he was building | Video B: If you have to convince her to choose you, she's already chosen |
+|---|---|---|
+| Format | animated micro story, 26 s | static typography, 9 s |
+| Public views | ~2,500 | ~526 |
+| Engaged views | ~1,800 | 127 |
+| Stayed to watch | 68.2% | 23.5% |
+| Avg view duration | 15 s (~58%) | 9 s (~100%) |
+Possible early drop around 6 to 8 s in Video A (not confirmed).
+Hypothesis to test (not proven): original animated stories with a relatable conflict and curiosity beat static statements that reveal the conclusion at once. Do not optimize for shortness. Never invent analytics or use arbitrary retention targets.
+
+## 3. Formats
+A. Psychological micro stories (relatable male character; beginning, development, satisfying outcome).
+B. Relationship moments (communication, respect, boundaries; no stereotypes, no manipulative tactics).
+C. Uncomfortable truths (must include an original explanation or concrete example; never a quote held on screen).
+D. Quiet discipline (consistency, patience, resilience; grounded).
+E. The moment everything changed (a realization or decision with a real payoff).
+Starting mix hypothesis: 70% animated micro stories, 20% relationship and dialogue stories, 10% experiments. Change only on evidence.
+
+## 4. Retention tests (every script must pass all three)
+A. First second hook: works without sound, minimal readable text, a conflict, a specific problem, an unexpected situation or an open question. No logos, greetings, setup or generic phrases. Do not reveal the conclusion unless that creates a stronger reason to stay.
+B. Continuous engagement: every scene advances the story (action, new information, emotional change, decision). A meaningful development inside roughly 5 to 10 s. No random effects just to add cuts.
+C. Satisfying ending: a specific insight, resolution or practical lesson tied to this story. A loop back to the opening is welcome but never at the cost of clarity.
+
+## 5. Length
+Test 15 to 35 s first; choose length by the idea (observation 12 to 18 s, micro story 20 to 30 s, longer only when the story needs it). Cut filler, not story. Change target length only after real results.
+
+## 6. Script rules
+Human, calm, conversational, emotionally intelligent. No robotic narration, clichés, hype words, repeated structures, unsupported psychological claims, misogyny or manipulation. Every script: distinctive premise, audience motivation, hook, progression, memorable payoff. Each Short is written as an original piece, never a template with swapped words. No dashes in on screen text, titles or captions.
+
+## 7. Visual system (LOCKED white glow style, see style.json; neon couple style.json for relationship stories)
+- Black background, dark charcoal ground, lots of negative space, one soft volumetric spotlight from above, monochrome, subtle bloom, flat vector look.
+- Hero: clean white stick figure, round head, thick uniform lines, soft white neon glow. Others: dim gray, no glow. No faces, no text in generated images.
+- Overlay text: Inter ExtraBold uppercase, white with soft glow, upper third, one gold key word (#F2C46D, `*word*` in assemble scripts). Hook text visible on frame 0, never a fade from black.
+- Consistency: generate the first scene with text2image, then every following scene with kling-3-omni image2image using the previous scene as reference ("keep the exact same scene, camera, table, figures; change only the poses"). This keeps one cohesive set across shots.
+- Clip prompts start "One single continuous wide shot, camera locked off, no zoom, no cuts." and end with motion_suffix + "Faceless stick figures, plain round heads." PixVerse still often pushes in; trim clips before the push becomes a giant close up behind the captions.
+- Every shot shows a meaningful action, emotion or change. Vary scenes between videos; never reuse the Simply Animated rock/chain or word bricks staircase.
+
+## 8. Production pipeline (approval gates in CAPS)
+1. Idea (from strategy + experiment log).
+2. Hook: three alternatives scored on clarity, curiosity, emotional relevance, visual potential, honesty; recommend one.
+3. Script: word for word narration with estimated duration (calm read ≈ 140 wpm).
+4. Storyboard: time range, scene, character action, on screen text, narration, animation, sound, transition.
+5. MARIO APPROVES the concept and script before any paid asset (OpenArt credits) is generated.
+6. Visuals: OpenArt kling-3-omni (images, 10 credits) and pixverseV6 image2video 540p 5 s (50 credits); max 2 video jobs at once. Contact sheet review before animating; frame strip review after.
+7. Voiceover: calm natural English male voice. ElevenLabs is NOT connected (Highsfield has only 10 credits and blocks other TTS hosts). Working fallback: local Kokoro TTS (kokoro-onnx, model files from github.com/thewh1teagle/kokoro-onnx releases), voice am_onyx, speed 0.92, one wav per line, then place lines on a timeline with deliberate pauses. Switch to ElevenLabs when Mario connects it.
+8. Edit: Remotion is not installed; current working editor is ffmpeg + Python (tools/animate/assemble.py for text only videos; the qml-anim-08 build script pattern for voiceover videos: per segment clips or stills with slow zoom, captions from text_card(), music.py bed ducked under the voice, a low hit on the key law, loudness normalized to -14 LUFS). Remotion can be added later if Mario wants it.
+9. QC: opening understandable without sound, clear progression, ending delivers, captions readable and inside the safe area (out of the bottom 20% and right 15%), balanced audio, consistent visuals, nothing cut off, frame 0 not black.
+10. Export: 1080x1920, H.264 MP4, 30 fps, AAC; plus title options, description, hashtags, cover frame JPG, metadata.
+11. MARIO APPROVES publishing. Do not upload or schedule without his OK. (Exception only where he has given a standing approval in writing.)
+12. Log the video in tools/animate/experiments.md and stories.md.
+
+## 9. Analytics loop
+After publishing, ask Mario for YouTube Studio numbers at about 24 h, 72 h and 7 days (public views, engaged views, shown in feed, stayed to watch, swiped away, avg view duration, avg % viewed, retention curve, likes, comments, shares, subscribers gained). Use only windows that exist.
+Diagnostics: many swipes → first frame, topic, hook. Drop right after hook → promise vs next scene. Mid drop → pacing, repetition, visual stagnation. Drop before payoff → predictability or slow ending. AVD above length → replays. Never treat one metric as proof; compare videos of similar age and format.
+Log per video: id, title, topic, hook, script, duration, format, publish date, analytics, retention notes, hypothesis, next experiment. After each batch: what improved, what declined, what is uncertain, which formats to keep testing, next changes. Never overturn the whole strategy on one video.
+
+## 10. Monetization and originality (checked 1 Nov 2026)
+- YPP: 1,000 subscribers plus 10 million qualified Shorts views in 90 days (or 4,000 long form watch hours in 12 months). YouTube says YPP updates start 1 Feb 2027 with higher criteria (figures not published on the page).
+- July 2026 inauthentic content clarification: generic, repetitive or template based mass produced content (AI, CGI or templates with little variation) cannot earn; neither can content designed to be distressing or manipulative. A channel with too much of it loses monetization. → Our daily templated quote Shorts are the main originality risk; original stories are the defence.
+- No reuploads, copyrighted clips, copied scripts, misleading titles or artificial engagement. Declare AI content where YouTube requires it.
+
+## 11. Research
+Study English Shorts in psychology, relationships, emotional intelligence, animated storytelling: hooks, structure, pacing, visuals, endings, titles. Verifiable sources only; never invent competitor numbers; never copy scripts, characters or animations.
+
+## 12. Open decisions for Mario (1 Nov 2026)
+- The Monday routine "Quiet Man Laws nedeljna serija" still auto publishes 7 static image Shorts and text videos per week on YouTube and does not wait for approval. This conflicts with sections 8 and 10. Waiting for Mario: pause it, or keep Instagram images but stop their YouTube versions and switch main videos to this pipeline with approval.
