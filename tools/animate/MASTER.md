@@ -75,6 +75,13 @@ Log per video: id, title, topic, hook, script, duration, format, publish date, a
 ## 11. Research
 Study English Shorts in psychology, relationships, emotional intelligence, animated storytelling: hooks, structure, pacing, visuals, endings, titles. Verifiable sources only; never invent competitor numbers; never copy scripts, characters or animations.
 
+## 11b. RETENTION RULE (Mario, 1 Nov 2026: "ljudi moraju da ostanu na videu, nemoj odma da im dajes celinu da procitaju i da odu")
+Viewers must stay to the end. Never hand them the whole message at once:
+- in the video, one short line at a time (caption beats), each line opens the next question; the lesson / payoff appears only in the last 2 to 3 seconds;
+- the hook is a situation or tension, never the conclusion; no full quote or full lesson on any single frame before the end;
+- cover headline, YouTube title, TikTok title and caption line 1 tease the conflict but never state the ending or the lesson;
+- keep each line short enough to read in under 1.5 s, so nobody can read ahead and leave.
+
 ## 12. Packaging standard for every video (Mario, 1 Nov 2026: "uvek imamo thumbnail, hashtagove i ostalo sve što ide")
 Every finished video ships with all of this, no exceptions:
 - Final MP4 1080x1920, frame 0 already shows the hook text.
@@ -85,7 +92,7 @@ Every finished video ships with all of this, no exceptions:
   - competitor research (1 Nov 2026): Simply Animated covers show one clear metaphor frame on black; PsycHacks repeats one headline look on every Short for recognition; Charisma on Command uses one bold accent colour on the key element. Our version: same clean glowing headline + one gold word every time.
   Host the cover in the repo (media/quietmanlaws/anim/<id>_coverN.jpg, new filename for every new version so caches never show an old one) and pass it as videoThumbnailUrl on Instagram REEL, YouTube Short and TikTok (fallback videoCoverMilliseconds 2000). Frame 0 of the video still shows the hook text.
 - YouTube title: the hook as a curiosity line, up to ~80 characters, ending " #shorts" (e.g. "The More He Chased, the Farther She Went #shorts"), plus 2 alternative titles in the report.
-- Captions are written PER PLATFORM (three separate Metricool posts at the same time: Instagram, YouTube, TikTok). All start the same: line 1 the story's insight in one sentence + 1 emoji; blank line; one question inviting viewers to share their own story. Then the follow lines (Mario, 1 Nov 2026: always ask people to follow on Instagram and do everything that makes the Shorts show up to them):
+- Captions are written PER PLATFORM (three separate Metricool posts at the same time: Instagram, YouTube, TikTok). All start the same: line 1 an open loop teaser that sets up the situation but NEVER gives away the ending or the lesson (retention rule below) + 1 emoji; blank line; one question inviting viewers to share their own story. Then the follow lines (Mario, 1 Nov 2026: always ask people to follow on Instagram and do everything that makes the Shorts show up to them):
   - Instagram: "Follow @quietmanlaws for a new quiet law every day 🖤🧠"
   - YouTube: question ends with "Tell me in the comments." then "Subscribe so the next Quiet Law shows up in your feed 🔔" and "Follow us on Instagram for a new post every day: @quietmanlaws (instagram.com/quietmanlaws)". First 3 hashtags are shown above the title, so order them: 2 strongest topic tags, then #shorts.
   - TikTok: "Follow for more and find us on Instagram @quietmanlaws 🖤🧠"

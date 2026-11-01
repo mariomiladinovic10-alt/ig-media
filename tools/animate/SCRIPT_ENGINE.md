@@ -19,6 +19,9 @@ Criteria: clarity without context · curiosity · emotional relevance · visual 
 | 25 to 32 s | ENDING: memorable final line, may echo frame 0 | final line + "Follow @quietmanlaws" |
 A focused idea can end at 15 to 20 s. Caption beats every 1.5 to 3 s; a visual change (new action, reaction, push-in, cut) at least every 3 s.
 
+## 3b. Retention rule (Mario, 1 Nov 2026)
+People must stay on the video: reveal the story line by line, never show the whole message or the lesson early, payoff only in the last 2 to 3 s. Titles, cover and caption line 1 tease the conflict, never the ending. Quality gate: PACING and ENDING fail (under 7) if the lesson is readable before the end.
+
 ## 4. Storyboard row (one per beat)
 time range · scene/visual · character action · on screen line (gold word in *asterisks*, max 8 words, no dashes) · animation (clip, trim, speed, push) · sound (music, hit, whoosh) · transition (cut by default).
 
