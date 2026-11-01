@@ -100,3 +100,12 @@ Every finished video ships with all of this, no exceptions:
 ## 13. Decisions (1 Nov 2026)
 - Mario: "na osnovu ovog prompta pravis videe i opise ... sve sto smo pricali". This master system is the standard for all Quiet Man Laws Shorts from now on, including the Monday weekly routine.
 - PENDING: updating the weekly routine to this system was blocked by a permission check on 1 Nov 2026; Mario needs to approve the routine change. Planned change: keep his standing auto publish approval (31 Oct 2026), make every main video an original animated story with full packaging (section 12), and stop YouTube Shorts versions of the static image posts (Instagram and TikTok image posts continue).
+
+## 14. V2 upgrade (Mario's "GROWTH SYSTEM V2", 1 Nov 2026)
+- Script engine: tools/animate/SCRIPT_ENGINE.md (10 ranked concepts per batch, 5 scored hooks, 0-2/2-7/7-16/16-25/25-32 s structure, storyboard rows, quality gate before any paid asset, experiment categories A to F, series).
+- Editor: tools/animate/assemble2.py (caption beats every 1.5 to 3 s, per scene trim/speed/push-in, cuts, hit/whoosh accents, final line over the last scene). assemble.py is kept unchanged.
+- Analytics: tools/analytics/shorts.csv (per video and age window: 24 h, 72 h, 7 d), channel.csv, experiments.csv, analyze.py (like rate, subs per 1,000 views, engaged share, averages by format, pillar, hook type, style; merges a YouTube Studio CSV export). Never invent missing numbers.
+- Internal targets (not algorithm thresholds): stayed to watch 55 to 60%+, swiped below 45%, likes 3 to 4% of views, 2+ subs per 1,000 views.
+- Content mix for 30 days: 60% emotional micro stories, 25% male psychology, 15% discipline.
+- Voiceover from V2 section 8 is NOT used: Mario decided on 1 Nov 2026 to keep all videos silent. Test it again only if he asks.
+- CTA: subtle and only when it fits ("Follow for more stories about self-respect"); the caption follow lines of section 12 stay.
