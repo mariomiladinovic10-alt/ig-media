@@ -1,0 +1,9 @@
+{"id":"qml-anim-10","seed":1010,"scenes":[
+ {"clip":"c1.mp4","dur":4.5,"push":[1.0,1.06],"beats":[{"t":0,"text":"2 AM. HE WROTE HER *EVERYTHING.*"},{"t":2.3,"text":"EVERY WORD HE NEVER *SAID.*"}]},
+ {"clip":"c2.mp4","start":0,"dur":2.5,"push":[1.0,1.04],"beats":[{"t":0,"text":"ONE TAP AND SHE'D *KNOW.*"}]},
+ {"clip":"c2.mp4","start":2.0,"dur":4.2,"speed":1.4,"push":[1.04,1.08],"beats":[{"t":0,"text":"HIS THUMB *FROZE.*"},{"t":2.0,"text":"THEN HE *DELETED* IT."}]},
+ {"clip":"c3.mp4","start":0,"dur":3.0,"speed":1.4,"push":[1.0,1.05],"beats":[{"t":0,"text":"NO REPLY TO *WAIT* FOR."}]},
+ {"clip":"c4.mp4","dur":4.0,"push":[1.0,1.05],"beats":[{"t":0,"text":"MORNING CAME *ANYWAY.*"}]},
+ {"clip":"c5.mp4","dur":5.0,"push":[1.0,1.06],"beats":[{"t":0,"text":"SOME FEELINGS ARE MEANT TO BE *FELT...*"}]}],
+ "sfx":[{"t":4.4,"type":"whoosh"},{"t":9.0,"type":"hit"},{"t":13.5,"type":"whoosh"}],
+ "end":{"text":"...NOT *SENT.*","sub":"Follow @quietmanlaws","dur":2.3}}

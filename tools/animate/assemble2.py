@@ -17,6 +17,7 @@ import numpy as np, soundfile as sf
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from assemble import text_card, GOLD  # same locked caption look
+from PIL import Image, ImageDraw, ImageFilter
 W, H, FPS = 1080, 1920, 30
 
 def run(cmd):
@@ -36,6 +37,16 @@ def scene_clip(src, sc, out):
           f"[a][g]blend=all_mode=screen:all_opacity=0.45,format=yuv420p,setsar=1")
     run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-filter_complex', vf, '-frames:v', str(n), '-an',
          '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-r', str(FPS), out])
+
+def add_plate(png, strength=150):
+    # soft dark plate behind the caption so it stays readable on bright scenes (V2 subtitle contrast rule)
+    im = Image.open(png).convert('RGBA'); bb = im.getchannel('A').point(lambda a: 255 if a > 40 else 0).getbbox()
+    if not bb: return
+    pad = 60; m = Image.new('L', im.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle([bb[0]-pad, bb[1]-pad//2, bb[2]+pad, bb[3]+pad//2], radius=50, fill=strength)
+    m = m.filter(ImageFilter.GaussianBlur(28))
+    plate = Image.new('RGBA', im.size, (0, 0, 0, 0)); plate.putalpha(m)
+    Image.alpha_composite(plate, im).save(png)
 
 def sfx_track(events, total, sr=44100):
     a = np.zeros(int(sr * (total + 1)))
@@ -81,6 +92,7 @@ def main():
         png = os.path.join(tmp, f'c{k}.png')
         y = story.get('text_y', 330)
         text_card(c[2], png, size=story.get('text_size', 80), y=y, sub=c[3] if len(c) > 3 else None)
+        if story.get('plate', True): add_plate(png)
         inputs += ['-loop', '1', '-t', f'{total:.3f}', '-i', png]
         fc.append(f"[{prev}][{k+1}:v]overlay=0:0:enable='between(t,{c[0]:.3f},{c[1]-0.001:.3f})'[v{k}]"); prev = f'v{k}'
     vout = os.path.join(tmp, 'v.mp4')
