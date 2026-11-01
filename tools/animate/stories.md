@@ -11,3 +11,5 @@
 | qml-anim-07 | NEON couple: called weak for staying calm (alley) | THEY CALLED HIM WEAK. | STAY CALM. |
 | qml-anim-08 | Quiet Law #1: answer disrespect with a calm question (dinner table, voiceover 49s) | SOMEONE MOCKED YOU IN FRONT OF EVERYONE. | SO NEXT TIME SOMEONE MOCKS YOU... (loop) |
 | qml-anim-09 | never chase her, build your own road (road, silent, 28s) | THE MORE HE CHASED... | STOP CHASING. START BUILDING. |
+
+- 1 Nov 2026: qml-anim-10 "The Text He Wrote at 2 AM" scheduled 2 Nov 20:00 Europe/Belgrade on Instagram, YouTube and TikTok (Metricool uuids -7887992920873415998, -92276105816813843, -6095200636551672453), cover qml-anim-10_cover2.jpg (clean style). qml-anim-09 posts switched to qml-anim-09_cover3.jpg (clean style).
