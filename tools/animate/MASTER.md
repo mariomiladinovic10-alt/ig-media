@@ -85,11 +85,16 @@ Every finished video ships with all of this, no exceptions:
   - built from competitor research (1 Nov 2026): Simply Animated covers show one clear metaphor frame on black with tiny labels; PsycHacks uses the same framed headline box on every Short for instant recognition; Charisma on Command uses one bold accent (yellow arrow/caption) on the key element. Our frame + single gold word combines these.
   Host the cover in the repo (media/quietmanlaws/anim/<id>_cover.jpg) and pass it as videoThumbnailUrl on Instagram REEL, YouTube Short and TikTok (fallback videoCoverMilliseconds 2000). Frame 0 of the video still shows the hook text.
 - YouTube title: the hook as a curiosity line, up to ~80 characters, ending " #shorts" (e.g. "The More He Chased, the Farther She Went #shorts"), plus 2 alternative titles in the report.
-- Caption / description (same text on Instagram, YouTube, TikTok): line 1 restates the story's insight in one sentence + 1 emoji; blank line; one question that invites viewers to share their own story; blank line; "Follow us for more @quietmanlaws 🖤🧠"; blank line; 6 to 8 hashtags: 3 to 5 topic tags + #stickfigure #animation #quietmanlaws (YouTube copy also #shorts). Never "-" or dashes.
+- Captions are written PER PLATFORM (three separate Metricool posts at the same time: Instagram, YouTube, TikTok). All start the same: line 1 the story's insight in one sentence + 1 emoji; blank line; one question inviting viewers to share their own story. Then the follow lines (Mario, 1 Nov 2026: always ask people to follow on Instagram and do everything that makes the Shorts show up to them):
+  - Instagram: "Follow @quietmanlaws for a new quiet law every day 🖤🧠"
+  - YouTube: question ends with "Tell me in the comments." then "Subscribe so the next Quiet Law shows up in your feed 🔔" and "Follow us on Instagram for a new post every day: @quietmanlaws (instagram.com/quietmanlaws)". First 3 hashtags are shown above the title, so order them: 2 strongest topic tags, then #shorts.
+  - TikTok: "Follow for more and find us on Instagram @quietmanlaws 🖤🧠"
+  Then 6 to 8 hashtags: topic tags + #stickfigure #animation #quietmanlaws. Never "-" or dashes.
+- Discovery basics on every YouTube Short: the main search phrase of the topic in the title and in the first line of the description; "quiet man laws" among the tags; notifySubscribers left on (default); keep the series look (same cover frame, same end card) so returning viewers recognise it. In the end card always "Follow @quietmanlaws".
 - YouTube tags: 4 topic tags + "mens psychology", "stick figure animation", "shorts"; category PEOPLE_BLOGS; madeForKids false; type short; public.
 - TikTok title: the hook in sentence case (no hashtags), privacy PUBLIC_TO_EVERYONE.
 - Instagram: type REEL, showReelOnFeed true.
-- Scheduling: one Metricool post (blogId 7710957) with instagram + youtube, and a separate TikTok post at the same time; then check both appear in getScheduledPosts.
+- Scheduling: three Metricool posts (blogId 7710957) at the same time, one each for instagram, youtube and tiktok, each with its own caption; then check all three appear in getScheduledPosts.
 - After scheduling: append to stories.md and experiments.md, commit and push.
 
 ## 13. Decisions (1 Nov 2026)
