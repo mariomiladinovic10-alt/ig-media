@@ -1,0 +1,102 @@
+{
+ "scenes": [
+  {
+   "clip": "v06c1.mp4",
+   "start": 0.2,
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "WHY SHE STAYED FOR *YEARS.*"
+    },
+    {
+     "t": 2.2,
+     "text": "HE PUT HIS PHONE *AWAY.*"
+    }
+   ]
+  },
+  {
+   "clip": "v06c2.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "HE SHOWED UP IN THE *RAIN.*"
+    }
+   ]
+  },
+  {
+   "clip": "v06c3.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "HE STAYED WHEN SHE WAS *QUIET.*"
+    }
+   ]
+  },
+  {
+   "clip": "v06c4.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "EVERY DAY, HE *CHOSE* HER."
+    }
+   ]
+  },
+  {
+   "clip": "v06c5.mp4",
+   "start": 0.0,
+   "dur": 4.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "NOTHING *BIG.*"
+    }
+   ],
+   "speed": 1.6
+  }
+ ],
+ "end": {
+  "text": "LOVE IS SMALL THINGS, *REPEATED.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.4
+ },
+ "seed": 606,
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 12.2,
+   "type": "whoosh"
+  }
+ ],
+ "id": "qml-anim-06w",
+ "grade": "curves=all='0/0 0.4/0.12 0.75/0.6 1/1'"
+}

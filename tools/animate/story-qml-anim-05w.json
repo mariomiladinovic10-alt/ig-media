@@ -1,0 +1,102 @@
+{
+ "scenes": [
+  {
+   "clip": "v05c1.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "SHE BROUGHT THE *STORM.*"
+    },
+    {
+     "t": 2.0,
+     "text": "HE DIDN'T *RUN.*"
+    }
+   ]
+  },
+  {
+   "clip": "v05c2.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "HE DIDN'T *FIGHT* IT EITHER."
+    }
+   ]
+  },
+  {
+   "clip": "v05c3.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "HE KEPT WALKING *TOWARD* HER."
+    }
+   ]
+  },
+  {
+   "clip": "v05c4.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "SHE TOOK HIS *HAND.*"
+    }
+   ]
+  },
+  {
+   "clip": "v05c5.mp4",
+   "start": 0.0,
+   "dur": 4.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "AND THE STORM *PASSED.*"
+    }
+   ],
+   "speed": 2.0
+  }
+ ],
+ "end": {
+  "text": "BE HER *PEACE.* NOT HER WAR.",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.4
+ },
+ "seed": 505,
+ "sfx": [
+  {
+   "t": 4.0,
+   "type": "hit"
+  },
+  {
+   "t": 12.0,
+   "type": "whoosh"
+  }
+ ],
+ "id": "qml-anim-05w",
+ "grade": "curves=all='0/0 0.4/0.12 0.75/0.6 1/1'"
+}

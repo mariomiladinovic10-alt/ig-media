@@ -1,0 +1,122 @@
+{
+ "scenes": [
+  {
+   "clip": "v04c1.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "SAME *FIGHT.*"
+    },
+    {
+     "t": 1.6,
+     "text": "TWO *DIFFERENT* MEN."
+    }
+   ]
+  },
+  {
+   "clip": "v04c2.mp4",
+   "start": 0.0,
+   "dur": 2.4,
+   "push": [
+    1.0,
+    1.04
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "ONE RAISED HIS *VOICE.*"
+    }
+   ]
+  },
+  {
+   "clip": "v04c2.mp4",
+   "start": 3.9,
+   "dur": 1.8,
+   "speed": 1.6,
+   "push": [
+    1.0,
+    1.04
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "SHE *LEFT.*"
+    }
+   ]
+  },
+  {
+   "clip": "v04c3.mp4",
+   "start": 0.2,
+   "dur": 4.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "THE OTHER ONE STAYED *QUIET.*"
+    },
+    {
+     "t": 2.4,
+     "text": "AND *LISTENED.*"
+    }
+   ]
+  },
+  {
+   "clip": "v04c4.mp4",
+   "start": 0.2,
+   "dur": 3.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "SHE STOPPED *FIGHTING.*"
+    }
+   ]
+  },
+  {
+   "clip": "v04c5.mp4",
+   "start": 0.0,
+   "dur": 4.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "AND CAME *CLOSER.*"
+    }
+   ],
+   "speed": 1.5
+  }
+ ],
+ "end": {
+  "text": "CALM IS NOT WEAK. CALM IS *SAFE.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.4
+ },
+ "seed": 404,
+ "sfx": [
+  {
+   "t": 4.0,
+   "type": "whoosh"
+  },
+  {
+   "t": 8.0,
+   "type": "hit"
+  }
+ ],
+ "id": "qml-anim-04w",
+ "grade": "curves=all='0/0 0.4/0.12 0.75/0.6 1/1'"
+}

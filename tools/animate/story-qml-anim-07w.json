@@ -1,0 +1,101 @@
+{
+ "scenes": [
+  {
+   "clip": "v07c1.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "THEY CALLED HIM *WEAK.*"
+    },
+    {
+     "t": 2.0,
+     "text": "BECAUSE HE NEVER *YELLED.*"
+    }
+   ]
+  },
+  {
+   "clip": "v07c3.mp4",
+   "start": 0.0,
+   "dur": 2.5,
+   "push": [
+    1.0,
+    1.04
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "THEY GOT *LOUDER.*"
+    }
+   ]
+  },
+  {
+   "clip": "v07c3.mp4",
+   "start": 2.5,
+   "dur": 2.5,
+   "push": [
+    1.04,
+    1.08
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "THEN EVERYTHING *SHOOK.*"
+    }
+   ]
+  },
+  {
+   "clip": "v07c4.mp4",
+   "start": 0.2,
+   "dur": 4.0,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "ONE MAN WAS STILL *STANDING.*"
+    }
+   ]
+  },
+  {
+   "clip": "v07c5.mp4",
+   "start": 0.2,
+   "dur": 4.5,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "beats": [
+    {
+     "t": 0,
+     "text": "THE *QUIET* ONE."
+    }
+   ]
+  }
+ ],
+ "end": {
+  "text": "CALM ISN'T WEAKNESS. IT'S *CONTROL.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.4
+ },
+ "seed": 707,
+ "sfx": [
+  {
+   "t": 8.0,
+   "type": "hit"
+  },
+  {
+   "t": 12.5,
+   "type": "whoosh"
+  }
+ ],
+ "id": "qml-anim-07w",
+ "grade": "curves=all='0/0 0.4/0.12 0.75/0.6 1/1'"
+}

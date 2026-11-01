@@ -33,7 +33,7 @@ def scene_clip(src, sc, out):
           f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
           f"tpad=stop_mode=clone:stop_duration={d + 1:.2f},"
           f"scale=w='iw*({zoom})':h='ih*({zoom})':eval=frame,crop={W}:{H}:(iw-{W})/2:(ih-{H})*{cy},"
-          f"hue=s=0,eq=contrast=1.08:brightness=-0.01,format=gbrp,split[a][b];[b]gblur=sigma=18[g];"
+          f"hue=s=0,{sc.get('grade', 'null')},eq=contrast=1.08:brightness=-0.01,format=gbrp,split[a][b];[b]gblur=sigma=18[g];"
           f"[a][g]blend=all_mode=screen:all_opacity=0.45,format=yuv420p,setsar=1")
     run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-filter_complex', vf, '-frames:v', str(n), '-an',
          '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-r', str(FPS), out])
@@ -67,6 +67,7 @@ def main():
     story, cdir, out = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3]
     tmp = tempfile.mkdtemp(); parts = []; t = 0.0; caps = []
     for i, sc in enumerate(story['scenes']):
+        if story.get('grade'): sc.setdefault('grade', story['grade'])  # extra filter, e.g. curves to turn old neon clips into the white glow look
         p = os.path.join(tmp, f's{i}.mp4'); scene_clip(os.path.join(cdir, sc['clip']), sc, p); parts.append(p)
         beats = sc.get('beats', [])
         for j, b in enumerate(beats):
