@@ -78,7 +78,12 @@ Study English Shorts in psychology, relationships, emotional intelligence, anima
 ## 12. Packaging standard for every video (Mario, 1 Nov 2026: "uvek imamo thumbnail, hashtagove i ostalo sve što ide")
 Every finished video ships with all of this, no exceptions:
 - Final MP4 1080x1920, frame 0 already shows the hook text.
-- Thumbnail JPG 1080x1920 (frame ~2 s with the hook text fully visible), hosted in the repo and passed as videoThumbnailUrl on Instagram REEL, YouTube Short and TikTok (fallback videoCoverMilliseconds 2000).
+- Thumbnail (cover) JPG 1080x1920 in the LOCKED cover style (Mario, 1 Nov 2026), made with `python3 tools/animate/thumb.py <scene.png> "<HEADLINE with one *gold* word>" <out.jpg> [zoom] [focus_y]`:
+  - background = the story's conflict moment (the scene that makes people ask "why?"), not the ending; key figures visible below the headline box and above the bottom 20%;
+  - top third: small gold "QUIET MAN LAWS" tag + thin gold rounded frame with a 2 to 5 word headline in Inter ExtraBold, white with ONE gold word;
+  - headline = a conflict or open loop specific to this story (e.g. "HE CHASED. SHE *RAN.*"), never the lesson itself and never the same words as the YouTube title;
+  - built from competitor research (1 Nov 2026): Simply Animated covers show one clear metaphor frame on black with tiny labels; PsycHacks uses the same framed headline box on every Short for instant recognition; Charisma on Command uses one bold accent (yellow arrow/caption) on the key element. Our frame + single gold word combines these.
+  Host the cover in the repo (media/quietmanlaws/anim/<id>_cover.jpg) and pass it as videoThumbnailUrl on Instagram REEL, YouTube Short and TikTok (fallback videoCoverMilliseconds 2000). Frame 0 of the video still shows the hook text.
 - YouTube title: the hook as a curiosity line, up to ~80 characters, ending " #shorts" (e.g. "The More He Chased, the Farther She Went #shorts"), plus 2 alternative titles in the report.
 - Caption / description (same text on Instagram, YouTube, TikTok): line 1 restates the story's insight in one sentence + 1 emoji; blank line; one question that invites viewers to share their own story; blank line; "Follow us for more @quietmanlaws 🖤🧠"; blank line; 6 to 8 hashtags: 3 to 5 topic tags + #stickfigure #animation #quietmanlaws (YouTube copy also #shorts). Never "-" or dashes.
 - YouTube tags: 4 topic tags + "mens psychology", "stick figure animation", "shorts"; category PEOPLE_BLOGS; madeForKids false; type short; public.
