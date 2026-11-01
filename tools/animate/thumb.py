@@ -7,6 +7,7 @@ W, H = 1080, 1920
 F_BOLD = '/usr/share/fonts/opentype/inter/Inter-ExtraBold.otf'
 F_SEMI = '/usr/share/fonts/opentype/inter/Inter-SemiBold.otf'
 GOLD, WHITE = (242, 196, 109), (255, 255, 255)
+STYLE = 'clean'  # LOCKED 1 Nov 2026 (Mario): no box, no tag; big glowing white text with one gold word, like the in-video captions
 
 def cover(img, zoom, fy):
     s = max(W / img.width, H / img.height) * zoom
@@ -20,7 +21,10 @@ def main():
     zoom = float(sys.argv[4]) if len(sys.argv) > 4 else 1.35
     fy = float(sys.argv[5]) if len(sys.argv) > 5 else 0.6
     img = cover(Image.open(bg).convert('RGB'), zoom, fy)
-    img = ImageEnhance.Contrast(img).enhance(1.12)
+    img = ImageEnhance.Contrast(img).enhance(1.15)
+    vig = Image.new('L', (W, H), 0); ImageDraw.Draw(vig).ellipse([-W*0.35, H*0.12, W*1.35, H*1.15], fill=255)
+    vig = vig.filter(ImageFilter.GaussianBlur(160))
+    img = Image.composite(img, Image.new('RGB', (W, H), (0, 0, 0)), vig)
     # top shade so the headline always reads
     shade = Image.new('L', (W, H), 0); d = ImageDraw.Draw(shade)
     for yy in range(0, 900):
@@ -29,7 +33,7 @@ def main():
     layer = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(layer)
     # headline, auto size, max 3 lines
     words = [(w.replace('*', ''), w.startswith('*') or w.endswith('*') or w.endswith('*.') ) for w in text.split()]
-    size = 150
+    size = 112
     while True:
         f = ImageFont.truetype(F_BOLD, size); lines, cur = [], []
         for w in words:
@@ -39,19 +43,18 @@ def main():
         lines.append(cur)
         if len(lines) <= 3 or size <= 90: break
         size -= 8
-    lh = int(size * 1.08); top = 250
+    lh = int(size * 1.12); top = 300
     box_h = len(lines) * lh + 90
-    # frame: thin gold border box (the channel's recurring cover frame)
-    d.rounded_rectangle([60, top - 45, W - 60, top - 45 + box_h], radius=28, outline=GOLD + (255,), width=5, fill=(0, 0, 0, 120))
-    tag = 'QUIET MAN LAWS'; ft = ImageFont.truetype(F_SEMI, 34)
-    tw = ft.getlength(tag); d.rectangle([(W - tw) / 2 - 22, top - 66, (W + tw) / 2 + 22, top - 24], fill=(0, 0, 0, 255))
-    d.text(((W - tw) / 2, top - 64), tag, font=ft, fill=GOLD)
+    if STYLE == 'box':  # old boxed look, kept only for reference
+        d.rounded_rectangle([60, top - 45, W - 60, top - 45 + box_h], radius=28, outline=GOLD + (255,), width=5, fill=(0, 0, 0, 120))
     for i, ln in enumerate(lines):
         full = ' '.join(x for x, _ in ln); x = (W - f.getlength(full)) / 2; y = top + i * lh
         for wd, g in ln:
             d.text((x, y), wd, font=f, fill=GOLD if g else WHITE); x += f.getlength(wd + ' ')
-    glow = layer.filter(ImageFilter.GaussianBlur(10))
-    out_img = Image.alpha_composite(img.convert('RGBA'), glow)
+    glow = layer.filter(ImageFilter.GaussianBlur(14))
+    shadow = Image.new('RGBA', (W, H), (0, 0, 0, 0)); shadow.putalpha(layer.getchannel('A').filter(ImageFilter.GaussianBlur(9)).point(lambda a: min(255, int(a * 0.85))))
+    out_img = Image.alpha_composite(img.convert('RGBA'), shadow)
+    out_img = Image.alpha_composite(out_img, glow); out_img = Image.alpha_composite(out_img, glow)
     out_img = Image.alpha_composite(out_img, layer).convert('RGB')
     out_img.save(out, quality=92)
     print('ok', out)
