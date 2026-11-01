@@ -39,7 +39,7 @@ Test 15 to 35 s first; choose length by the idea (observation 12 to 18 s, micro 
 ## 6. Script rules
 Human, calm, conversational, emotionally intelligent. No robotic narration, clichés, hype words, repeated structures, unsupported psychological claims, misogyny or manipulation. Every script: distinctive premise, audience motivation, hook, progression, memorable payoff. Each Short is written as an original piece, never a template with swapped words. No dashes in on screen text, titles or captions.
 
-## 7. Visual system (LOCKED white glow style, see style.json; neon couple style.json for relationship stories)
+## 7. Visual system (LOCKED white glow style, see style.json; neon style RETIRED 1 Nov 2026, Mario: no more neon videos)
 - Black background, dark charcoal ground, lots of negative space, one soft volumetric spotlight from above, monochrome, subtle bloom, flat vector look.
 - Hero: clean white stick figure, round head, thick uniform lines, soft white neon glow. Others: dim gray, no glow. No faces, no text in generated images.
 - Overlay text: Inter ExtraBold uppercase, white with soft glow, upper third, one gold key word (#F2C46D, `*word*` in assemble scripts). Hook text visible on frame 0, never a fade from black.
