@@ -13,3 +13,4 @@
 | qml-anim-09 | never chase her, build your own road (road, silent, 28s) | THE MORE HE CHASED... | STOP CHASING. START BUILDING. |
 
 - 1 Nov 2026: qml-anim-10 "The Text He Wrote at 2 AM" scheduled 2 Nov 20:00 Europe/Belgrade on Instagram, YouTube and TikTok (Metricool uuids -7887992920873415998, -92276105816813843, -6095200636551672453), cover qml-anim-10_cover2.jpg (clean style). qml-anim-09 posts switched to qml-anim-09_cover3.jpg (clean style).
+- 1 Nov 2026 (Mario: "2 shortsa dnevno, za americko trziste"): schedule reset to 2 Shorts per day at 18:00 and 22:00 Belgrade (12:00 / 16:00 ET). qml-anim-09 moved to 1 Nov 22:00, qml-anim-10 to 2 Nov 22:00. Neon "stop waiting" to 6 Nov 22:00, neon "same fight" to 7 Nov 22:00. YouTube quote Shorts from the 01:00 slot moved: replay 8 Nov 18:00, shrinking 8 Nov 22:00, guilt 9 Nov 18:00, discipline 9 Nov 22:00, waiting 10 Nov 18:00, attractive 10 Nov 22:00. Stock lasts through 10 Nov.

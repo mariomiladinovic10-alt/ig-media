@@ -101,6 +101,7 @@ Every finished video ships with all of this, no exceptions:
 - YouTube tags: 4 topic tags + "mens psychology", "stick figure animation", "shorts"; category PEOPLE_BLOGS; madeForKids false; type short; public.
 - TikTok title: the hook in sentence case (no hashtags), privacy PUBLIC_TO_EVERYONE.
 - Instagram: type REEL, showReelOnFeed true.
+- Posting cadence (Mario, 1 Nov 2026): 2 Shorts every day, timed for the US audience: 18:00 and 22:00 Europe/Belgrade = 12:00 and 16:00 New York (Metricool best times for our YouTube audience peak at 16:00 ET, Instagram is strong 10:00 to 18:00 ET). New V2 animated stories take the 22:00 slot. Never more than 2 Shorts in one day; overflow moves to the next free slot.
 - Scheduling: three Metricool posts (blogId 7710957) at the same time, one each for instagram, youtube and tiktok, each with its own caption; then check all three appear in getScheduledPosts.
 - After scheduling: append to stories.md and experiments.md, commit and push.
 
