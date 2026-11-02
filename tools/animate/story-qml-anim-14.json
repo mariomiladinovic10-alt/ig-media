@@ -1,0 +1,9 @@
+{"id":"qml-anim-14","seed":1414,"scenes":[
+ {"clip":"s1.png","dur":3.6,"push":[1.0,1.10],"cy":0.7,"beats":[{"t":0,"text":"MONDAY. HE STARTED *AGAIN.*"},{"t":1.8,"text":"NEW PLAN. NEW *HIM.*"}]},
+ {"clip":"s2.png","dur":3.4,"push":[1.0,1.10],"cy":0.7,"beats":[{"t":0,"text":"BY WEDNESDAY HE WAS *DONE.*"},{"t":1.7,"text":"NEXT MONDAY, HE *THOUGHT.*"}]},
+ {"clip":"c2.mp4","start":0,"dur":1.6,"speed":1.6,"push":[1.0,1.04],"beats":[{"t":0,"text":"SAME LOOP. FOR *YEARS.*"}]},
+ {"clip":"c2.mp4","start":2.2,"dur":2.8,"push":[1.0,1.05],"beats":[{"t":0,"text":"BUT THIS TIME HE *STOOD UP.*"}]},
+ {"clip":"c3.mp4","start":0,"dur":2.6,"speed":1.3,"push":[1.0,1.04],"beats":[{"t":0,"text":"TIRED. ON A *WEDNESDAY.*"}]},
+ {"clip":"c3.mp4","start":2.0,"dur":4.6,"speed":1.5,"push":[1.0,1.06],"beats":[{"t":0,"text":"ONE SLOW, UGLY *REP.*"}]}],
+ "sfx":[{"t":3.6,"type":"whoosh"},{"t":8.6,"type":"hit"},{"t":13.0,"type":"whoosh"}],
+ "end":{"text":"DON'T START OVER. *CONTINUE.*","sub":"Follow @quietmanlaws","dur":2.6}}

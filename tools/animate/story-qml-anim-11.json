@@ -1,0 +1,9 @@
+{"id":"qml-anim-11","seed":1111,"scenes":[
+ {"clip":"s1.png","dur":2.6,"push":[1.0,1.12],"cy":0.8,"beats":[{"t":0,"text":"HE SAW HER WITH SOMEONE *NEW.*"}]},
+ {"clip":"c1.mp4","start":1.4,"dur":3.0,"push":[1.0,1.05],"beats":[{"t":0,"text":"EVERYONE WAITED FOR A *SCENE.*"}]},
+ {"clip":"c1.mp4","start":3.3,"dur":1.7,"push":[1.05,1.10],"beats":[{"t":0,"text":"HIS GRIP *TIGHTENED.*"}]},
+ {"clip":"s4.png","dur":3.2,"push":[1.0,1.12],"cy":0.8,"beats":[{"t":0,"text":"HE TOOK ONE *BREATH.*"},{"t":1.6,"text":"NODDED. *POLITELY.*"}]},
+ {"clip":"c5.mp4","start":0,"dur":2.5,"push":[1.0,1.04],"beats":[{"t":0,"text":"AND WALKED *OUT.*"}]},
+ {"clip":"c5.mp4","start":2.5,"dur":3.8,"push":[1.0,1.05],"beats":[{"t":0,"text":"THE NIGHT FELT *LIGHTER.*"}]}],
+ "sfx":[{"t":2.6,"type":"whoosh"},{"t":7.3,"type":"hit"},{"t":10.5,"type":"whoosh"}],
+ "end":{"text":"CLOSURE IS SOMETHING YOU *GIVE YOURSELF.*","sub":"Follow @quietmanlaws","dur":2.8}}

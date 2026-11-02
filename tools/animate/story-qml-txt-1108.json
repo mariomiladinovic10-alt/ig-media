@@ -1,0 +1,6 @@
+{"id":"qml-txt-1108","seed":1108,"text_y":560,"scenes":[
+ {"clip":"bg1.png","dur":4.2,"push":[1.0,1.05],"beats":[{"t":0,"text":"THEY SAID HE'D *CHANGED.*"},{"t":2.1,"text":"LIKE IT WAS AN *ACCUSATION.*"}]},
+ {"clip":"bg1.png","dur":6.3,"push":[1.05,1.10],"beats":[{"t":0,"text":"HE STOPPED DRINKING EVERY *WEEKEND.*"},{"t":2.1,"text":"STOPPED ANSWERING AT *2 AM.*"},{"t":4.2,"text":"STARTED GOING TO BED *EARLY.*"}]},
+ {"clip":"bg1.png","dur":6.0,"push":[1.10,1.16],"beats":[{"t":0,"text":"THEY KEPT SAYING IT *AGAIN.*"},{"t":2.0,"text":"AND THEY WERE *RIGHT.*"}]}],
+ "sfx":[{"t":4.2,"type":"whoosh"},{"t":12.5,"type":"hit"}],
+ "end":{"text":"HE CHANGED. THAT WAS THE *POINT.*","sub":"Follow @quietmanlaws","dur":2.6}}

@@ -1,0 +1,9 @@
+{"id":"qml-anim-15","seed":1515,"scenes":[
+ {"clip":"s1.png","dur":3.4,"push":[1.0,1.12],"cy":0.75,"beats":[{"t":0,"text":"HE WAITED YEARS FOR FOUR *WORDS.*"},{"t":1.8,"text":"TROPHIES. GRADES. *SILENCE.*"}]},
+ {"clip":"c1.mp4","start":0,"dur":2.0,"speed":2.2,"push":[1.0,1.05],"beats":[{"t":0,"text":"HIS FATHER NEVER *LOOKED UP.*"}]},
+ {"clip":"s2c.png","dur":3.4,"push":[1.0,1.12],"cy":0.65,"beats":[{"t":0,"text":"SO HE KEPT *ACHIEVING.*"},{"t":1.7,"text":"STILL *WAITING.*"}]},
+ {"clip":"s3.png","dur":2.8,"push":[1.0,1.12],"cy":0.7,"beats":[{"t":0,"text":"THEN HIS SON RAN IN WITH A *DRAWING.*"}]},
+ {"clip":"c4.mp4","start":0,"dur":2.6,"speed":1.3,"push":[1.0,1.04],"beats":[{"t":0,"text":"HE KNELT *DOWN.*"}]},
+ {"clip":"c4.mp4","start":2.0,"dur":5.0,"speed":1.6,"push":[1.0,1.06],"beats":[{"t":0,"text":"I'M PROUD OF *YOU.*"}]}],
+ "sfx":[{"t":3.4,"type":"whoosh"},{"t":8.8,"type":"whoosh"},{"t":14.2,"type":"hit"}],
+ "end":{"text":"HE GAVE WHAT HE NEVER *GOT.*","sub":"Follow @quietmanlaws","dur":2.8}}

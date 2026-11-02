@@ -1,0 +1,6 @@
+{"id":"qml-txt-1112","seed":1112,"text_y":560,"scenes":[
+ {"clip":"bg2.png","dur":4.2,"push":[1.0,1.05],"beats":[{"t":0,"text":"HE SAID *SORRY* SIX TIMES TODAY."},{"t":2.1,"text":"FOR ASKING A *QUESTION.*"}]},
+ {"clip":"bg2.png","dur":6.3,"push":[1.05,1.10],"beats":[{"t":0,"text":"FOR BEING TWO MINUTES *LATE.*"},{"t":2.1,"text":"FOR A MISTAKE THAT WASN'T *HIS.*"},{"t":4.2,"text":"EVERY SORRY MADE HIM *SMALLER.*"}]},
+ {"clip":"bg2.png","dur":6.0,"push":[1.10,1.16],"beats":[{"t":0,"text":"SO TOMORROW HE'LL TRY ONE *THING.*"},{"t":2.0,"text":"NOT \"SORRY I'M LATE.\""}]}],
+ "sfx":[{"t":4.2,"type":"whoosh"},{"t":12.5,"type":"hit"}],
+ "end":{"text":"BUT: THANK YOU FOR *WAITING.*","sub":"Follow @quietmanlaws","dur":2.6}}

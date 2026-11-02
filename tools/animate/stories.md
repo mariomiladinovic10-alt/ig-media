@@ -11,7 +11,14 @@
 | qml-anim-07 | NEON couple: called weak for staying calm (alley) | THEY CALLED HIM WEAK. | STAY CALM. |
 | qml-anim-08 | Quiet Law #1: answer disrespect with a calm question (dinner table, voiceover 49s) | SOMEONE MOCKED YOU IN FRONT OF EVERYONE. | SO NEXT TIME SOMEONE MOCKS YOU... (loop) |
 | qml-anim-09 | never chase her, build your own road (road, silent, 28s) | THE MORE HE CHASED... | STOP CHASING. START BUILDING. |
+| qml-anim-11 | seeing the ex with someone new at a party, he nods and leaves (party, street under stars) | HE SAW HER WITH SOMEONE NEW. | CLOSURE IS SOMETHING YOU GIVE YOURSELF. |
+| qml-anim-12 | one sided friendship: always picked up, nobody answered him, he lets it ring (couch, van, broken car in rain) | HE ALWAYS PICKED UP. | NO GRUDGE. JUST CLARITY. |
+| qml-anim-13 | growth when nobody watches: night run in the rain, months later, hilltop sunrise | NOBODY WOULD KNOW IF HE QUIT. | NOBODY SAW IT. THAT'S WHY IT COUNTED. |
+| qml-anim-14 | the Monday restart loop: stop starting over, continue (home gym, calendar, pull up) | MONDAY. HE STARTED AGAIN. | DON'T START OVER. CONTINUE. |
+| qml-anim-15 | father who never said 'I'm proud of you'; he says it to his own son (armchair, office, living room hug) | HE WAITED YEARS FOR FOUR WORDS. | HE GAVE WHAT HE NEVER GOT. |
 
 - 1 Nov 2026: qml-anim-10 "The Text He Wrote at 2 AM" scheduled 2 Nov 20:00 Europe/Belgrade on Instagram, YouTube and TikTok (Metricool uuids -7887992920873415998, -92276105816813843, -6095200636551672453), cover qml-anim-10_cover2.jpg (clean style). qml-anim-09 posts switched to qml-anim-09_cover3.jpg (clean style).
 - 1 Nov 2026 (Mario: "2 shortsa dnevno, za americko trziste"): schedule reset to 2 Shorts per day at 18:00 and 22:00 Belgrade (12:00 / 16:00 ET). qml-anim-09 moved to 1 Nov 22:00, qml-anim-10 to 2 Nov 22:00. Neon "stop waiting" to 6 Nov 22:00, neon "same fight" to 7 Nov 22:00. YouTube quote Shorts from the 01:00 slot moved: replay 8 Nov 18:00, shrinking 8 Nov 22:00, guilt 9 Nov 18:00, discipline 9 Nov 22:00, waiting 10 Nov 18:00, attractive 10 Nov 22:00. Stock lasts through 10 Nov.
 - 1 Nov 2026 (Mario: "samo ih edituj da ne budu neon"): the 4 scheduled neon videos (04 same fight, 05 storm, 06 why she stayed, 07 called weak) remade without credits from the original OpenArt clips: grayscale + curves grade (story "grade"), assemble2 white/gold captions with plates, retention beats (lesson only on the last line), new clean covers. Files qml-anim-0Xw.mp4 / _cover.jpg, stories story-qml-anim-0Xw.json. Posts now split per platform (IG, YT, TT).
+
+- 2 Nov 2026 (weekly run): qml-anim-11 to 15 (white glow, silent, assemble2) scheduled 9, 10, 11, 13, 14 Nov 22:00 Belgrade; text videos qml-txt-1108 and qml-txt-1112 (caption beats over a spotlight background, story-qml-txt-*.json) on 8 and 12 Nov 22:00. OpenArt budget: 5 images + 2 to 3 clips per video, stills with push-in fill the rest.

@@ -1,0 +1,9 @@
+{"id":"qml-anim-12","seed":1212,"scenes":[
+ {"clip":"c1.mp4","start":0,"dur":3.6,"push":[1.0,1.05],"beats":[{"t":0,"text":"HE ALWAYS *PICKED UP.*"},{"t":1.8,"text":"MIDNIGHT? ON MY *WAY.*"}]},
+ {"clip":"s2.png","dur":3.4,"push":[1.0,1.10],"cy":0.7,"beats":[{"t":0,"text":"MOVING DAY? HE CARRIED THE *BOXES.*"},{"t":1.8,"text":"EVERY. SINGLE. *TIME.*"}]},
+ {"clip":"c3.mp4","start":0,"dur":2.4,"push":[1.0,1.04],"beats":[{"t":0,"text":"THEN HIS CAR DIED IN THE *RAIN.*"}]},
+ {"clip":"c3.mp4","start":2.4,"dur":2.6,"push":[1.04,1.08],"beats":[{"t":0,"text":"HE CALLED. NO *ANSWER.*"}]},
+ {"clip":"c5.mp4","start":0,"dur":2.5,"push":[1.0,1.04],"beats":[{"t":0,"text":"A WEEK LATER, HIS PHONE *LIT UP.*"}]},
+ {"clip":"c5.mp4","start":2.5,"dur":4.8,"speed":1.9,"push":[1.04,1.10],"beats":[{"t":0,"text":"SAME NAME. ANOTHER *FAVOR.*"},{"t":1.7,"text":"HE LET IT *RING.*"}]}],
+ "sfx":[{"t":3.6,"type":"whoosh"},{"t":7.0,"type":"hit"},{"t":12.0,"type":"whoosh"}],
+ "end":{"text":"NO GRUDGE. JUST *CLARITY.*","sub":"Follow @quietmanlaws","dur":2.6}}
