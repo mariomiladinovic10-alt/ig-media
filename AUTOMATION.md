@@ -27,3 +27,6 @@ Quiet Man Laws YouTube is unchanged.
 
 ## Thumbnails (Mario's standing rule, 31 Oct 2026)
 Every video (Instagram Reel, YouTube Short, TikTok) must have a real thumbnail, never a black frame. Pass `videoThumbnailUrl` (a 1080x1920 JPG with the hook text) when scheduling, or `videoCoverMilliseconds` (e.g. 2000, a frame where the text is fully visible) if the thumbnail is rejected. Frame 0 of every rendered video must already show the text (no fade from black).
+
+## Music (Mario, 2 Nov 2026)
+Every video (animations, text videos, YouTube versions of image posts) carries the original V2 score from `tools/animate/music2.py` (built in by assemble2.py; for render.js reels run `python3 tools/animate/remix.py in.mp4 out.mp4 <seed>` instead of the old soft pad). Instagram song library is not available for this account via Metricool (403).

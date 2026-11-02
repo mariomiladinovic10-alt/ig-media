@@ -100,7 +100,7 @@ def main():
     run(['ffmpeg', '-y', '-loglevel', 'error', *inputs, '-filter_complex', ';'.join(fc), '-map', f'[{prev}]', '-t', f'{total:.3f}',
          '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-r', str(FPS), '-pix_fmt', 'yuv420p', vout])
     # audio: original music + accents
-    mus = os.path.join(tmp, 'm.wav'); run(['python3', os.path.join(HERE, 'music.py'), mus, f'{total + 0.3:.2f}', str(story.get('seed', 1))])
+    mus = os.path.join(tmp, 'm.wav'); run(['python3', os.path.join(HERE, 'music2.py'), mus, f'{total + 0.3:.2f}', str(story.get('seed', 1))])
     m, sr = sf.read(mus); m = m if m.ndim == 1 else m.mean(1)
     fx = sfx_track(story.get('sfx', []), total, sr)[:len(m)]
     mix = m[:len(fx)] + fx; mix = mix / max(1e-9, np.abs(mix).max()) * 0.9

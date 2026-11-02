@@ -19,7 +19,7 @@ Repo: `mariomiladinovic10-alt/ig-media`, folder `tools/animate/` (style.json, as
 - Image prompt = `style_prefix` + scene + `style_suffix` from style.json, with the hero and others lines verbatim.
 - Clip prompt must start with "One single continuous wide shot, camera locked off, no zoom, no cuts" (PixVerse otherwise jump zooms) and end with the motion_suffix plus "Faceless stick figures, plain round heads".
 - Overlay text: Inter ExtraBold uppercase, white with glow, one gold key word marked `*like this*`, upper third. Hook text visible from frame 0.
-- Music: original synthesized piano and pad from music.py (seed per video). No copyrighted audio.
+- Music: original synthesized score from music2.py (piano, strings, pulse that builds to the turn at ~62%, loudness about -13 LUFS; Mario approved 2 Nov 2026, "moramo neku muziku"). assemble2.py uses it automatically; remix.py puts it on an existing video. Instagram audio library is NOT available for this account (Metricool 403: needs a Business account linked to a Facebook Page). No copyrighted audio.
 - End card: one short line + "Follow @quietmanlaws". Length about 25s (5 scenes of 5s, 0.4s crossfades, 2.4s end card).
 
 ## Story rules
