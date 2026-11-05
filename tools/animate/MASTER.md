@@ -117,3 +117,12 @@ Every finished video ships with all of this, no exceptions:
 - Content mix for 30 days: 60% emotional micro stories, 25% male psychology, 15% discipline.
 - Voiceover from V2 section 8 is NOT used: Mario decided on 1 Nov 2026 to keep all videos silent. Test it again only if he asks.
 - CTA: subtle and only when it fits ("Follow for more stories about self-respect"); the caption follow lines of section 12 stay.
+
+## 15. V3 growth system (5 Nov 2026, Mario's "elite YouTube Shorts growth" brief)
+- Audit with real Studio data: tools/growth/AUDIT.md (stories 54.7% stayed vs static quotes 30.8%; 0.82 subs per 1,000 views).
+- Three series (Emotional Truth, Real Scenarios, Psychology Reframes), V3 structure and QC: SCRIPT_ENGINE.md section 9, tools/growth/qc_script.py (must PASS before paid assets).
+- Visual, subtitle and audio guide + prompt templates: tools/growth/STYLE_GUIDE.md. Series tag on frame 0: story "series" field in assemble2.py.
+- YouTube end line "Subscribe for the next Quiet Law" (Mario, 5 Nov: "dodaj to na kraju"): `assemble2.py story clips out.mp4 yt`, or `endcta.py story.json in.mp4 out_yt.mp4 yt` for finished videos. Instagram keeps "Follow @quietmanlaws".
+- Analytics: analyze.py V3 (latest row per video, per format baselines, diagnosis rules, `--report ID`, `--next`). Pull numbers from Studio per video overview pages (see tools/growth/STUDIO_PULL.md).
+- Plans: tools/growth/CONCEPTS.md (30 ranked), PLAN_14D.md (15 to 28 Nov), production packs tools/growth/shorts/*.json, channel copy proposal CHANNEL.md (not applied).
+- PENDING Mario: stop YouTube versions of static quote Shorts; channel verification for thumbnails; reconnect TikTok in Metricool; approve V3 scripts and OpenArt credits (7 left); optional voice test (STYLE_GUIDE.md section 6).

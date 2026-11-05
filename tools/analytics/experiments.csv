@@ -2,3 +2,6 @@ exp_id,hypothesis,category,variable,video_a,video_b,status,result,decision
 E1,Story Shorts keep more viewers than static statements,A,format,Zsx89gydLyA,6j3PsKvveYQ,early data,68.2% vs 23.5% stayed (different topics),keep testing with same topic
 E2,Voiceover helps retention,voice,voice,JyU_1COXtxg,qml-anim-09,stopped,voice video got 6 views in 11h,Mario: no voiceover (1 Nov)
 E3,Several caption beats + push-ins + caption plates (assemble2) beat one caption per 5 s scene,B,pacing,qml-anim-09,qml-anim-10,scheduled (09: 1 Nov 20:00, 10: 2 Nov 20:00),,
+E4,A YouTube subscribe end line raises subs per 1000 views,F,end CTA,"stories 30 Oct to 5 Nov (Follow @quietmanlaws)","7, 9, 11 Nov YouTube (Subscribe for the next Quiet Law)",running,,
+E5,Series B practical scenarios earn more shares and subs than series A stories at similar stayed to watch,D,series,qml-v3-02,qml-v3-01,planned 15 to 16 Nov,,
+E6,Dropping static quote Shorts from YouTube raises channel stayed median and views per Short,A,format mix,29 Oct to 14 Nov,15 to 28 Nov,proposed (needs Mario),,

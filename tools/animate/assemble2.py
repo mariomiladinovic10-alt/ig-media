@@ -50,6 +50,18 @@ def add_plate(png, strength=150):
     plate = Image.new('RGBA', im.size, (0, 0, 0, 0)); plate.putalpha(m)
     Image.alpha_composite(plate, im).save(png)
 
+def series_tag(text, path, y):
+    # small letter spaced series label above the hook on the first scene (V3, 5 Nov 2026)
+    from assemble import FONT2
+    from PIL import ImageFont
+    f = ImageFont.truetype(FONT2, 38); sp = 6
+    w = sum(f.getlength(ch) + sp for ch in text) - sp
+    img = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(img); x = (W - w) / 2
+    for ch in text:
+        d.text((x, y), ch, font=f, fill=(189, 189, 189)); x += f.getlength(ch) + sp
+    sh = Image.new('RGBA', (W, H), (0, 0, 0, 0)); sh.paste((0, 0, 0, 200), mask=img.split()[3].filter(ImageFilter.GaussianBlur(5)))
+    Image.alpha_composite(sh, img).save(path)
+
 def sfx_track(events, total, sr=44100):
     a = np.zeros(int(sr * (total + 1)))
     for e in events:
@@ -101,6 +113,11 @@ def main():
         if story.get('plate', True): add_plate(png)
         inputs += ['-loop', '1', '-t', f'{total:.3f}', '-i', png]
         fc.append(f"[{prev}][{k+1}:v]overlay=0:0:enable='between(t,{c[0]:.3f},{c[1]-0.001:.3f})'[v{k}]"); prev = f'v{k}'
+    if story.get('series'):
+        png = os.path.join(tmp, 'series.png'); series_tag(story['series'], png, story.get('text_y', 330) - 80)
+        k = len(caps); inputs += ['-loop', '1', '-t', f'{total:.3f}', '-i', png]
+        t1 = story['scenes'][0]['dur']
+        fc.append(f"[{prev}][{k+1}:v]overlay=0:0:enable='between(t,0,{t1:.3f})'[vs]"); prev = 'vs'
     vout = os.path.join(tmp, 'v.mp4')
     run(['ffmpeg', '-y', '-loglevel', 'error', *inputs, '-filter_complex', ';'.join(fc), '-map', f'[{prev}]', '-t', f'{total:.3f}',
          '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-r', str(FPS), '-pix_fmt', 'yuv420p', vout])

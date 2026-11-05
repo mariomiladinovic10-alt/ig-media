@@ -38,3 +38,31 @@ The Quiet Man's Lessons · Stories of Self-Respect · Psychology of Silence · T
 ## 8. Production (existing pipeline, unchanged tools)
 OpenArt kling-3-omni text2image for scene 1, then image2image from it for every next scene (consistency) · pixverseV6 image2video 540p 5 s (prompt starts "One single continuous wide shot, camera locked off, no zoom, no cuts.") · contact sheet + frame strip review · assemble2.py (beats, trims, push-ins, accents, final line over the last scene) · thumb.py cover · packaging per MASTER.md section 12 · QC: 1080x1920, frame 0 not black, captions inside the safe area, loudness about -14 LUFS, no corrupted frames.
 Cost per Short about 300 to 450 OpenArt credits; ask Mario before batches that exceed what he has authorised.
+
+## 9. V3 changes (5 Nov 2026, Mario's growth brief; these override sections 1 to 3 where they differ)
+Evidence behind them: tools/growth/AUDIT.md (stories 54.7% stayed vs static quotes 30.8%; conflict and situation hooks beat statements).
+
+### 9a. Three series (rotate A, B, C; one series per Short)
+- A. EMOTIONAL TRUTH: relatable relationship experiences, heartbreak, self respect, attachment, emotional maturity. Micro story, one man, one moment.
+- B. REAL SCENARIOS: one specific dating or relationship situation, then a realistic, practical response the viewer can use tonight.
+- C. PSYCHOLOGY REFRAMES: a popular belief, a concrete example that breaks it, the healthier or more accurate way to think. No invented statistics; name a concept only if it is well established, never a number we cannot source.
+Frame 0 carries a small series tag line above the hook (e.g. "REAL SCENARIOS") in the cover and video, same position every time.
+
+### 9b. Structure (adapt, never stretch)
+| time | job |
+|---|---|
+| 0 to 2 s | SCROLL STOPPING HOOK: a specific conflict, curiosity gap, relatable problem or useful promise. Readable without sound. |
+| 2 to 7 s | EMOTIONAL CONNECTION: a realistic situation the viewer recognises from his own life. |
+| 7 to 17 s | STORY / INSIGHT: develop it, introduce one useful distinction, keep curiosity, no filler. |
+| 17 to 26 s | PAYOFF: the real lesson, practical response or insight the hook promised. |
+| 26 to 30 s | ENDING: a memorable line or a natural question, then the platform CTA under it (endcta.py / assemble2.py yt). |
+Length buckets to test: 15 to 25 s (default), 25 to 35 s, occasionally 35 to 45 s when the story needs it. Log the bucket in shorts.csv duration_s.
+
+### 9c. Hooks
+At least three alternatives per Short (five when time allows), ranked by specificity, clarity, curiosity, emotional relevance (1 to 5 each, total out of 20). Write the ranking into the production pack. A hook is a situation or a tension, never the lesson.
+
+### 9d. Never
+Generic motivational quotes; sigma or alpha clichés; empty dramatic statements; long intros; narration that repeats what the picture shows; engagement bait ("comment YES"); misleading or unverified psychological claims; negative generalisations about women or men; dashes in on screen text, titles or captions.
+
+### 9e. Quality control (automatic)
+Run `python3 tools/growth/qc_script.py pack.json` on every production pack before any paid asset. It fails on: dashes, banned phrases, fewer than 3 hooks, an on screen line over 8 words or unreadable in 1.5 s, the payoff word set appearing before the last 30% of the timeline, a missing CTA line, a total outside 15 to 45 s, a missing hypothesis. Editorial gate scores (section 5) stay.

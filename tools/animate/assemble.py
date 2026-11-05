@@ -22,7 +22,12 @@ def text_card(text, path, size=78, y=360, sub=None, accent=GOLD):
     """Uppercase glowing text, *word* rendered in gold. Transparent PNG."""
     img = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     f = ImageFont.truetype(FONT, size)
-    words = [(w.strip('*'), w.startswith('*')) for w in text.split()]
+    # *gold span* may cover several words and may sit inside quotes ("*YOU.*") (fixed 5 Nov 2026)
+    words, inside = [], False
+    for w in text.split():
+        n = w.count('*'); gold = inside or n > 0
+        if n % 2: inside = not inside
+        words.append((w.replace('*', ''), gold))
     lines, cur, maxw = [], [], W - 160
     for w in words:
         test = ' '.join(x for x, _ in cur + [w])

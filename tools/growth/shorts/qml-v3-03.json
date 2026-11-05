@@ -1,0 +1,256 @@
+{
+ "id": "qml-v3-03",
+ "series": "PSYCHOLOGY REFRAMES",
+ "concept": "C4",
+ "duration_bucket": "25-35",
+ "title": "He Lost His Job and Told No One #shorts",
+ "title_alts": [
+  "The Strong Quiet Type #shorts",
+  "Why He Still Leaves Home at 8 AM #shorts"
+ ],
+ "hooks": [
+  {
+   "text": "HE LOST HIS JOB. NOBODY *KNOWS.*",
+   "specificity": 5,
+   "clarity": 5,
+   "curiosity": 5,
+   "relevance": 4
+  },
+  {
+   "text": "EVERYONE CALLS HIM THE *STRONG* QUIET TYPE.",
+   "specificity": 4,
+   "clarity": 5,
+   "curiosity": 4,
+   "relevance": 5
+  },
+  {
+   "text": "HE STILL LEAVES HOME AT *EIGHT.*",
+   "specificity": 5,
+   "clarity": 3,
+   "curiosity": 5,
+   "relevance": 3
+  },
+  {
+   "text": "HIS SILENCE WASN'T *STRENGTH.*",
+   "specificity": 3,
+   "clarity": 4,
+   "curiosity": 4,
+   "relevance": 4
+  }
+ ],
+ "chosen_hook": 0,
+ "payoff_keywords": [
+  "out loud",
+  "a choice"
+ ],
+ "story": {
+  "id": "qml-v3-03",
+  "seed": 3303,
+  "series": "PSYCHOLOGY REFRAMES",
+  "scenes": [
+   {
+    "clip": "s1.png",
+    "dur": 2.6,
+    "push": [
+     1.0,
+     1.1
+    ],
+    "cy": 0.7,
+    "beats": [
+     {
+      "t": 0,
+      "text": "HE LOST HIS JOB. NOBODY *KNOWS.*"
+     }
+    ]
+   },
+   {
+    "clip": "s2.png",
+    "dur": 2.8,
+    "push": [
+     1.04,
+     1.12
+    ],
+    "cy": 0.65,
+    "beats": [
+     {
+      "t": 0,
+      "text": "THEY CALL HIM THE *STRONG* QUIET ONE."
+     }
+    ]
+   },
+   {
+    "clip": "c3.mp4",
+    "start": 0,
+    "dur": 3.0,
+    "speed": 1.2,
+    "push": [
+     1.0,
+     1.05
+    ],
+    "beats": [
+     {
+      "t": 0,
+      "text": "EVERY MORNING HE STILL LEAVES AT *EIGHT.*"
+     }
+    ]
+   },
+   {
+    "clip": "s4.png",
+    "dur": 3.0,
+    "push": [
+     1.0,
+     1.1
+    ],
+    "cy": 0.65,
+    "beats": [
+     {
+      "t": 0,
+      "text": "AND SITS IN A PARKING LOT *ALL DAY.*"
+     }
+    ]
+   },
+   {
+    "clip": "s5.png",
+    "dur": 5.2,
+    "push": [
+     1.0,
+     1.12
+    ],
+    "cy": 0.7,
+    "beats": [
+     {
+      "t": 0,
+      "text": "QUIET USED TO BE HIS *STRENGTH.*"
+     },
+     {
+      "t": 2.6,
+      "text": "NOW IT WAS HIS *HIDING PLACE.*"
+     }
+    ]
+   },
+   {
+    "clip": "c6.mp4",
+    "start": 0,
+    "dur": 3.0,
+    "speed": 1.2,
+    "push": [
+     1.0,
+     1.05
+    ],
+    "beats": [
+     {
+      "t": 0,
+      "text": "SO HE CALLED *ONE* FRIEND."
+     }
+    ]
+   },
+   {
+    "clip": "s7.png",
+    "dur": 5.6,
+    "push": [
+     1.0,
+     1.1
+    ],
+    "cy": 0.7,
+    "beats": [
+     {
+      "t": 0,
+      "text": "AND SAID IT OUT *LOUD.*"
+     }
+    ]
+   }
+  ],
+  "sfx": [
+   {
+    "t": 5.4,
+    "type": "whoosh"
+   },
+   {
+    "t": 16.6,
+    "type": "hit"
+   }
+  ],
+  "end": {
+   "text": "SILENCE IS STRENGTH ONLY WHEN IT'S A *CHOICE.*",
+   "sub": "Follow @quietmanlaws",
+   "dur": 3.2
+  }
+ },
+ "image_prompts": [
+  {
+   "name": "s1",
+   "mode": "text2image 9:16",
+   "prompt": "Minimalist 2D stick figure animation frame, vertical 9:16. Pure black background, a flat dark charcoal ground plane, lots of empty negative space. A family dinner table at night under one hanging lamp. dim gray stick figures with no glow laugh and talk around the table. the hero: a clean white stick figure with a round head and smooth uniform thick lines, glowing with a soft white neon halo sits upright at the end of the table, calm, hands folded, slightly apart from the others. Camera: wide, eye level. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism."
+  },
+  {
+   "name": "s2",
+   "mode": "image2image from s1",
+   "prompt": "Keep the exact same scene, camera, set, lighting and figures. Change only: one gray figure leans over and pats the hero on the shoulder; the hero gives a small nod. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism."
+  },
+  {
+   "name": "s3",
+   "mode": "text2image 9:16",
+   "prompt": "Minimalist 2D stick figure animation frame, vertical 9:16. Pure black background, a flat dark charcoal ground plane, lots of empty negative space. Early morning, a front door of a house opening onto a dark street. the hero: a clean white stick figure with a round head and smooth uniform thick lines, glowing with a soft white neon halo steps out wearing a work bag over his shoulder, upright, as if going to work. Camera: wide, eye level. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism."
+  },
+  {
+   "name": "s4",
+   "mode": "text2image 9:16",
+   "prompt": "Minimalist 2D stick figure animation frame, vertical 9:16. Pure black background, a flat dark charcoal ground plane, lots of empty negative space. Inside a parked car seen from the back seat, an empty parking lot through the windshield in grey daylight. the hero: a clean white stick figure with a round head and smooth uniform thick lines, glowing with a soft white neon halo sits in the driver seat, hands on the wheel, not moving, work bag on the passenger seat. Camera: from the back seat, eye level. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism."
+  },
+  {
+   "name": "s5",
+   "mode": "text2image 9:16",
+   "prompt": "Minimalist 2D stick figure animation frame, vertical 9:16. Pure black background, a flat dark charcoal ground plane, lots of empty negative space. A park bench at dusk under one street lamp. the hero: a clean white stick figure with a round head and smooth uniform thick lines, glowing with a soft white neon halo sits alone on the bench holding a phone that glows warm muted gold, thumb over the screen, looking down at it. Camera: wide, eye level. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism. Monochrome except ONE object glowing warm muted gold as described."
+  },
+  {
+   "name": "s7",
+   "mode": "image2image from s5",
+   "prompt": "Keep the exact same scene, camera, set, lighting and figures. Change only: a dim gray friend figure now sits next to the hero on the bench with one hand on his shoulder; the hero's head is lifted, shoulders relaxed; the phone rests on the bench. A single soft volumetric spotlight from above. Monochrome black and white, high contrast, subtle glow and bloom, clean flat vector illustration, simple geometric shapes, cinematic composition, motivational animation aesthetic. No text, no letters, no watermark, no faces, no 3D, no photorealism."
+  }
+ ],
+ "clip_prompts": [
+  {
+   "name": "c3",
+   "from": "s3",
+   "prompt": "One single continuous wide shot, camera locked off, no zoom, no cuts. The hero closes the door behind him, adjusts the bag strap and walks out of frame to the right. Smooth simple 2D stick figure animation, fluid natural body movement, keep the exact same minimalist black and white glowing style, same characters, same background, no new objects, no text, no camera shake. Faceless stick figures, plain round heads."
+  },
+  {
+   "name": "c6",
+   "from": "s5",
+   "prompt": "One single continuous wide shot, camera locked off, no zoom, no cuts. The hero lifts the phone to his ear, waits, then slowly sits up straighter as someone answers. Smooth simple 2D stick figure animation, fluid natural body movement, keep the exact same minimalist black and white glowing style, same characters, same background, no new objects, no text, no camera shake. Faceless stick figures, plain round heads."
+  }
+ ],
+ "credits": "6 images x 10 + 2 clips x 50 = 160",
+ "cover": {
+  "bg": "s4.png",
+  "headline": "WHERE DOES HE *GO?*"
+ },
+ "audio": "music2.py seed 3303. Whoosh at 5.4 s (front door), low hit at 16.6 s (he calls). Keep music low under the parking lot scene.",
+ "voice_optional": "He lost his job. Nobody knows. They call him the strong, quiet one. Every morning he still leaves at eight, and sits in a parking lot all day. [pause] Quiet used to be his strength. Now it was his hiding place. So he called one friend, and said it out loud. [pause] Silence is strength only when it's a choice.",
+ "description": "Every morning he still leaves the house at 8. Nobody knows where he goes 🖤\n\nWho is the one person you would call? Tell me in the comments.\n\nPsychology Reframes: a new Quiet Law every day. Subscribe so the next one shows up in your feed 🔔\nInstagram: @quietmanlaws",
+ "hashtags": [
+  "#menshealth",
+  "#menspsychology",
+  "#shorts",
+  "#itsokaytotalk",
+  "#strength",
+  "#quietmanlaws"
+ ],
+ "youtube_tags": [
+  "men not talking about problems",
+  "lost my job",
+  "asking for help",
+  "mens mental health",
+  "mens psychology",
+  "quiet man laws",
+  "shorts"
+ ],
+ "pinned_comment": "Being quiet can be strength or a place to hide. Who is the one person you'd call? I read every reply.",
+ "hypothesis": "A reframe that questions the channel's own 'silence is power' idea (series C) gets more comments and shares per 1,000 views than a pure story, and a 25 to 35 s length holds if every beat develops.",
+ "metrics": [
+  "stayed to watch",
+  "average % viewed at 25 s length vs 15 to 25 s stories",
+  "comments and shares per 1,000 views",
+  "subs per 1,000 views"
+ ]
+}
