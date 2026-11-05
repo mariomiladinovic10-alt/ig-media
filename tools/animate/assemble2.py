@@ -1,5 +1,7 @@
 # V2 assembler for Quiet Man Laws Shorts (1 Nov 2026). assemble.py stays as it was.
-# Usage: python3 assemble2.py story.json clips_dir out.mp4
+# Usage: python3 assemble2.py story.json clips_dir out.mp4 [yt|ig|tt]
+#   optional platform: swaps end.sub for that platform's call to action (end.sub_yt etc., else endcta.CTA)
+#   (Mario 5 Nov 2026: YouTube versions end with a subscribe line). Without it nothing changes.
 # story.json:
 # {"id": "qml-anim-10", "seed": 10,
 #  "scenes": [ {"clip": "c1.mp4", "start": 0.0, "dur": 3.0, "speed": 1.0, "push": [1.00, 1.06],
@@ -65,6 +67,9 @@ def sfx_track(events, total, sr=44100):
 
 def main():
     story, cdir, out = json.load(open(sys.argv[1])), sys.argv[2], sys.argv[3]
+    if len(sys.argv) > 4 and story.get('end', {}).get('text'):
+        from endcta import CTA
+        story['end']['sub'] = story['end'].get(f'sub_{sys.argv[4]}', CTA[sys.argv[4]])
     tmp = tempfile.mkdtemp(); parts = []; t = 0.0; caps = []
     for i, sc in enumerate(story['scenes']):
         if story.get('grade'): sc.setdefault('grade', story['grade'])  # extra filter, e.g. curves to turn old neon clips into the white glow look
