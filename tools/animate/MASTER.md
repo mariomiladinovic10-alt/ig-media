@@ -126,3 +126,9 @@ Every finished video ships with all of this, no exceptions:
 - Analytics: analyze.py V3 (latest row per video, per format baselines, diagnosis rules, `--report ID`, `--next`). Pull numbers from Studio per video overview pages (see tools/growth/STUDIO_PULL.md).
 - Plans: tools/growth/CONCEPTS.md (30 ranked), PLAN_14D.md (15 to 28 Nov), production packs tools/growth/shorts/*.json, channel copy proposal CHANNEL.md (not applied).
 - PENDING Mario: stop YouTube versions of static quote Shorts; channel verification for thumbnails; reconnect TikTok in Metricool; approve V3 scripts and OpenArt credits (7 left); optional voice test (STYLE_GUIDE.md section 6).
+
+## 16. Weekly run 9 Nov 2026
+- OpenArt balance 7 credits (one kling 3 omni image costs 10): all 7 main videos of 15 to 21 Nov are text videos (qml-txt-1115..1121). Next run continues the 3:1 cycle at 22 Nov with an animation (22 anim, 23 anim, 24 text).
+- New tool tools/animate/txtbg.py: procedural white glow stick figure scenes (poses stand, stand_back, stand_phone, walk, sit, sit_phone, sit_headdown; props bench, door, window, table, other) as text video backgrounds, so text videos keep the brand look without credits.
+- TikTok is disconnected in Metricool (posts since 8 Nov fail with "TikTok was disconnected"); TikTok posts stay scheduled and will publish once Mario reconnects.
+- YouTube thumbnail upload warns "Could not upload video thumbnail" (channel not verified); covers still work on Instagram.
