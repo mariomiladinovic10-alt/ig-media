@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1121",
+ "seed": 1121,
+ "text_y": 560,
+ "series": "REAL SCENARIOS",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SHE CANCELED. ONE HOUR *BEFORE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SHIRT IRONED. TABLE *BOOKED.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE TYPED \"NO WORRIES\" THREE *TIMES.*"
+    },
+    {
+     "t": 2.1,
+     "text": "DELETED IT THREE *TIMES.*"
+    },
+    {
+     "t": 4.2,
+     "text": "SENT: \"HAPPENS. PICK A *DAY?*\""
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "THEN HE KEPT THE *RESERVATION.*"
+    },
+    {
+     "t": 2.1,
+     "text": "AND CALLED HIS *BROTHER.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HIS EVENING WASN'T HERS TO *CANCEL.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

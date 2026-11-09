@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1116",
+ "seed": 1116,
+ "text_y": 560,
+ "series": "EMOTIONAL TRUTH",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "DINNER FOR ONE. OVER THE *SINK.*"
+    },
+    {
+     "t": 2.1,
+     "text": "THREE MONTHS SINCE SHE *LEFT.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "CEREAL. TAKEOUT. ALWAYS STANDING *UP.*"
+    },
+    {
+     "t": 2.1,
+     "text": "LIKE HE DIDN'T COUNT *ALONE.*"
+    },
+    {
+     "t": 4.2,
+     "text": "TONIGHT HE SET THE *TABLE.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "ONE PLATE. A REAL *MEAL.*"
+    },
+    {
+     "t": 2.1,
+     "text": "NO PHONE. NO *RUSH.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE STARTED TREATING HIMSELF LIKE *SOMEONE.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

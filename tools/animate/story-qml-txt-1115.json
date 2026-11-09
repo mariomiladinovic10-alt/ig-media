@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1115",
+ "seed": 1115,
+ "text_y": 560,
+ "series": "REAL SCENARIOS",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SHE TEXTED: \"WE NEED TO *TALK.*\""
+    },
+    {
+     "t": 2.1,
+     "text": "SIX HOURS UNTIL HE GOT *HOME.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE REPLAYED THE WHOLE *WEEK.*"
+    },
+    {
+     "t": 2.1,
+     "text": "WROTE THREE *DEFENSES* IN HIS HEAD."
+    },
+    {
+     "t": 4.2,
+     "text": "WALKED IN READY TO *FIGHT.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SHE JUST WANTED TO PLAN *CHRISTMAS.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE LAUGHED. THEN IT *HIT* HIM."
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE WAS READY TO DEFEND. NOT TO *LISTEN.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

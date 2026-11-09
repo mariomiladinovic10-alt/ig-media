@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1120",
+ "seed": 1120,
+ "text_y": 560,
+ "series": "PSYCHOLOGY REFRAMES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "TWO YEARS OF *HATING* HIS JOB."
+    },
+    {
+     "t": 2.1,
+     "text": "EVERY FRIDAY, THE SAME *SPEECH.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HIS FRIENDS KNEW IT BY *HEART.*"
+    },
+    {
+     "t": 2.1,
+     "text": "VENTING FELT LIKE DOING *SOMETHING.*"
+    },
+    {
+     "t": 4.2,
+     "text": "ONE FRIDAY HE SKIPPED THE *SPEECH.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "WENT HOME. SENT ONE *APPLICATION.*"
+    },
+    {
+     "t": 2.1,
+     "text": "THEN ANOTHER THE NEXT *NIGHT.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE STOPPED SPENDING THE ENERGY ON *COMPLAINING.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

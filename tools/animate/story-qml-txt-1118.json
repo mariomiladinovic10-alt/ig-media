@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1118",
+ "seed": 1118,
+ "text_y": 560,
+ "series": "REAL SCENARIOS",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HER DAD DIDN'T SHAKE HIS *HAND.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SAT HIM AT THE END OF THE *TABLE.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "ONE WORD ANSWERS ALL *NIGHT.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE WANTED TO *PROVE* HIMSELF."
+    },
+    {
+     "t": 4.2,
+     "text": "INSTEAD HE CLEARED THE *PLATES.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "ASKED ABOUT THE OLD CAR IN THE *GARAGE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "THEY TALKED FOR AN *HOUR.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE DIDN'T PERFORM. HE JUST *SHOWED UP.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

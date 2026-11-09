@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1119",
+ "seed": 1119,
+ "text_y": 560,
+ "series": "EMOTIONAL TRUTH",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HIS LITTLE BROTHER COPIES *EVERYTHING.*"
+    },
+    {
+     "t": 2.1,
+     "text": "THE WAY HE WALKS. HIS *HOODIE.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "EVEN HOW HE TALKS ABOUT *GIRLS.*"
+    },
+    {
+     "t": 2.1,
+     "text": "LAST WEEK HE HEARD IT *BACK.*"
+    },
+    {
+     "t": 4.2,
+     "text": "SAME JOKE. SAME *SMIRK.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "IT WASN'T FUNNY *ANYMORE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SO HE CHANGED THE *JOKE.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "SOMEONE IS ALWAYS *LEARNING* FROM YOU.",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

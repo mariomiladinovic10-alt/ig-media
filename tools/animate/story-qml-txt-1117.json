@@ -1,0 +1,84 @@
+{
+ "id": "qml-txt-1117",
+ "seed": 1117,
+ "text_y": 560,
+ "series": "PSYCHOLOGY REFRAMES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HIS OLD CLASSMATE BOUGHT A *HOUSE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE SAW IT AT *MIDNIGHT.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE KEPT SCROLLING UNTIL HE FELT *BEHIND.*"
+    },
+    {
+     "t": 2.1,
+     "text": "CAR. WEDDING. PROMOTION. *VACATION.*"
+    },
+    {
+     "t": 4.2,
+     "text": "THEN HE LOOKED AT HIS OWN *YEAR.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "DEBT PAID. QUIT *SMOKING.*"
+    },
+    {
+     "t": 2.1,
+     "text": "CALLED HIS DAD EVERY *SUNDAY.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE'D BEEN RACING SOMEONE'S *HIGHLIGHT REEL.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}
