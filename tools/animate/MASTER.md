@@ -132,3 +132,10 @@ Every finished video ships with all of this, no exceptions:
 - New tool tools/animate/txtbg.py: procedural white glow stick figure scenes (poses stand, stand_back, stand_phone, walk, sit, sit_phone, sit_headdown; props bench, door, window, table, other) as text video backgrounds, so text videos keep the brand look without credits.
 - TikTok is disconnected in Metricool (posts since 8 Nov fail with "TikTok was disconnected"); TikTok posts stay scheduled and will publish once Mario reconnects.
 - YouTube thumbnail upload warns "Could not upload video thumbnail" (channel not verified); covers still work on Instagram.
+
+## 17. Weekly run 16 Nov 2026
+- OpenArt still 7 credits (kling 3 omni image 10): the 7 B slots of 22 to 28 Nov are text videos qml-txt-1122..1128 on Instagram and TikTok only (YOUTUBE FOCUS, Mario 10 Nov: no static or text video on YouTube). YouTube gets no new upload until credits are added.
+- Step 8 cleanup: all 18 YouTube posts left from the old plan (12 static quote Shorts at 18:00 on 16 to 27 Nov, 6 text video _yt versions at 22:00 on 16 to 21 Nov) set to draft in Metricool.
+- New tool tools/animate/build_txt.py builds a week of text videos from txt/meta.json (txtbg scenes, assemble2, thumb cover).
+- YouTube 30 day ranking (Metricool, 16 Nov): Stop waiting 3,317 views / 111 likes (now #1), They laughed 2,789, The Text He Wrote at 2 AM 1,887; animated stories average ~1,460 views; static quotes ~850; bottom: Guilt quote 114, Ordinary Tuesday quote 194, Walking away 339. Metricool has no YouTube rows after 10 Nov yet.
+- TikTok still disconnected (no analytics, 16 Nov TikTok photo post failed).
