@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1124",
+ "seed": 1124,
+ "text_y": 560,
+ "series": "THE DISCIPLINE SERIES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "THE NEW GUY ATE LUNCH *ALONE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "EVERY DAY FOR TWO *MONTHS.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE LEARNED EVERY MACHINE ON THE *FLOOR.*"
+    },
+    {
+     "t": 2.1,
+     "text": "STAYED LATE TO FIX WHAT OTHERS *SKIPPED.*"
+    },
+    {
+     "t": 4.2,
+     "text": "THEN THE MAIN LINE BROKE ON A *FRIDAY.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "EVERYONE PANICKED. THEN TURNED TO *HIM.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE ALREADY HAD THE *MANUAL* OPEN."
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "RESPECT FOUND HIM AT HIS *WORKBENCH.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

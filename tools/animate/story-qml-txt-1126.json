@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1126",
+ "seed": 1126,
+ "text_y": 560,
+ "series": "THE DISCIPLINE SERIES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE FAILED THE EXAM. *TWICE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HIS COUSIN TOLD THE WHOLE *FAMILY.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "THANKSGIVING. EVERYONE HAD A *JOKE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE LAUGHED. THEN WENT BACK TO HIS *DESK.*"
+    },
+    {
+     "t": 4.2,
+     "text": "NIGHTS. WEEKENDS. ONE MORE *TRY.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SPRING. ONE LETTER IN THE *MAIL.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE DIDN'T POST IT. HE CALLED HIS *DAD.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "SOME WINS DON'T NEED AN *AUDIENCE.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

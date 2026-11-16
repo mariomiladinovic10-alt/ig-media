@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1125",
+ "seed": 1125,
+ "text_y": 560,
+ "series": "STORIES OF SELF RESPECT",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE WAS ALWAYS THE GROUP'S *JOKE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "AND HE ALWAYS LAUGHED *FIRST.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SATURDAY. SAME TABLE. SAME *JOKE.*"
+    },
+    {
+     "t": 2.1,
+     "text": "THIS TIME HE DIDN'T *LAUGH.*"
+    },
+    {
+     "t": 4.2,
+     "text": "THE TABLE WENT *QUIET.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE SAID: \"THAT ONE'S GETTING *OLD.*\""
+    },
+    {
+     "t": 2.1,
+     "text": "THE NEXT ROUND, NOBODY *TRIED* IT."
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HE STOPPED LAUGHING AT HIMSELF FOR *THEM.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

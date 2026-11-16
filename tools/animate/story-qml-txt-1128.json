@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1128",
+ "seed": 1128,
+ "text_y": 560,
+ "series": "THE DISCIPLINE SERIES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "32 YEARS OLD. COULDN'T *SWIM.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SIGNED UP FOR THE KIDS' *CLASS.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "THE ONLY ADULT IN THE *POOL.*"
+    },
+    {
+     "t": 2.1,
+     "text": "PARENTS ON THE BENCH *STARED.*"
+    },
+    {
+     "t": 4.2,
+     "text": "HE CAME BACK EVERY *SATURDAY.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "WEEK NINE. ONE FULL *LENGTH.*"
+    },
+    {
+     "t": 2.1,
+     "text": "A KID ON THE EDGE STARTED *CLAPPING.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "BEING A BEGINNER IS THE PRICE OF *ENTRY.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

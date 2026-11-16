@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1122",
+ "seed": 1122,
+ "text_y": 560,
+ "series": "THE DISCIPLINE SERIES",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "THE COACH CUT HIM IN *SEPTEMBER.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SAID HE WAS TOO *SLOW.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "5 AM. EMPTY TRACK. EVERY *DAY.*"
+    },
+    {
+     "t": 2.1,
+     "text": "NOBODY ASKED WHY HE KEPT *COMING.*"
+    },
+    {
+     "t": 4.2,
+     "text": "NEXT TRYOUTS. SAME *COACH.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE DIDN'T ASK FOR A *SPOT.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE JUST CROSSED THE LINE *FIRST.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "THE CUT WAS HIS *STARTING* LINE.",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

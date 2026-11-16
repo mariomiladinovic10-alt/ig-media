@@ -1,0 +1,237 @@
+[
+ {
+  "id": "qml-1122",
+  "date": "2026-11-22",
+  "cat": "dejting",
+  "angle": "Rejection",
+  "text": "A no doesn't lower your *value.* It just saves you months of guessing.",
+  "caption": "Rejection stings for a night. A clear answer early is a favor you only appreciate later 🖤",
+  "q": "What rejection turned out to be the best thing for you?",
+  "tags": [
+   "#datingadvice",
+   "#rejection",
+   "#selfworth",
+   "#dating",
+   "#mensmindset",
+   "#confidence",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "center",
+   "bright": 0.55,
+   "font": "playfair",
+   "grain": 0.3,
+   "mono": true,
+   "overlay": 0.55,
+   "posY": 0.52,
+   "size": 0,
+   "tpl": "t2",
+   "bg": "silueta"
+  },
+  "full": "Rejection stings for a night. A clear answer early is a favor you only appreciate later 🖤\n\nWhat rejection turned out to be the best thing for you?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#datingadvice #rejection #selfworth #dating #mensmindset #confidence #quietmanlaws"
+ },
+ {
+  "id": "qml-1123",
+  "date": "2026-11-23",
+  "cat": "psihologija",
+  "angle": "Envy",
+  "text": "Envy is information. It points at what you *want* but haven't started.",
+  "caption": "That sting when someone else gets there first is not a flaw. It is a map, if you are honest enough to read it 🧭",
+  "q": "What did your envy show you about what you really want?",
+  "tags": [
+   "#envy",
+   "#selfawareness",
+   "#mindset",
+   "#selfimprovement",
+   "#menspsychology",
+   "#growth",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "center",
+   "bright": 0.5,
+   "font": "anton",
+   "grain": 0.35,
+   "mono": true,
+   "overlay": 0.35,
+   "posY": 0.5,
+   "size": 0,
+   "tpl": "t3",
+   "bg": "beton"
+  },
+  "full": "That sting when someone else gets there first is not a flaw. It is a map, if you are honest enough to read it 🧭\n\nWhat did your envy show you about what you really want?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#envy #selfawareness #mindset #selfimprovement #menspsychology #growth #quietmanlaws"
+ },
+ {
+  "id": "qml-1124",
+  "date": "2026-11-24",
+  "cat": "odnosi",
+  "angle": "Instead of calm down",
+  "format": "carousel",
+  "slides": [
+   "What to say instead of *\"calm down.\"*",
+   "I can see this really got to *you.*",
+   "Tell me the part I'm *missing.*",
+   "Do you want a solution, or do you need me to *listen?*",
+   "Let's take ten minutes and come *back* to this.",
+   "I'm on your side, even right *now.*",
+   "*Save* this. Follow @quietmanlaws for more."
+  ],
+  "caption": "Almost nobody calms down because they were told to. The words you pick in a heated moment decide if it ends in a wall or a conversation 🖤",
+  "q": "Which one would work best with the person you love?",
+  "tags": [
+   "#relationships",
+   "#communication",
+   "#relationshipadvice",
+   "#emotionalintelligence",
+   "#conflictresolution",
+   "#mensmindset",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "left",
+   "bright": 0.28,
+   "font": "dmserif",
+   "grain": 0.2,
+   "mono": true,
+   "overlay": 0,
+   "posY": 0.56,
+   "size": 0,
+   "tpl": "t4",
+   "bg": "prozor"
+  },
+  "full": "Almost nobody calms down because they were told to. The words you pick in a heated moment decide if it ends in a wall or a conversation 🖤\n\nWhich one would work best with the person you love?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#relationships #communication #relationshipadvice #emotionalintelligence #conflictresolution #mensmindset #quietmanlaws"
+ },
+ {
+  "id": "qml-1125",
+  "date": "2026-11-25",
+  "cat": "odnosi",
+  "angle": "Apology",
+  "text": "An apology without a change is just a *pause* before the next time.",
+  "caption": "Sorry is the easy part. The proof is in what is different a month later 🤝",
+  "q": "What apology actually changed something for you?",
+  "tags": [
+   "#apology",
+   "#accountability",
+   "#relationships",
+   "#emotionalmaturity",
+   "#mensmindset",
+   "#trust",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "center",
+   "bright": 0.5,
+   "font": "archivo",
+   "grain": 0.3,
+   "mono": true,
+   "overlay": 0.45,
+   "posY": 0.5,
+   "size": 0,
+   "tpl": "t5",
+   "bg": "kisa"
+  },
+  "full": "Sorry is the easy part. The proof is in what is different a month later 🤝\n\nWhat apology actually changed something for you?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#apology #accountability #relationships #emotionalmaturity #mensmindset #trust #quietmanlaws"
+ },
+ {
+  "id": "qml-1126",
+  "date": "2026-11-26",
+  "cat": "psihologija",
+  "angle": "Gratitude",
+  "text": "Thank the people who stayed when you had *nothing* to offer.",
+  "caption": "Anyone shows up for the version of you that is winning. This Thanksgiving, call the ones who showed up before that 🦃🖤",
+  "q": "Who stayed with you when you had nothing to offer?",
+  "tags": [
+   "#thanksgiving",
+   "#gratitude",
+   "#loyalty",
+   "#friendship",
+   "#mensmindset",
+   "#family",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "center",
+   "bright": 0.55,
+   "font": "cormorant",
+   "grain": 0.3,
+   "mono": true,
+   "overlay": 0.45,
+   "posY": 0.5,
+   "size": 0,
+   "tpl": "t1",
+   "bg": "hodnik"
+  },
+  "full": "Anyone shows up for the version of you that is winning. This Thanksgiving, call the ones who showed up before that 🦃🖤\n\nWho stayed with you when you had nothing to offer?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#thanksgiving #gratitude #loyalty #friendship #mensmindset #family #quietmanlaws"
+ },
+ {
+  "id": "qml-1127",
+  "date": "2026-11-27",
+  "cat": "psihologija",
+  "angle": "Provocation",
+  "text": "If anyone can make you angry, anyone can *steer* you.",
+  "caption": "Losing your temper hands the wheel to whoever pushed the button. Staying steady keeps your day yours 🧠",
+  "q": "Who knows exactly which button to push with you?",
+  "tags": [
+   "#selfcontrol",
+   "#emotionalintelligence",
+   "#anger",
+   "#mindset",
+   "#stoicism",
+   "#mensmindset",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "center",
+   "bright": 0.45,
+   "font": "anton",
+   "grain": 0.35,
+   "mono": true,
+   "overlay": 0.35,
+   "posY": 0.5,
+   "size": 0,
+   "tpl": "t3",
+   "bg": "grad"
+  },
+  "full": "Losing your temper hands the wheel to whoever pushed the button. Staying steady keeps your day yours 🧠\n\nWho knows exactly which button to push with you?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#selfcontrol #emotionalintelligence #anger #mindset #stoicism #mensmindset #quietmanlaws"
+ },
+ {
+  "id": "qml-1128",
+  "date": "2026-11-28",
+  "cat": "disciplina",
+  "angle": "Respect your time",
+  "format": "carousel",
+  "slides": [
+   "Things you stop doing once you respect your own *time.*",
+   "Saying yes to plans you already *dread.*",
+   "Giving the first hour of the morning to your *phone.*",
+   "Explaining yourself to people who decided not to *understand.*",
+   "Arguing with strangers in comment *sections.*",
+   "Rereading old conversations at *night.*",
+   "*Save* this. Follow @quietmanlaws for more."
+  ],
+  "caption": "Your hours are the only thing you can never earn back. Guard them like it 💪",
+  "q": "Which one are you cutting out this week?",
+  "tags": [
+   "#discipline",
+   "#timemanagement",
+   "#selfrespect",
+   "#selfimprovement",
+   "#productivity",
+   "#mensmindset",
+   "#quietmanlaws"
+  ],
+  "design": {
+   "align": "left",
+   "bright": 0.6,
+   "font": "archivo",
+   "grain": 0.22,
+   "mono": true,
+   "overlay": 0,
+   "posY": 0.5,
+   "size": 0,
+   "tpl": "t1",
+   "bg": "dim"
+  },
+  "full": "Your hours are the only thing you can never earn back. Guard them like it 💪\n\nWhich one are you cutting out this week?\n\nFollow us for more @quietmanlaws 🖤🧠\n\n#discipline #timemanagement #selfrespect #selfimprovement #productivity #mensmindset #quietmanlaws"
+ }
+]

@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1127",
+ "seed": 1127,
+ "text_y": 560,
+ "series": "REAL SCENARIOS",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HER EX TEXTED HER AT *MIDNIGHT.*"
+    },
+    {
+     "t": 2.1,
+     "text": "SHE TURNED THE SCREEN TOWARD *HIM.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE FELT THE HEAT IN HIS *CHEST.*"
+    },
+    {
+     "t": 2.1,
+     "text": "HE WANTED TO GRAB THE *PHONE.*"
+    },
+    {
+     "t": 4.2,
+     "text": "HE TOOK ONE SLOW *BREATH.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "HE ASKED: \"HOW DO *YOU* FEEL ABOUT IT?\""
+    },
+    {
+     "t": 2.1,
+     "text": "SHE BLOCKED THE NUMBER *HERSELF.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "TRUST GROWS WHERE IT ISN'T *FORCED.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "id": "qml-txt-1123",
+ "seed": 1123,
+ "text_y": 560,
+ "series": "REAL SCENARIOS",
+ "scenes": [
+  {
+   "clip": "bg1.png",
+   "dur": 4.2,
+   "push": [
+    1.0,
+    1.05
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SHE SAID \"I'M *FINE.*\" TWICE."
+    },
+    {
+     "t": 2.1,
+     "text": "HE KNEW SHE *WASN'T.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg2.png",
+   "dur": 6.3,
+   "push": [
+    1.05,
+    1.1
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "OLD HIM WOULD PUSH UNTIL IT WAS A *FIGHT.*"
+    },
+    {
+     "t": 2.1,
+     "text": "OR GO QUIET FOR A WHOLE *DAY.*"
+    },
+    {
+     "t": 4.2,
+     "text": "THIS TIME HE PUT THE KETTLE *ON.*"
+    }
+   ]
+  },
+  {
+   "clip": "bg3.png",
+   "dur": 6.8,
+   "push": [
+    1.1,
+    1.15
+   ],
+   "cy": 0.62,
+   "beats": [
+    {
+     "t": 0.0,
+     "text": "SAT NEXT TO HER. SAID *NOTHING.*"
+    },
+    {
+     "t": 2.1,
+     "text": "TEN MINUTES LATER SHE STARTED *TALKING.*"
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "t": 4.2,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.7,
+   "type": "hit"
+  }
+ ],
+ "end": {
+  "text": "HIS PRESENCE ASKED WHAT WORDS *COULDN'T.*",
+  "sub": "Follow @quietmanlaws",
+  "dur": 2.6
+ }
+}
